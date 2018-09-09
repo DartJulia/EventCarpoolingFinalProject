@@ -17,6 +17,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -35,12 +36,115 @@ public class EventController {
 	@RequestMapping("/")
 	public ModelAndView index() {
 		
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
+	}
+	
+	
+	//  TODO: combine queries into one method with if/else statements
+	@RequestMapping("/searchloc")
+	public ModelAndView location(@RequestParam("queryloc") String queryloc) {
+		
+		RestTemplate restTemplate = eventRest();
+		
+		HttpEntity<String> entity = eventHeaders();
+		
+		// if you want to "show more" use CSS later
+		// get Entry
+		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&location=" + queryloc + "&page_size=10000", 
+				HttpMethod.GET, entity, Entry.class);
+	
+		Entry entry = response.getBody();
+		
+		// get Events
+		Events events = entry.getEvents();
+		
+		// get ArrayList<Event>
+		ArrayList<Event> result = events.getEventList();
+		
+		ModelAndView lv = new ModelAndView("event-results");
+		queryloc = queryloc.toUpperCase();
+		lv.addObject("queryloc", queryloc);
+		lv.addObject("events", result);
+	
+		return lv;
+	}
+	
+	@RequestMapping("/searchname")
+	public ModelAndView name(@RequestParam("queryname") String queryname) {
+		
+		RestTemplate restTemplate = eventRest();
+		
+		HttpEntity<String> entity = eventHeaders();
+		
+		// if you want to "show more" use CSS later
+		// get Entry
+		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&q=" + queryname + "&page_size=10000", 
+				HttpMethod.GET, entity, Entry.class);
+	
+		Entry entry = response.getBody();
+		
+		// get Events
+		Events events = entry.getEvents();
+		
+		// get ArrayList<Event>
+		ArrayList<Event> result = events.getEventList();
+		
+		ModelAndView lv = new ModelAndView("event-results");
+		queryname = queryname.toUpperCase();
+		lv.addObject("queryname", queryname);
+		lv.addObject("events", result);
+	
+		return lv;
+	}
+	
+	@RequestMapping("/searchdate")
+	public ModelAndView date(@RequestParam("querydate") String querydate) {
+		RestTemplate restTemplate = eventRest();
+		
+		HttpEntity<String> entity = eventHeaders();
+		
+		
+		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&t=" + querydate + "&page_size=10000", 
+				HttpMethod.GET, entity, Entry.class);
+	
+		Entry entry = response.getBody();
+		
+		// get Events
+		Events events = entry.getEvents();
+		
+		// get ArrayList<Event>
+		ArrayList<Event> result = events.getEventList();
+		
+		ModelAndView dv = new ModelAndView("event-results");
+		querydate = querydate.toUpperCase();
+		dv.addObject("querydate", querydate);
+		dv.addObject("events", result);
+		return dv;
+		
+	}
+	
+	// TODO: method to parse date and time
+	
+	// TODO: pull rides from database here
+	@RequestMapping("/event/{id}")
+	public ModelAndView viewEvent(@PathVariable("id") String id) {
+		ModelAndView ev = new ModelAndView("view-event");
+		ev.addObject("tag", id);
+		return ev;
+	}
+	
+	// helper method
+	public HttpEntity<String> eventHeaders() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		
 		HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-		
+		return entity;
+	}
+
+	// helper method
+	public RestTemplate eventRest() {
 		//for getting around SSL certification, pass into the RestTemplate
 		CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
 		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
@@ -56,29 +160,7 @@ public class EventController {
 		jaxbMessageConverter.setSupportedMediaTypes(mediaTypes);
 		messageConverters.add(jaxbMessageConverter);
 		restTemplate.setMessageConverters(messageConverters);
-		
-		// if you want to "show more" use CSS later
-		// get Entry
-		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&location=New+York&page_size=10000", 
-				HttpMethod.GET, entity, Entry.class);
-	
-		Entry entry = response.getBody();
-		
-		// get Events
-		Events events = entry.getEvents();
-		
-		// get ArrayList<Event>
-		ArrayList<Event> result = events.getEventList();
-		
-		ModelAndView mv = new ModelAndView("index");
-		mv.addObject("events", result);
-		return mv;
-	}
-	
-	@RequestMapping("/searchloc")
-	public ModelAndView location(@RequestParam("query") String query) {
-		ModelAndView lv = new ModelAndView();
-		return lv;
+		return restTemplate;
 	}
 	
 }
