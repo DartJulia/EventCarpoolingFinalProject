@@ -29,37 +29,41 @@
 	
 	<br>
 	
+		<form action ="/allsearch">
+	
 		<table style="border-spacing: 20px; margin: 0 auto; width: 75%">
 				<tr>
-				<form action="/searchloc">
+				<!-- <form action="/searchloc"> -->
 				<td>search by location</td>
 				<td><input type="text" style="font-size: 150%" name="queryloc" placeholder="where would you like to go?"></td>
-				<td><input type="submit"></td>
+				<!-- <td><input type="submit"></td> -->
 				</form>
 				</tr>
 				<br>
 				
 				<tr>
-				<form action="/searchname">
+				<!-- <form action="/searchname"> -->
 				<td>search by keyword</td>
 				<td><input type="text" style="font-size: 150%" name="queryname" placeholder="what is your event keyword?"></td>
-				<td><input type="submit"></td>
+			<!-- 	<td><input type="submit"></td> -->
 				</form>
 				</tr>
 				<br>
 				
 				<tr>
-				<form action="/searchdate">
+				<!-- <form action="/searchdate"> -->
 				<td>search by date</td>
 				<td><input type="text" style="font-size: 150%" name="querydate" placeholder="when is your event?"></td>
-				<td><input type="submit"></td>
+				<!-- <td><input type="submit"></td> -->
 				</form>
 				</tr>
 				<br>
 				
 		</table>
+		<input type="submit" value="search">
+		</form>
 		<br>
-	<br>
+	
 
 </div>	
 

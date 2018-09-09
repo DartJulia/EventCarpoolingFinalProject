@@ -14,10 +14,10 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.Statio
 @Controller
 public class GasController {
 
-	@RequestMapping("/")
-	public ModelAndView index() {
-		return new ModelAndView ("index");
-	}
+//	@RequestMapping("/")
+//	public ModelAndView index() {
+//		return new ModelAndView ("index");
+//	}
 	
 	//This method finds the last gas station that has the most expensive gas in the array that is pulled from a 1 mile radius from a location.
 	@RequestMapping("gasprice")

@@ -17,11 +17,11 @@ public class MapsController {
 	@Value("${maps.key}")
 	String map;
 
-	@RequestMapping("/")
-	public ModelAndView home() {
-
-		return new ModelAndView("index");
-	}
+//	@RequestMapping("/")
+//	public ModelAndView home() {
+//
+//		return new ModelAndView("index");
+//	}
 
 	@RequestMapping("/search")
 	public ModelAndView searchTitle() {
