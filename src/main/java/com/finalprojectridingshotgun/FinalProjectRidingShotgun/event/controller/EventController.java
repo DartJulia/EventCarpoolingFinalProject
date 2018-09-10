@@ -60,7 +60,7 @@ public class EventController {
 		// get ArrayList<Event>
 		ArrayList<Event> result = events.getEventList();
 		
-		ModelAndView av = new ModelAndView("event-results");
+		ModelAndView av = new ModelAndView("driver-event-results");
 		
 		queryloc = queryloc.toUpperCase();
 		queryname = queryname.toUpperCase();
@@ -74,89 +74,6 @@ public class EventController {
 		return av;
 	}
 	
-	//  TODO: combine queries into one method with if/else statements
-//	@RequestMapping("/searchloc")
-//	public ModelAndView location(@RequestParam("queryloc") String queryloc) {
-//		
-//		RestTemplate restTemplate = eventRest();
-//		
-//		HttpEntity<String> entity = eventHeaders();
-//		
-//		// if you want to "show more" use CSS later
-//		// get Entry
-//		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&location=" + queryloc + "&page_size=10000", 
-//				HttpMethod.GET, entity, Entry.class);
-//	
-//		Entry entry = response.getBody();
-//		
-//		// get Events
-//		Events events = entry.getEvents();
-//		
-//		// get ArrayList<Event>
-//		ArrayList<Event> result = events.getEventList();
-//		
-//		ModelAndView lv = new ModelAndView("event-results");
-//		queryloc = queryloc.toUpperCase();
-//		lv.addObject("queryloc", queryloc);
-//		lv.addObject("events", result);
-//	
-//		return lv;
-//	}
-//	
-//	@RequestMapping("/searchname")
-//	public ModelAndView name(@RequestParam("queryname") String queryname) {
-//		
-//		RestTemplate restTemplate = eventRest();
-//		
-//		HttpEntity<String> entity = eventHeaders();
-//		
-//		// if you want to "show more" use CSS later
-//		// get Entry
-//		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&q=" + queryname + "&page_size=10000", 
-//				HttpMethod.GET, entity, Entry.class);
-//	
-//		Entry entry = response.getBody();
-//		
-//		// get Events
-//		Events events = entry.getEvents();
-//		
-//		// get ArrayList<Event>
-//		ArrayList<Event> result = events.getEventList();
-//		
-//		ModelAndView lv = new ModelAndView("event-results");
-//		queryname = queryname.toUpperCase();
-//		lv.addObject("queryname", queryname);
-//		lv.addObject("events", result);
-//	
-//		return lv;
-//	}
-//	
-//	@RequestMapping("/searchdate")
-//	public ModelAndView date(@RequestParam("querydate") String querydate) {
-//		RestTemplate restTemplate = eventRest();
-//		
-//		HttpEntity<String> entity = eventHeaders();
-//		
-//		
-//		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key=" + eId + "&t=" + querydate + "&page_size=10000", 
-//				HttpMethod.GET, entity, Entry.class);
-//	
-//		Entry entry = response.getBody();
-//		
-//		// get Events
-//		Events events = entry.getEvents();
-//		
-//		// get ArrayList<Event>
-//		ArrayList<Event> result = events.getEventList();
-//		
-//		ModelAndView dv = new ModelAndView("event-results");
-//		querydate = querydate.toUpperCase();
-//		dv.addObject("querydate", querydate);
-//		dv.addObject("events", result);
-//		return dv;
-//		
-//	}
-//	
 	// TODO: method to parse date and time
 	
 	// TODO: pull rides from database here
