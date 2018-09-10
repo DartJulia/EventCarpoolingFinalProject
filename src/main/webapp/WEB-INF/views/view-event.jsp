@@ -15,7 +15,13 @@
 
 <div style="margin-left: 50px; margin-top: 50px;">
 
-<h1> Rides going to event ${tag}:</h1>
+<h1> Rides going to event: </h1>
+
+<h4>Latitude: ${tag} </h4>
+<h4>Longitude: ${longit}: </h4>
+
+<iframe width="600" height="450" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI" allowfullscreen></iframe>
 
 </div>
 

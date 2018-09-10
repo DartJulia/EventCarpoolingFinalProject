@@ -91,12 +91,9 @@ public class EventController {
 		System.out.println(e);
 		session.setAttribute("echosen", e);
 
-		// System.out.println(lat);
-//		
-//		System.out.println("lat: " + e.getLatitude());
-//
-//		System.out.println(e.getLongitude());
-		ev.addObject("tag", lat);
+		ev.addObject("latit", lat);
+		ev.addObject("longit", lon);
+	
 		return ev;
 	}
 
