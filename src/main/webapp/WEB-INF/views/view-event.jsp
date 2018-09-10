@@ -17,7 +17,7 @@
 
 <h1> Rides going to event: </h1>
 
-<h4>Latitude: ${tag} </h4>
+<h4>Latitude: ${latit} </h4>
 <h4>Longitude: ${longit}: </h4>
 
 <iframe width="600" height="450" frameborder="0" style="border:0"

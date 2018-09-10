@@ -21,30 +21,31 @@
 
 <div class="container">
 
-		<form action="" >
-			<fieldset>
+		<form action="/adduser">
+			
 				<div  class="form-group" >
-					<label for="fname">Enter Your First Name</label> 
-					<input type="text" class="form-control" id="fname" placeholder="First Name">
+					<label>Enter Your First Name</label> 
+					<input type="text" class="form-control" name="first_name" placeholder="First Name">
 			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 			
-					<label for="lname">Enter Your Last Name</label> 
-					<input type="text" class="form-control" id="lname" placeholder="Last Name"> 
+					<label>Enter Your Last Name</label> 
+					<input type="text" class="form-control" name="last_name" placeholder="Last Name"> 
 			
-					<label for="email">Enter Your Email</label> 
-					<input type="email" class="form-control" id="email" placeholder="example@email.com">
+					<label>Enter Your Email</label> 
+					<input type="email" class="form-control" name="email" placeholder="example@email.com">
 
-					<label for="city">Enter Your Home City</label> 
-					<input type="text" class="form-control" id="city" placeholder="City"> 
+					<label>Enter Your Home City</label> 
+					<input type="text" class="form-control" name="address" placeholder="City"> 
 			
-					<label for="username">Enter A Unique User Name</label> 
-					<input type="text" class="form-control" id="userName" placeholder="User1234"> 
+					<label>Enter A Unique User Name</label> 
+					<input type="text" class="form-control" name="username" placeholder="User1234"> 
 			
-					<label for="password">Enter A Unique P@ssw0rd</label> 
-					<input type="text" class="form-control" id="password" placeholder="Password">
+					<label>Enter A Unique P@ssw0rd</label> 
+					<input type="password" class="form-control" name="passcode" placeholder="Password">
 				</div>
-			</fieldset>
-			<input type="submit" value="Submit">
+			
+			<%-- <a href="/adduser/${first_name}/${last_name}/${email}/${address}/${username}/${passcode}"><button>Submit</button></a> --%>
+			  <input type="submit" value="Submit"> 
 		</form>
 
 

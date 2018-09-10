@@ -61,6 +61,16 @@ public class User {
 		this.plate = plate;
 	}
 
+	public User(String first_name, String last_name, String username, String passcode, String address, String email) {
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.username = username;
+		this.passcode = passcode;
+		this.address = address;
+		this.email = email;
+
+	}
+
 
 
 	public long getUser_id() {
