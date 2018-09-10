@@ -2,25 +2,32 @@ package com.finalprojectridingshotgun.FinalProjectRidingShotgun;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWrapper;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.Routes;
 
 @Controller
+@SessionAttributes("echosen")
 public class MapsController {
 
 	@Value("${maps.key}")
 	String map;
 
 
-
 	@RequestMapping("/search")
-	public ModelAndView searchTitle() {
+	public ModelAndView searchTitle(HttpSession session) {
+		Event e = (Event) session.getAttribute("echosen");
+		e.getLatitude();
+		System.out.println(e.getLatitude());
 
 		RestTemplate restTemp = new RestTemplate();
 		JsonWrapper wrapper = restTemp.getForObject(
@@ -32,7 +39,8 @@ public class MapsController {
 
 		System.out.println("Console: " + routes.get(0).getLegs().get(0).getDistance().getText());
 		// System.out.println(response.getBody());
-		return new ModelAndView("result", "map", routes.get(0).getLegs().get(0).getDistance().getText());
+
+		return new ModelAndView("test", "map", routes.get(0).getLegs().get(0).getDistance().getText());
 	}
 
 }

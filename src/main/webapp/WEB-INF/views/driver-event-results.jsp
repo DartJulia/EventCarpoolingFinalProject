@@ -32,7 +32,8 @@
 						<td><%-- <img src="${event.image}" alt="no image available" style="width:128px;height:128px;"> --%></td>
 						<td>${event.start_time}</td>
 						<td>${event.title}</td>
-						<td><a href="/event/${event.id}">view</a></td>
+						<%-- <td><a href="/event/${event.latitude}/${event.longitude}">view</a></td> --%>
+						<td><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}">view</a></td>
 					</tr>
 				</c:forEach>
 			</table>

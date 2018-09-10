@@ -1,8 +1,5 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity;
 
-import java.util.Date;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,18 +20,30 @@ public class Event {
 	@JsonProperty("venue_name")
 	private String venue_name;
 	
-	//add latitude/longitude
+	@JsonProperty("latitude")
+	private String latitude;
+
+	@JsonProperty("longitude")
+	private String longitude;
 
 	public Event() {
 	}
 
-	public Event(String id, String title, String start_time, String venue_name) {
+	public Event(String id, String latitude, String longitude) {
+		this.id = id;
+	}
+
+
+	public Event(String id, String title, String start_time, String venue_name, String latitude, String longitude) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.start_time = start_time;
 		this.venue_name = venue_name;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
+
 
 	public String getId() {
 		return id;
@@ -68,9 +77,26 @@ public class Event {
 		this.venue_name = venue_name;
 	}
 
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", start_time=" + start_time + ", venue_name=" + venue_name
-				+ "]";
+				+ ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
+
 }
