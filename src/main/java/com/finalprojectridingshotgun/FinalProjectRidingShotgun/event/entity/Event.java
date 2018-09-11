@@ -25,6 +25,9 @@ public class Event {
 
 	@JsonProperty("longitude")
 	private String longitude;
+	
+	@JsonProperty("image")
+	private Image image;
 
 	public Event() {
 	}
@@ -32,7 +35,6 @@ public class Event {
 	public Event(String id, String latitude, String longitude) {
 		this.id = id;
 	}
-
 
 	public Event(String id, String title, String start_time, String venue_name, String latitude, String longitude) {
 		super();
@@ -43,7 +45,6 @@ public class Event {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-
 
 	public String getId() {
 		return id;
@@ -91,6 +92,14 @@ public class Event {
 
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	@Override
