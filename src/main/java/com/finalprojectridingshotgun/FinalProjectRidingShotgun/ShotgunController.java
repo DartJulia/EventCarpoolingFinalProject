@@ -10,27 +10,24 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserReposito
 
 @Controller
 public class ShotgunController {
-	
+
 	@Autowired
 	UserRepository userRepo;
 
+// **Takes user to register form 
 	@RequestMapping("/registerpage")
 	public ModelAndView registrationPage() {
 		return new ModelAndView("registration");
 	}
-	
-	// @RequestMapping("/adduser/{first_name}/{last_name}/{email}/{address}/{username}/{passcode}")
+
+	// **Adds new user into User table in database
+	// Note: Don't need to pass in variables to url (based on jsp form names
+	// matching POJO
+	// variable names pass object in as parameter and save to database
 	@RequestMapping("/adduser")
-//	public ModelAndView addUser(@PathVariable("first_name") String fName, @PathVariable("last_name") String lName,
-//			@PathVariable("email") String email, @PathVariable("address") String city,
-//			@PathVariable("username") String userName, @PathVariable("passcode") String password) {
 	public ModelAndView addUser(User u) {
 		System.out.println(u);
 		userRepo.save(u);
-		// System.out.println(fName + lName);
-		// User user = new User(fName, lName, userName, password, city, email);
-//		userRepo.save(user);
-//		System.out.println(user);
 		return new ModelAndView("redirect:/");
 	}
 
