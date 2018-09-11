@@ -25,6 +25,7 @@
 						<th>date/time</th>
 						<th>event</th>
 						<th>select</th>
+						<th>Driver ? </th>
 					</tr>
 					
 				<c:forEach var="event" items="${events}">	<!--prints from ArrayList in controller-->	
@@ -34,6 +35,7 @@
 						<td>${event.title}</td>
 						<%-- <td><a href="/event/${event.latitude}/${event.longitude}">view</a></td> --%>
 						<td><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}">view</a></td>
+						<td><a href="/pullevent/{id}/{title}">Yes</a></td>
 					</tr>
 				</c:forEach>
 			</table>
