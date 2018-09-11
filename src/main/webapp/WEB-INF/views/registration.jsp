@@ -5,16 +5,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/yeti/bootstrap.min.css" />
+	<script src="jquery-3.3.1.min.js"></script>
+<script src="registration.js"></script>
 <style>
 form {
 	width: 30%;
 	margin: 0 auto;
-d
+}
+
 </style>
-<script src="jquery-3.3.1.min.js"></script>
-<script src="registration.js"></script>
+
 
 </head>
 <body>
@@ -48,6 +51,8 @@ d
 
 
 	</div>
+
+
 
 </body>
 </html>

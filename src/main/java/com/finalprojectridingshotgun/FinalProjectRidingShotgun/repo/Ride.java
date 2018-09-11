@@ -1,9 +1,10 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,25 +18,31 @@ import javax.persistence.Table;
 @Table(name = "ride_database")
 public class Ride {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long rideid;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ride_id")
+	private Long rideid;
+	@Column(name = "eventid")
 	private String eventid;
+	@Column(name = "user_id")
 	private long userid;
-	private Set<User> users = new HashSet<User>();
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "user_ride", joinColumns = @JoinColumn(name = "ride_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users = new ArrayList<User>();
 	
 	
 	public Ride() {
 
 	}
 	
-	public Ride(long rideid, String eventid, long userid, Set<User> users) {
+	public Ride(Long rideid, String eventid, Long userid, List<User> users) {
 		this.rideid = rideid;
 		this.eventid = eventid;
 		this.userid = userid;
 		this.users = users;
 	}
 
-	public Ride(String eventid, long userid, Set<User> users) {
+	public Ride(String eventid, Long userid, List<User> users) {
 		
 		this.eventid = eventid;
 		this.userid = userid;
@@ -49,12 +56,12 @@ public class Ride {
 	public void deleteUser(User user) {
 		this.users.remove(user);
 	}
-	
-	public long getRideid() {
+
+	public Long getRideid() {
 		return rideid;
 	}
 
-	public void setRideid(long rideid) {
+	public void setRideid(Long rideid) {
 		this.rideid = rideid;
 	}
 
@@ -66,26 +73,20 @@ public class Ride {
 		this.eventid = eventid;
 	}
 
-	public long getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(long userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_ride",
-            joinColumns = @JoinColumn(name = "rideid"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
 
-	public Set<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
