@@ -92,13 +92,13 @@
 			<version>2.3.0</version>
 		</dependency>
 		
+<!-- 		don't need
 		<dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
+	        <groupId>org.hibernate</groupId>
+	        <artifactId>hibernate-core</artifactId>
         <version>4.2.7.SP1</version>
-        
     </dependency>
-		
+		 -->
 	</dependencies>
 
 	<build>
