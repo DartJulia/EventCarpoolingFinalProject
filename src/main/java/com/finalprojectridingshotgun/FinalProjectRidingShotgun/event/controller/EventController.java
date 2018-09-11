@@ -97,6 +97,7 @@ public class EventController {
 		return ev;
 	}
 
+
 //	@RequestMapping("/event")
 //	public ModelAndView viewEvent(@RequestParam("event") Event e) {
 //		ModelAndView ev = new ModelAndView("view-event");

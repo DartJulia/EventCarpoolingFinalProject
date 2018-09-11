@@ -8,8 +8,10 @@
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/yeti/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="test2.css">
 	<script src="jquery-3.3.1.min.js"></script>
 <script src="registration.js"></script>
+
 <style>
 form {
 	width: 30%;

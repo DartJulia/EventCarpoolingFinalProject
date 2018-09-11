@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.Ride;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
@@ -46,9 +46,10 @@ public class ShotgunController {
 	@RequestMapping("/pullevent/{id}/{title}")
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title) {
 		
-		Event eventIdAndTitleToAdd = new Event(id, title);
-		System.out.println(eventIdAndTitleToAdd.getId());
-		System.out.println(eventIdAndTitleToAdd.getTitle());
+		Ride eventIdAndTitleToAdd = new Ride(id, title, 1);
+		System.out.println(eventIdAndTitleToAdd.getEventid());
+		System.out.println(eventIdAndTitleToAdd.getEventtitle());
+		rideRepo.save(eventIdAndTitleToAdd);
 		return new ModelAndView ("redirect:/");
 	}
 	

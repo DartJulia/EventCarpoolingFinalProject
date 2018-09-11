@@ -24,6 +24,8 @@ public class Ride {
 	private Long rideid;
 	@Column(name = "eventid")
 	private String eventid;
+	@Column(name = "eventtitle")
+	private String eventtitle;
 	@Column(name = "user_id")
 	private long userid;
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -35,6 +37,12 @@ public class Ride {
 
 	}
 	
+	public Ride(String id, String eventtitle, long userid) {
+		this.eventid = id;
+		this.eventtitle = eventtitle;
+		this.userid = userid;
+	}
+
 	public Ride(Long rideid, String eventid, Long userid, List<User> users) {
 		this.rideid = rideid;
 		this.eventid = eventid;
@@ -81,6 +89,18 @@ public class Ride {
 		this.userid = userid;
 	}
 	
+
+	public String getEventtitle() {
+		return eventtitle;
+	}
+
+	public void setEventtitle(String eventtitle) {
+		this.eventtitle = eventtitle;
+	}
+
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
 
 	public List<User> getUsers() {
 		return users;
