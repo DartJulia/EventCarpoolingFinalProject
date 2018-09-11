@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
 
-<link rel="stylesheet" href="test.css" type="text/css">
+<link rel="stylesheet" href="jobotest.css" type="text/css">
 
 </head>
 <body>
@@ -33,12 +33,19 @@
 			<br>
 
 			<form name="searchform" action="/allsearch">
+			
+			<label class="switch">
+				<input class="switch-input" type="checkbox" id="rideordrive" value="yes">
+				<span class="switch-label" data-on="Rider" data-off="Driver"></span> 
+				<span class="switch-handle"></span> 
+			</label>
 				
-				<div class="toggle">
-					<label> rider or driver? </label> <label class="switch"> <input
-						type="checkbox" id="rideordrive" value="yes" data-label-off="rider" data-label-on="driver"> <span class="slider round"></span>
+				<!-- <div class="toggle">
+					<label> rider or driver? </label> 
+					<label class="switch"> 
+					<input type="checkbox" id="rideordrive" value="yes" data-label-off="rider" data-label-on="driver"> <span class="slider round"></span>
 					</label>
-				</div>
+				</div> -->
 
 				<table style="border-spacing: 20px; margin: 0 auto; width: 75%">
 					<tr>
