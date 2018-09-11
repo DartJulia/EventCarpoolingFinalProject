@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -29,10 +30,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Entry;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Events;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 
 @Controller
 @SessionAttributes("echosen")
 public class EventController {
+	
+	@Autowired
+	RideRepository riderepo;
 
 	@Value("${events.key}")
 	String eId; // event key
@@ -78,7 +83,12 @@ public class EventController {
 
 		return av;
 	}
-
+	@RequestMapping("/ridesearch")
+	public ModelAndView searchForRides(@RequestParam("queryloc") String location, 
+			@RequestParam("queryname") String title, @RequestParam("querydate") String start_time) {
+		
+		return new ModelAndView("ridesearch", "titletag", riderepo.findByEventtitleContaining(title));
+	}
 	// TODO: method to parse date and time
 
 	// TODO: pull rides from database here
