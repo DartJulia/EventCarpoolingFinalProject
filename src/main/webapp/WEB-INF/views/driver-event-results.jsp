@@ -30,7 +30,7 @@
 					
 				<c:forEach var="event" items="${events}">	<!--prints from ArrayList in controller-->	
 					<tr>
-						<td><img src="${event.image.thumb.url}" alt="no image available" style="width:48px;height:48px;"></td>
+						<td><img src="${event.image.thumb.url}" alt="" style="width:48px;height:48px;"></td>
 						<td>${event.start_time}</td>
 						<td>${event.title}</td>
 						<%-- <td><a href="/event/${event.latitude}/${event.longitude}">view</a></td> --%>
