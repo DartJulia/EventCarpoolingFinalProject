@@ -32,10 +32,10 @@
 
 			<br>
 
-			<form name="searchform" action="/allsearch">
+			<form name="searchform" action="/ridesearch">
 			
 			<label class="switch">
-				<input class="switch-input" type="checkbox" id="rideordrive" value="yes">
+				<input class="switch-input" type="checkbox" id="rideordrive" value="yes" checked="false">
 				<span class="switch-label" data-on="Rider" data-off="Driver"></span> 
 				<span class="switch-handle"></span> 
 			</label>

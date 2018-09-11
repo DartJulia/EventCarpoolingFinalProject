@@ -7,9 +7,9 @@
 
     rideordrive.onchange = function(){
       if(this.checked){
-        form.action = "/allsearch";
-      }else{
         form.action = "/ridesearch";
+      }else{
+        form.action = "/allsearch";
       }
       console.log(form.action);
     };
