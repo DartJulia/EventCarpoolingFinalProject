@@ -35,7 +35,7 @@
 						<td>${event.title}</td>
 						<%-- <td><a href="/event/${event.latitude}/${event.longitude}">view</a></td> --%>
 						<td><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}">view</a></td>
-						<td><a href="/pullevent/{id}/{title}">Yes</a></td>
+						<td><a href="/pullevent/${event.id}/${event.title}">Yes</a></td>
 					</tr>
 				</c:forEach>
 			</table>

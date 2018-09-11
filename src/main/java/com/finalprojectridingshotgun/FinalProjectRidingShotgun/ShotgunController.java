@@ -1,7 +1,5 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,8 +42,8 @@ public class ShotgunController {
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title) {
 		
 		Event eventIdAndTitleToAdd = new Event(id, title);
-		System.out.println(eventIdAndTitleToAdd);
-		
+		System.out.println(eventIdAndTitleToAdd.getId());
+		System.out.println(eventIdAndTitleToAdd.getTitle());
 		return new ModelAndView ("redirect:/");
 	}
 	
