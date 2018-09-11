@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.Ride;
@@ -12,6 +13,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
 @Controller
+@SessionAttributes("user_name")
 public class ShotgunController {
 
 	@Autowired
@@ -52,6 +54,17 @@ public class ShotgunController {
 		rideRepo.save(eventIdAndTitleToAdd);
 		return new ModelAndView ("redirect:/");
 	}
+	
+	
+	
+	//For Loggin in
+	@RequestMapping("/login")
+	public ModelAndView loginPage() {
+		return new ModelAndView("login");
+	}
+	
+	
+	
 	
 	
 	
