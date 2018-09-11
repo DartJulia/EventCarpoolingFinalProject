@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,13 +58,21 @@ public class ShotgunController {
 	
 	
 	
-	//For Loggin in
+	//Displays login page
 	@RequestMapping("/login")
 	public ModelAndView loginPage() {
 		return new ModelAndView("login");
 	}
 	
 	
+	//Validating login
+	@RequestMapping ("validateuser")
+	public String valUserName(@RequestParam ("user_name") String username, @RequestParam ("password") String password) {
+	userRepo.findByUsernameAndPasscode(username, password).getUser_id();
+	User user = userRepo.findByUsernameAndPasscode(username, password);
+	System.out.println("Welcome" + user.getFirst_name());
+		return "Welcome" + user.getFirst_name();
+	}	
 	
 	
 	

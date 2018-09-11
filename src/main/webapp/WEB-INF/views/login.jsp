@@ -26,7 +26,7 @@ form {
 
 	<div class="container">
 
-		<form action="login">
+		<form action="validateuser">
 
 			<div class="form-group">
 				<label>USER NAME</label> <input type="text"
