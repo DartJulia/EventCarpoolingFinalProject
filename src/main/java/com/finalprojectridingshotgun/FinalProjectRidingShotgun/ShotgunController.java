@@ -26,6 +26,11 @@ public class ShotgunController {
 		return new ModelAndView("registration");
 	}
 
+	@RequestMapping("/ridesearch")
+	public ModelAndView riderOptionPage() {
+		return new ModelAndView("ridesearch");
+	}
+	
 	// **Adds new user into User table in database
 	// Note: Don't need to pass in variables to url (based on jsp form names
 	// matching POJO
