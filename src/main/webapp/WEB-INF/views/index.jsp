@@ -19,6 +19,7 @@
 	<div class="container" style="margin: 50px">
 
 		<div class="logins" style="text-align: right">
+		${welcome}
 			<a href="/registerpage" style="padding: 20px">sign up</a> 
 			<a href="/login" style="padding: 20px">login</a>
 		</div>

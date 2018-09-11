@@ -110,4 +110,10 @@ public class Ride {
 		this.users = users;
 	}
 
+	@Override
+	public String toString() {
+		return "Ride [rideid=" + rideid + ", eventid=" + eventid + ", eventtitle=" + eventtitle + ", userid=" + userid
+				+ ", users=" + users + "]";
+	}
+
 }

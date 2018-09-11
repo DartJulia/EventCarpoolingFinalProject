@@ -55,27 +55,23 @@ public class ShotgunController {
 		rideRepo.save(eventIdAndTitleToAdd);
 		return new ModelAndView ("redirect:/");
 	}
-	
-	
-	
+
 	//Displays login page
 	@RequestMapping("/login")
 	public ModelAndView loginPage() {
 		return new ModelAndView("login");
 	}
-	
-	
+
 	//Validating login
 	@RequestMapping ("validateuser")
-	public String valUserName(@RequestParam ("user_name") String username, @RequestParam ("password") String password) {
-	userRepo.findByUsernameAndPasscode(username, password).getUser_id();
+	public ModelAndView valUserName(@RequestParam("user_name") String username,
+			@RequestParam("password") String password) {
+		// userRepo.findByUsernameAndPasscode(username, password).getUser_id();
 	User user = userRepo.findByUsernameAndPasscode(username, password);
 	System.out.println("Welcome" + user.getFirst_name());
-		return "Welcome" + user.getFirst_name();
+		return new ModelAndView("index", "welcome", "Welcome " + user.getFirst_name() + "!");
 	}	
-	
-	
-	
+
 	
 //	@RequestMapping("/pullevent")
 //	public ModelAndView pullEvent() {

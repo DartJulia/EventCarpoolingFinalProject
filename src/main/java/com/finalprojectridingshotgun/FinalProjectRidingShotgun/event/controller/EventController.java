@@ -58,7 +58,8 @@ public class EventController {
 		HttpEntity<String> entity = eventHeaders();
 
 		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
-				+ eId + "&location=" + queryloc + "&q=" + queryname + "&page_size=100&image_sizes=thumb", HttpMethod.GET, entity,
+				+ eId + "&location=" + queryloc + "&q=" + queryname + "&page_size=50&image_sizes=thumb", HttpMethod.GET,
+				entity,
 				Entry.class);
 
 		// get Entry
@@ -86,7 +87,7 @@ public class EventController {
 	@RequestMapping("/ridesearch")
 	public ModelAndView searchForRides(@RequestParam("queryloc") String location, 
 			@RequestParam("queryname") String title, @RequestParam("querydate") String start_time) {
-		
+
 		return new ModelAndView("ridesearch", "titletag", riderepo.findByEventtitleContaining(title));
 	}
 	// TODO: method to parse date and time
