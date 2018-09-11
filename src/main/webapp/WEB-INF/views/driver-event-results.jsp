@@ -13,9 +13,9 @@
 </head>
 <body>
 
-<div class="container" style="margin: 50px">
+<div class="container" style="margin: 20px">
 
-	<div style="margin-left: 50px; margin-top: 50px;">
+	<div style="margin-left: 20px; margin-top: 50px;">
 		<h1>YOU SEARCHED FOR ${queryloc} ${queryname} ${querydate}</h1>
 		
 		<form> <!--  CAN BE A REQUESTPARAM -->
@@ -30,7 +30,7 @@
 					
 				<c:forEach var="event" items="${events}">	<!--prints from ArrayList in controller-->	
 					<tr>
-						<td><%-- <img src="${event.image}" alt="no image available" style="width:128px;height:128px;"> --%></td>
+						<td><img src="${event.image.thumb.url}" alt="no image available" style="width:48px;height:48px;"></td>
 						<td>${event.start_time}</td>
 						<td>${event.title}</td>
 						<%-- <td><a href="/event/${event.latitude}/${event.longitude}">view</a></td> --%>

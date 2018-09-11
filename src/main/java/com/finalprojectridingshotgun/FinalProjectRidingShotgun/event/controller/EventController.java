@@ -53,7 +53,7 @@ public class EventController {
 		HttpEntity<String> entity = eventHeaders();
 
 		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
-				+ eId + "&location=" + queryloc + "&q=" + queryname + "&page_size=100", HttpMethod.GET, entity,
+				+ eId + "&location=" + queryloc + "&q=" + queryname + "&page_size=100&image_sizes=thumb", HttpMethod.GET, entity,
 				Entry.class);
 
 		// get Entry
