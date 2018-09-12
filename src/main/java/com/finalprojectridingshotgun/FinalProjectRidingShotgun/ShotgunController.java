@@ -18,7 +18,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
 @Controller
-@SessionAttributes("user_name")
+@SessionAttributes("sessionUser")
 public class ShotgunController {
 
 	@Autowired
@@ -52,6 +52,7 @@ public class ShotgunController {
 	@RequestMapping("/pullevent/{id}/{title}")
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title, HttpSession session) {
 		User user = (User) session.getAttribute("user_name");
+		System.out.println(user.getFirst_name());
 		Ride eventIdAndTitleToAdd = new Ride(id, title, user.getUser_id());
 		System.out.println(eventIdAndTitleToAdd.getEventid());
 		System.out.println(eventIdAndTitleToAdd.getEventtitle());
@@ -75,7 +76,7 @@ public class ShotgunController {
 		if (user.isPresent()) {
 			String truePassword = user.get().getPasscode();
 			if (truePassword.equals(password)) {
-				session.setAttribute("user_name", username);
+				session.setAttribute("sessionUser", user);
 				return new ModelAndView("index", "welcome", "Welcome " + user.get().getFirst_name() + "!");
 			}
 		} else {
