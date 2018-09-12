@@ -18,7 +18,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.Routes;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
-@SessionAttributes({ "echosen", "user_name" })
+@SessionAttributes({ "echosen", "sessionUser" })
 
 public class Calculator {
 	@Autowired
@@ -30,25 +30,46 @@ public class Calculator {
 	@Value("${gas.key}")
 	String gasID;
 
+	
 	public String getDistance(HttpSession session) {
-		Event e = (Event) session.getAttribute("echosen");
-		System.out.println(e.getLatitude());
-		User userOrigin = (User) session.getAttribute("user_name");
-
 		RestTemplate restTemp = new RestTemplate();
-		JsonWrapper wrapper = restTemp.getForObject(
-				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
-						+ "&destination="
-						+ e.getLatitude() + "," + e.getLongitude() + "&key="
-						+ map,
-				JsonWrapper.class);
+		
+		User userOrigin = (User) session.getAttribute("sessionUser");
+		Event e = (Event) session.getAttribute("echosen");
+		
+		JsonWrapper tripDistance = restTemp.getForObject("https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map, JsonWrapper.class);
+		
+		
+		
+		return tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		Event e = (Event) session.getAttribute("echosen");
+//		System.out.println(e.getLatitude());
+//		User userOrigin = (User) session.getAttribute("user_name");
+//		RestTemplate restTemp = new RestTemplate();
+//		JsonWrapper wrapper = restTemp.getForObject(
+//				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+//						+ "&destination="
+//						+ e.getLatitude() + "," + e.getLongitude() + "&key="
+//						+ map,
+//				JsonWrapper.class);
 
-		ArrayList<Routes> routes = wrapper.getRoutes();
-
-		System.out.println("Console: " + routes.get(0).getLegs().get(0).getDistance().getText());
-		// System.out.println(response.getBody());
-
-		return "";
+//		ArrayList<Routes> routes = wrapper.getRoutes();
+//
+//		System.out.println("THIS IS PULLING THE USER ADDRESS:" + userOrigin.getAddress());
+//		System.out.println("Console: " + routes.get(0).getLegs().get(0).getDistance().getText());
+//		// System.out.println(response.getBody());
+//
+//		return tripDistance;
 	}
 
 	public ModelAndView regGasPrice(HttpSession session) {

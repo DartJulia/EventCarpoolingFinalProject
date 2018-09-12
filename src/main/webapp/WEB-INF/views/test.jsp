@@ -9,6 +9,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
 </head>
 <body>
-${echosen.latitude}
+<%-- ${echosen.latitude} --%>
+
+<a href="finddistance"><button>Get Cost</button></a>
+${testresult}
 </body>
 </html>
