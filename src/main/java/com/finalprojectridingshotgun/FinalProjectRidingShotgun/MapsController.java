@@ -16,7 +16,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWra
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.Routes;
 
 @Controller
-@SessionAttributes("echosen")
+@SessionAttributes({"echosen", "user_name"})
 public class MapsController {
 
 	@Value("${maps.key}")
