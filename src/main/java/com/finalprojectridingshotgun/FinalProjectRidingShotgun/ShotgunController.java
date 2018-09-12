@@ -51,8 +51,8 @@ public class ShotgunController {
 
 	@RequestMapping("/pullevent/{id}/{title}")
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title, HttpSession session) {
-		User user = (User) session.getAttribute("user_name");
-		System.out.println(user.getFirst_name());
+		User user = (User) session.getAttribute("sessionUser");
+		//System.out.println(user.getFirst_name());
 		Ride eventIdAndTitleToAdd = new Ride(id, title, user.getUser_id());
 		System.out.println(eventIdAndTitleToAdd.getEventid());
 		System.out.println(eventIdAndTitleToAdd.getEventtitle());
