@@ -103,7 +103,7 @@ public class EventController {
 		Event e = new Event(id, title, start, v, lat, lon);
 		System.out.println(e);
 		session.setAttribute("echosen", e);
-		List<Ride> rides = riderepo.findByEventtitleContaining(id);
+		List<Ride> rides = riderepo.findByEventid(id);
 		ev.addObject("ridelist", rides);
 		ev.addObject("latit", lat);
 		ev.addObject("longit", lon);
