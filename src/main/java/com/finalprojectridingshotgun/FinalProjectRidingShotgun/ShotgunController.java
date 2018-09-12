@@ -5,21 +5,32 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWrapper;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.Ride;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
 @Controller
-@SessionAttributes("sessionUser")
+@SessionAttributes({"echosen","sessionUser"})
 public class ShotgunController {
+	
+	
+	@Value("${maps.key}")
+	String map;
+	
+	@Value("${gas.key}")
+	String gasID;
 
 	@Autowired
 	UserRepository userRepo;
@@ -103,5 +114,25 @@ public class ShotgunController {
 //		System.out.println(eventToAdd);
 //		return new ModelAndView("redirect:/");
 //	}
+	
+	@RequestMapping("test")
+	public String test() {
+		return "test";
+	}
+	
+	@RequestMapping("finddistance")
+	public ModelAndView findDistance(HttpSession session) {
+		RestTemplate restTemp = new RestTemplate();
+		
+		User userOrigin = (User) session.getAttribute("sessionUser");
+		Event e = (Event) session.getAttribute("echosen");
+		
+		JsonWrapper tripDistance = restTemp.getForObject("https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map, JsonWrapper.class);
+		
+		
+		
+		return new ModelAndView ("redirect:/test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
+	}
 
 }

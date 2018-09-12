@@ -29,7 +29,8 @@
 <c:forEach var="event" items="${titletag}">
 
 <tr>
-						<td>${event.rideid}</td>
+			
+						<th></th>
 						<td>${event.eventid}
 						<td>${event.eventtitle}</td>
 						<td>${event.userid }</td>
