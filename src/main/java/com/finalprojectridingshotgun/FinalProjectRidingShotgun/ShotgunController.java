@@ -76,7 +76,8 @@ public class ShotgunController {
 		if (user.isPresent()) {
 			String truePassword = user.get().getPasscode();
 			if (truePassword.equals(password)) {
-				session.setAttribute("sessionUser", user);
+				User trueUser = user.get();
+				session.setAttribute("sessionUser", trueUser);
 				return new ModelAndView("index", "welcome", "Welcome " + user.get().getFirst_name() + "!");
 			}
 		} else {
