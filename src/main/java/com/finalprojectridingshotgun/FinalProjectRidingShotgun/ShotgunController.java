@@ -1,5 +1,7 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class ShotgunController {
 
 	@Autowired
 	RideRepository rideRepo;
-	
+
 // **Takes user to register form 
 	@RequestMapping("/registerpage")
 	public ModelAndView registrationPage() {
@@ -46,36 +48,42 @@ public class ShotgunController {
 		userRepo.save(u);
 		return new ModelAndView("redirect:/");
 	}
-	
-	
+
 	@RequestMapping("/pullevent/{id}/{title}")
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title) {
-		
+
 		Ride eventIdAndTitleToAdd = new Ride(id, title, 1);
 		System.out.println(eventIdAndTitleToAdd.getEventid());
 		System.out.println(eventIdAndTitleToAdd.getEventtitle());
 		rideRepo.save(eventIdAndTitleToAdd);
-		return new ModelAndView ("redirect:/");
+		return new ModelAndView("redirect:/");
 	}
 
-	//Displays login page
+	// Displays login page
 	@RequestMapping("/login")
 	public ModelAndView loginPage() {
 		return new ModelAndView("login");
 	}
 
-	//Validating login
-	@RequestMapping ("validateuser")
+	// Validating login
+	@RequestMapping("validateuser")
 	public ModelAndView valUserName(@RequestParam("user_name") String username,
 			@RequestParam("password") String password, HttpSession session) {
 		// userRepo.findByUsernameAndPasscode(username, password).getUser_id();
-	User user = userRepo.findByUsernameAndPasscode(username, password);
-	session.setAttribute("user_name", user);
-	System.out.println("Welcome" + user.getFirst_name());
-		return new ModelAndView("index", "welcome", "Welcome " + user.getFirst_name() + "!");
-	}	
+		Optional<User> user = userRepo.findByUsernameAndPasscode(username, password);
+		// System.out.println("Welcome" + user.getFirst_name());
+		if (user.isPresent()) {
+			String truePassword = user.get().getPasscode();
+			if (truePassword.equals(password)) {
+				session.setAttribute("user_name", username);
+				return new ModelAndView("index", "welcome", "Welcome " + user.get().getFirst_name() + "!");
+			}
+		} else {
+			return new ModelAndView("index", "welcome", "you are not a user");
+		}
+		return null;
+	}
 
-	
 //	@RequestMapping("/pullevent")
 //	public ModelAndView pullEvent() {
 //		Event eventIdToAdd = new;
@@ -85,7 +93,7 @@ public class ShotgunController {
 //		System.out.println(eventIdToAdd + " " + eventTitleToAdd);
 //		return new ModelAndView("redirect:/");
 //	}
-	
+
 //	@RequestMapping("/sendevent")
 //	public ModelAndView sendEventToDatabase(Event ) {
 //		
@@ -93,7 +101,5 @@ public class ShotgunController {
 //		System.out.println(eventToAdd);
 //		return new ModelAndView("redirect:/");
 //	}
-	
-	
 
 }
