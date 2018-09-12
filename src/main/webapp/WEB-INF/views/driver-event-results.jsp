@@ -47,7 +47,7 @@
 					</tr>-->	
 		
 				<c:forEach var="event" items="${events}">	
-					<div style="max-width: 20rem; display: inline-block;  float: left;  margin-right: 10px; height: 400px; text-overflow: ellipsis;">
+					<div style="max-width: 20rem; display: flex;  float: left;  margin-right: 10px; height: 400px; text-overflow: ellipsis;">
 				<div class="card border-primary mb-3" >
 				<div class="card-header"><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}">${event.title }</a></div>
 				<div class="card-body">
