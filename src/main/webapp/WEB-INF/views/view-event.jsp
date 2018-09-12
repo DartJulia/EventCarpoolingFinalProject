@@ -16,6 +16,7 @@
 <div style="margin-left: 50px; margin-top: 50px;">
 
 <h1> Rides going to event: </h1>
+${rides}
 
 <h4>Latitude: ${latit} </h4>
 <h4>Longitude: ${longit} </h4>

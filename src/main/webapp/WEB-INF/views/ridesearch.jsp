@@ -11,7 +11,9 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
 </head>
+
 <body>
+
 <br>
 <h5>Rides matching your search:</h5>
 

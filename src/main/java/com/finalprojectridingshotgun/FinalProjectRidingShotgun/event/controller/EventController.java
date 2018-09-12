@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Entry;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Events;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.Ride;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 
 @Controller
@@ -102,6 +103,8 @@ public class EventController {
 		Event e = new Event(id, title, start, v, lat, lon);
 		System.out.println(e);
 		session.setAttribute("echosen", e);
+		List<Ride> rides = riderepo.findByEventtitleContaining(id);
+		ev.addObject("ridelist", rides);
 		ev.addObject("latit", lat);
 		ev.addObject("longit", lon);
 	
