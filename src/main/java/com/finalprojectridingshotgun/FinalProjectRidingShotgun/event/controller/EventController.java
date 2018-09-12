@@ -87,8 +87,9 @@ public class EventController {
 	@RequestMapping("/ridesearch")
 	public ModelAndView searchForRides(@RequestParam("queryloc") String location, 
 			@RequestParam("queryname") String title, @RequestParam("querydate") String start_time) {
-
-		return new ModelAndView("ridesearch", "titletag", riderepo.findByEventtitleContaining(title));
+		ModelAndView rsv = new ModelAndView("ridesearch", "titletag", riderepo.findByEventtitleContaining(title));
+		rsv.addObject("ridenumber", "placeholder");
+		return rsv;
 	}
 	// TODO: method to parse date and time
 

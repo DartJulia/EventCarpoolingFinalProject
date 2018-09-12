@@ -10,7 +10,7 @@
 </head>
 <body>
 <br>
-<h5>Here are the drivers going to your event:</h5>
+<h5>There are ${ridenumber} drivers going to your event:</h5>
 
 ${titletag}
 <br>
