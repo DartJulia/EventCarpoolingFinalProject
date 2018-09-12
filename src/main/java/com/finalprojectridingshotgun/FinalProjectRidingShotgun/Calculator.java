@@ -14,7 +14,6 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Even
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.GasStations;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.StationOptions;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWrapper;
-import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.Routes;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
@@ -30,7 +29,6 @@ public class Calculator {
 	@Value("${gas.key}")
 	String gasID;
 
-	
 	public String getDistance(HttpSession session) {
 		RestTemplate restTemp = new RestTemplate();
 		

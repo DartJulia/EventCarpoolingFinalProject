@@ -16,7 +16,7 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 40%;
+	width: 60%;
 	}
 	
 	.card border-primary mb-3 {
@@ -47,12 +47,12 @@
 					</tr>-->	
 		
 				<c:forEach var="event" items="${events}">	
-					<div style="max-width: 20rem; display: inline-block;  float: left;  margin-right: 10px; height: 300px; text-overflow: ellipsis;">
+					<div style="max-width: 20rem; display: inline-block;  float: left;  margin-right: 10px; height: 400px; text-overflow: ellipsis;">
 				<div class="card border-primary mb-3" >
 				<div class="card-header"><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}">${event.title }</a></div>
 				<div class="card-body">
-				   <h4 class="card-title"><img src="${event.image.thumb.url}"></h4>
-				   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				   <h4 class="card-title"><img src="${event.image.medium.url}"></h4>
+				   <p class="card-text">${event.start_time}</p>
 				 </div>
 				 </div>
 				</div>
