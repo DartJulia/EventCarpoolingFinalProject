@@ -1,5 +1,7 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,9 +67,10 @@ public class ShotgunController {
 	//Validating login
 	@RequestMapping ("validateuser")
 	public ModelAndView valUserName(@RequestParam("user_name") String username,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password, HttpSession session) {
 		// userRepo.findByUsernameAndPasscode(username, password).getUser_id();
 	User user = userRepo.findByUsernameAndPasscode(username, password);
+	session.setAttribute("user_name", user);
 	System.out.println("Welcome" + user.getFirst_name());
 		return new ModelAndView("index", "welcome", "Welcome " + user.getFirst_name() + "!");
 	}	
