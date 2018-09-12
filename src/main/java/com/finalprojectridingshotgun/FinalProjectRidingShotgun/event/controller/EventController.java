@@ -33,7 +33,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Even
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 
 @Controller
-@SessionAttributes("echosen")
+@SessionAttributes({"echosen", "user_name"})
 public class EventController {
 	
 	@Autowired
