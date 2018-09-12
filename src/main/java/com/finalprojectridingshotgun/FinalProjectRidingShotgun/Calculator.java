@@ -18,7 +18,8 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.Routes;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
-@SessionAttributes("echosen")
+@SessionAttributes({ "echosen", "user_name" })
+
 public class Calculator {
 	@Autowired
 	UserRepository userRepo;
@@ -32,7 +33,7 @@ public class Calculator {
 	public String getDistance(HttpSession session) {
 		Event e = (Event) session.getAttribute("echosen");
 		System.out.println(e.getLatitude());
-		User userOrigin = new User();
+		User userOrigin = (User) session.getAttribute("user_name");
 
 		RestTemplate restTemp = new RestTemplate();
 		JsonWrapper wrapper = restTemp.getForObject(
