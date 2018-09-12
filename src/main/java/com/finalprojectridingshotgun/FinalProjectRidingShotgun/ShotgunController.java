@@ -130,9 +130,13 @@ public class ShotgunController {
 		JsonWrapper tripDistance = restTemp.getForObject("https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
 						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map, JsonWrapper.class);
 		
+		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
+		String[] miles = dist.split(" ");
+		Double milesParse = Double.parseDouble(miles[0]);
+		// tripCost = (milesParse/mpg) * pfc;
+//		GasController.gaspriceatloc(e, milesParse);
 		
-		
-		return new ModelAndView ("redirect:/test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
+		return new ModelAndView ("test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
 	}
 
 }

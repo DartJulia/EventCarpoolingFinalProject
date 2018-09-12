@@ -16,7 +16,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.GasSta
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.StationOptions;
 
 @Controller
-@SessionAttributes("echosen")
+@SessionAttributes({"echosen","sessionUser"})
 public class GasController {
 	
 	@Value("${gas.key}")
@@ -29,14 +29,22 @@ public class GasController {
 	public ModelAndView regGasPrice(HttpSession session) {
 		Event e = (Event) session.getAttribute("echosen");
 
+		String pfc = gasPriceAtLoc(e);
+		
+	//	return new ModelAndView("index", "price", station.getStationDetails().getGasPrice());
+		//return new ModelAndView("view-event", "price", priceForCost.get(priceForCost.size() - 1).getGasPrice());
+		return new ModelAndView("view-event", "price", pfc);
+	}
+
+
+	public String gasPriceAtLoc(Event e) {   // add milesParse?
 		RestTemplate restTemplate = new RestTemplate();
 		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
 				+ "/" + e.getLongitude() + "/1.0/reg/price/" + gasID + ".json", GasStations.class);
 		ArrayList<StationOptions> priceForCost = station.getChosenStation();
-		priceForCost.get(priceForCost.size() - 1).getGasPrice();
-		
-	//	return new ModelAndView("index", "price", station.getStationDetails().getGasPrice());
-		return new ModelAndView("view-event", "price", priceForCost.get(priceForCost.size() - 1).getGasPrice());
+		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
+		return pfc;
+		// tripCost = (milesParse/mpg) * pfc;
 	}
 	
 }
