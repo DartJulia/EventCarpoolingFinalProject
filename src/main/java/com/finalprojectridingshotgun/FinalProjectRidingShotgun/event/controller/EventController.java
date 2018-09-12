@@ -102,7 +102,6 @@ public class EventController {
 		Event e = new Event(id, title, start, v, lat, lon);
 		System.out.println(e);
 		session.setAttribute("echosen", e);
-
 		ev.addObject("latit", lat);
 		ev.addObject("longit", lon);
 	
