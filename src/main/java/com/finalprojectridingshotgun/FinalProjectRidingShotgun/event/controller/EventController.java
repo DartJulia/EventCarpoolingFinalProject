@@ -110,7 +110,32 @@ public class EventController {
 	
 		return ev;
 	}
+	
+	// display events for rider
+	@RequestMapping("/event/{eventid}/")
+	public ModelAndView rideEvent(@PathVariable("eventid") String eventId) {
+		RestTemplate restTemplate = eventRest();
 
+		HttpEntity<String> entity = eventHeaders();
+		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
+				+ eventId + "&page_size=30&image_sizes=medium",
+				HttpMethod.GET,
+				entity,
+				Entry.class);
+		
+		Entry entry = response.getBody();
+
+		// get Events
+		Events events = entry.getEvents();
+
+		// get ArrayList<Event>
+		ArrayList<Event> result = events.getEventList();
+		ModelAndView rv = new ModelAndView("driver-event-results");
+		rv.addObject("events", result);
+
+		return rv;
+	}
+	
 
 //	@RequestMapping("/event")
 //	public ModelAndView viewEvent(@RequestParam("event") Event e) {
