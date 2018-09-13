@@ -122,21 +122,35 @@ public class ShotgunController {
 	
 	@RequestMapping("finddistance")
 	public ModelAndView findDistance(HttpSession session) {
-		RestTemplate restTemp = new RestTemplate();
+		Double milesParse = milesParsed(session);
+		// tripCost = (milesParse/mpg) * pfc;
+//		GasController.gaspriceatloc(e, milesParse);
+		
+		//return new ModelAndView ("test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
+		return new ModelAndView ("test", "tripDist", milesParse);
+	}
+
+	public Double milesParsed(HttpSession session) {
+		
 		
 		User userOrigin = (User) session.getAttribute("sessionUser");
 		Event e = (Event) session.getAttribute("echosen");
-		
+		RestTemplate restTemp = new RestTemplate();
 		JsonWrapper tripDistance = restTemp.getForObject("https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
 						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map, JsonWrapper.class);
 		
 		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
 		String[] miles = dist.split(" ");
 		Double milesParse = Double.parseDouble(miles[0]);
-		// tripCost = (milesParse/mpg) * pfc;
-//		GasController.gaspriceatloc(e, milesParse);
-		
-		return new ModelAndView ("test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
+		return milesParse;
 	}
+	
+	
+	
+	
+//	@RequestMapping("calctripcost")
+//	public ModelAndView tripCostForRider(HttpSessions session) {
+//		
+//	}
 
 }

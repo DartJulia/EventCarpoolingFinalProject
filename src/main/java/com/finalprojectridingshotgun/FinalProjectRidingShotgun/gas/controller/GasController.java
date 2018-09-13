@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.ShotgunController;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.GasStations;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.StationOptions;
@@ -25,26 +26,37 @@ public class GasController {
 
 	// @RequestParam("lat") Double lat, @RequestParam("lng") Double lng,
 	//This method finds the last gas station that has the most expensive gas in the array that is pulled from a 1 mile radius from a location.
-	@RequestMapping("/gasprice")
-	public ModelAndView regGasPrice(HttpSession session) {
-		Event e = (Event) session.getAttribute("echosen");
-
-		String pfc = gasPriceAtLoc(e);
+//	@RequestMapping("/gasprice")
+//	public ModelAndView regGasPrice(HttpSession session) {
+//		Event e = (Event) session.getAttribute("echosen");
+//
+//		String pfc = gasPriceAtLoc(e);
 		
 	//	return new ModelAndView("index", "price", station.getStationDetails().getGasPrice());
 		//return new ModelAndView("view-event", "price", priceForCost.get(priceForCost.size() - 1).getGasPrice());
-		return new ModelAndView("view-event", "price", pfc);
-	}
+//		return new ModelAndView("view-event", "price", pfc);
+//	}
 
 
-	public String gasPriceAtLoc(Event e) {   // add milesParse?
-		RestTemplate restTemplate = new RestTemplate();
+	public Double gasPriceAtLoc(Event e, HttpSession session) {  
+		ShotgunController sC = new ShotgunController();
+		sC.milesParsed(session);
+		RestTemplate restTemplate = new RestTemplate(); // add milesParse?
+		
 		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
 				+ "/" + e.getLongitude() + "/1.0/reg/price/" + gasID + ".json", GasStations.class);
 		ArrayList<StationOptions> priceForCost = station.getChosenStation();
 		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
-		return pfc;
+		double tripCost = ((sC.milesParsed(session) / 24) * Double.parseDouble(pfc));
+		return tripCost;
 		// tripCost = (milesParse/mpg) * pfc;
+	}
+	
+	@RequestMapping("/cost of trip")
+	public ModelAndView costOfGasForTrip() {
+		GasController totalPrice = new GasController();
+		totalPrice.gasPriceAtLoc("echosen", "sessionUser");
+		return totalPrice.gasPriceAtLoc("echosen", "sessionUser");
 	}
 	
 }

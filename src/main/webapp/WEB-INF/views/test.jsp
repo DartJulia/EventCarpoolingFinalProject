@@ -15,6 +15,6 @@
 <%-- ${echosen.latitude} --%>
 
 <a href="finddistance"><button>Get Cost</button></a>
-${testresult}
+${tripDist}
 </body>
 </html>
