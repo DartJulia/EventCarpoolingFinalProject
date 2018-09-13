@@ -55,6 +55,6 @@ form {
 	</div>
 
 
-User: ${User.first_name}
+${welcome}
 </body>
 </html>
