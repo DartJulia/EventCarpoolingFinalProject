@@ -31,6 +31,8 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Entr
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Events;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRide;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRideRepository;
 
@@ -43,6 +45,9 @@ public class EventController {
 	
 	@Autowired
 	UserRideRepository urRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 
 	@Value("${events.key}")
 	String eId; // event key
@@ -121,6 +126,11 @@ public class EventController {
 		ModelAndView rjv = new ModelAndView("join-ride");
 		UserRide ur = new UserRide(userId, rideId);
 		urRepo.save(ur);
+		User d = userRepo.getOne(riderepo.getOne(rideId).getUserid());
+		String event = riderepo.getOne(rideId).getEventtitle();
+		rjv.addObject("user", userRepo.getOne(userId).getFirst_name());
+		rjv.addObject("ride", d.getFirst_name());
+		rjv.addObject("event", event);
 		return rjv;
 		
 	}
