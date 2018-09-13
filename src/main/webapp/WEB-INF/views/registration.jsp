@@ -55,6 +55,6 @@ form {
 	</div>
 
 
-
+${welcome}
 </body>
 </html>

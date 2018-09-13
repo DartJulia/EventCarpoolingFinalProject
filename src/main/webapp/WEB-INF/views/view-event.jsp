@@ -27,6 +27,6 @@ ${rides}
 src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI" allowfullscreen></iframe>
 
 </div>
-
+User: ${User.first_name}
 </body>
 </html>

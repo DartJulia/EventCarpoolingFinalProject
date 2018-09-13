@@ -73,6 +73,6 @@
 </div>
 	
 <script src="index.js"></script>
-
+User: ${User.first_name}
 </body>
 </html>

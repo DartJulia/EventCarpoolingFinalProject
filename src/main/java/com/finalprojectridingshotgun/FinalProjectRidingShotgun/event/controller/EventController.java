@@ -110,7 +110,39 @@ public class EventController {
 	
 		return ev;
 	}
+	
+	// display events for rider
+	@RequestMapping("/event/{eventid}/{eventtitle}")
+	public ModelAndView rideEvent(@PathVariable("eventid") String eventId, @PathVariable("eventtitle") String title) {
+		RestTemplate restTemplate = eventRest();
+		
+		// this doesn't really work
+		//String keyword = title.replace(" ", "+");
+		String[] titleArr = title.split(" ");
+		String keyword = titleArr[0] + " " + titleArr[1] + " " + titleArr[2] + " " + titleArr[3];
+		System.out.println(keyword);
+		// + "&q=" + keyword + "&page_size=30&image_sizes=medium"
+		HttpEntity<String> entity = eventHeaders();
+		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
+				+ eId + "&id=" + eventId,
+				HttpMethod.GET,
+				entity,
+				Entry.class);
+		System.out.println(eventId);
+		Entry entry = response.getBody();
+		System.out.println(entry);
+		// get Events
+		Events events = entry.getEvents();
+		System.out.println(events);
+		// get ArrayList<Event>
+		ArrayList<Event> result = events.getEventList();
+		System.out.println(result);
+		ModelAndView rv = new ModelAndView("driver-event-results");
+		rv.addObject("events", result);
 
+		return rv;
+	}
+	
 
 //	@RequestMapping("/event")
 //	public ModelAndView viewEvent(@RequestParam("event") Event e) {

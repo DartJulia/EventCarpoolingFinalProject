@@ -24,6 +24,7 @@
 						<th>ride id</th>
 						<th>event title</th>
 						<th>driver id</th>
+						<th>event link</th>
 						<th></th>
 					</tr>
 <c:forEach var="event" items="${titletag}">
@@ -33,8 +34,8 @@
 						<th></th>
 						<td>${event.eventid}
 						<td>${event.eventtitle}</td>
-						<td>${event.userid }</td>
-						<%-- <td><a href="/pullevent/${event.id}/${event.title}">Yes</a></td> --%>
+						<td>${event.userid }</td> 
+						<td><a href="/event/${event.eventid}/${event.eventtitle}">Link</a></td>
 					</tr>
 
 </c:forEach>
@@ -42,5 +43,7 @@
 
 <br>
 <a href="/">Go Back</a>
+<br>
+User: ${User.first_name}
 </body>
 </html>
