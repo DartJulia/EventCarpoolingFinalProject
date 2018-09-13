@@ -22,7 +22,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
 @Controller
-@SessionAttributes({"echosen","sessionUser"})
+@SessionAttributes({ "echosen", "sessionUser", "milesParse" })
 public class ShotgunController {
 	
 	
@@ -89,7 +89,7 @@ public class ShotgunController {
 			if (truePassword.equals(password)) {
 				User trueUser = user.get();
 				session.setAttribute("sessionUser", trueUser);
-				return new ModelAndView("index", "welcome", "Welcome " + user.get().getFirst_name() + "!");
+				return new ModelAndView("index", "welcome", "Welcome " + trueUser.getFirst_name() + "!"); // user.get().getFirst_name()
 			}
 		} else {
 			return new ModelAndView("index", "welcome", "you are not a user");
@@ -122,26 +122,50 @@ public class ShotgunController {
 	
 	@RequestMapping("finddistance")
 	public ModelAndView findDistance(HttpSession session) {
-		Double milesParse = milesParsed(session);
+		// Double milesParse = milesParsed(session);
 		// tripCost = (milesParse/mpg) * pfc;
 //		GasController.gaspriceatloc(e, milesParse);
 		
 		//return new ModelAndView ("test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
-		return new ModelAndView ("test", "tripDist", milesParse);
+		User userOrigin = (User) session.getAttribute("sessionUser");
+		Event e = (Event) session.getAttribute("echosen");
+		Double num = findTripDistance(userOrigin, e);
+		System.out.println(num);
+//		session.setAttribute("milesParse", milesParse);
+//		System.out.println(milesParse);
+		return new ModelAndView("test", "tripDist", "");
+	}
+
+	public Double findTripDistance(User userOrigin, Event e) {
+		RestTemplate restTemp = new RestTemplate();
+		JsonWrapper tripDistance = restTemp.getForObject(
+				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
+				JsonWrapper.class);
+
+		System.out.println(tripDistance);
+		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
+		String[] miles = dist.split(" ");
+		// System.out.println(miles[0]);
+		Double milesParse = Double.parseDouble(miles[0]);
+		return milesParse;
 	}
 
 	public Double milesParsed(HttpSession session) {
-		
-		
+
 		User userOrigin = (User) session.getAttribute("sessionUser");
 		Event e = (Event) session.getAttribute("echosen");
 		RestTemplate restTemp = new RestTemplate();
-		JsonWrapper tripDistance = restTemp.getForObject("https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
-						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map, JsonWrapper.class);
-		
+		JsonWrapper tripDistance = restTemp.getForObject(
+				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
+				JsonWrapper.class);
+
 		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
 		String[] miles = dist.split(" ");
 		Double milesParse = Double.parseDouble(miles[0]);
+		session.setAttribute("milesParse", milesParse);
+		System.out.println(milesParse);
 		return milesParse;
 	}
 	

@@ -20,6 +20,7 @@
 
 		<div class="logins" style="text-align: right">
 		${welcome}
+		${sessionUser.first_name }
 			<a href="/registerpage" style="padding: 20px">sign up</a> 
 			<a href="/login" style="padding: 20px">login</a>
 		</div>
