@@ -35,7 +35,7 @@
 						<td>${event.eventid}
 						<td>${event.eventtitle}</td>
 						<td>${event.userid }</td> 
-						<td><a href="/event/${event.eventid}/">Link</a></td>
+						<td><a href="/event/${event.eventid}/${event.eventtitle}">Link</a></td>
 					</tr>
 
 </c:forEach>
