@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +25,12 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserReposito
 @Controller
 @SessionAttributes({ "echosen", "sessionUser", "milesParse" })
 public class ShotgunController {
-	
-	
+
+	HttpSession session;
+
 	@Value("${maps.key}")
 	String map;
-	
+
 	@Value("${gas.key}")
 	String gasID;
 
@@ -61,9 +63,10 @@ public class ShotgunController {
 	}
 
 	@RequestMapping("/pullevent/{id}/{title}")
-	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title, HttpSession session) {
+	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title,
+			HttpSession session) {
 		User user = (User) session.getAttribute("sessionUser");
-		//System.out.println(user.getFirst_name());
+		// System.out.println(user.getFirst_name());
 		Ride eventIdAndTitleToAdd = new Ride(id, title, user.getUser_id());
 		System.out.println(eventIdAndTitleToAdd.getEventid());
 		System.out.println(eventIdAndTitleToAdd.getEventtitle());
@@ -114,19 +117,20 @@ public class ShotgunController {
 //		System.out.println(eventToAdd);
 //		return new ModelAndView("redirect:/");
 //	}
-	
+
 	@RequestMapping("test")
 	public String test() {
 		return "test";
 	}
-	
+
 	@RequestMapping("finddistance")
 	public ModelAndView findDistance(HttpSession session) {
 		// Double milesParse = milesParsed(session);
 		// tripCost = (milesParse/mpg) * pfc;
 //		GasController.gaspriceatloc(e, milesParse);
-		
-		//return new ModelAndView ("test", "testresult", tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
+		// System.out.println(userOrigin);
+		// return new ModelAndView ("test", "testresult",
+		// tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
 		User userOrigin = (User) session.getAttribute("sessionUser");
 		Event e = (Event) session.getAttribute("echosen");
 		Double num = findTripDistance(userOrigin, e);
@@ -151,7 +155,7 @@ public class ShotgunController {
 		return milesParse;
 	}
 
-	public Double milesParsed(HttpSession session) {
+	public Double milesParsed() {
 
 		User userOrigin = (User) session.getAttribute("sessionUser");
 		Event e = (Event) session.getAttribute("echosen");
@@ -168,10 +172,26 @@ public class ShotgunController {
 		System.out.println(milesParse);
 		return milesParse;
 	}
-	
-	
-	
-	
+
+	// Testing the adding of method data from maps API distance and Gas API price.
+	@RequestMapping("/calcrideprice")
+	public ModelAndView pricePerRider(@ModelAttribute("sessionUser") User userOrigin,
+			@ModelAttribute("echosen") Event e) {
+		System.out.println("Made it here!!!");
+
+		// User userOrigin = (User) session.getAttribute("sessionUser");
+		System.out.println(userOrigin);
+		//Event e = (Event) session.getAttribute("echosen");
+		System.out.println("Made it here now!!!");
+		System.out.println(e);
+		System.out.println(e.getLatitude() + e.getLongitude());
+		System.out.println(userOrigin.getAddress());
+		Calculator calc = new Calculator();
+		calc.findTripDistance(userOrigin, e);
+		System.out.println(calc.findTripDistance(userOrigin, e));
+		return new ModelAndView("test", "pricePerRider", calc.findTripDistance(userOrigin, e));
+	}
+
 //	@RequestMapping("calctripcost")
 //	public ModelAndView tripCostForRider(HttpSessions session) {
 //		

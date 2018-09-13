@@ -35,20 +35,20 @@ public class GasController {
 //	}
 
 
-	public Double gasPriceAtLoc(Event e, HttpSession session) {
+//	public Double gasPriceAtLoc(Event e, HttpSession session) {
 //		ShotgunController sC = new ShotgunController();
 //		session.getAttribute("sessionUser");
 //		session.getAttribute("echosen");
 //		sC.milesParsed(session);
-		RestTemplate restTemplate = new RestTemplate(); // add milesParse?
-
-		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
-				+ "/" + e.getLongitude() + "/1.0/reg/price/" + gasID + ".json", GasStations.class);
-		ArrayList<StationOptions> priceForCost = station.getChosenStation();
-		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
-		Double tripCost = (((sC.milesParsed(session) / 24)) * Double.parseDouble(pfc));
-		System.out.println(tripCost);
-		return tripCost;
+//		RestTemplate restTemplate = new RestTemplate(); // add milesParse?
+//
+//		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
+//				+ "/" + e.getLongitude() + "/1.0/reg/price/" + gasID + ".json", GasStations.class);
+//		ArrayList<StationOptions> priceForCost = station.getChosenStation();
+//		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
+//		Double tripCost = (((sC.milesParse(session) / 24)) * Double.parseDouble(pfc));
+//		System.out.println(tripCost);
+//		return tripCost;
 		// tripCost = (milesParse/mpg) * pfc;
 	}
 	
@@ -59,4 +59,4 @@ public class GasController {
 //		return totalPrice.gasPriceAtLoc("echosen", "sessionUser");
 //	}
 //	
-}
+//}

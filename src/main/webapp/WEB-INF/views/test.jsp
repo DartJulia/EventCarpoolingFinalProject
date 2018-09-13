@@ -14,7 +14,7 @@
 <body>
 <%-- ${echosen.latitude} --%>
 
-<a href="finddistance"><button>Get Cost</button></a>
-${tripDist}
+
+${pricePerRider}
 </body>
 </html>
