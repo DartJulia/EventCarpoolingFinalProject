@@ -118,18 +118,19 @@ public class EventController {
 
 		HttpEntity<String> entity = eventHeaders();
 		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
-				+ eventId + "&page_size=30&image_sizes=medium",
+				+ eId + "&id=" + eventId + "&page_size=30&image_sizes=medium",
 				HttpMethod.GET,
 				entity,
 				Entry.class);
-		
+		System.out.println(eventId);
 		Entry entry = response.getBody();
-
+		System.out.println(entry);
 		// get Events
 		Events events = entry.getEvents();
-
+		System.out.println(events);
 		// get ArrayList<Event>
 		ArrayList<Event> result = events.getEventList();
+		System.out.println(result);
 		ModelAndView rv = new ModelAndView("driver-event-results");
 		rv.addObject("events", result);
 
