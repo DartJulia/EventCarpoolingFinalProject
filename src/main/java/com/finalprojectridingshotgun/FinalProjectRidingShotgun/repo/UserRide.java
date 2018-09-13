@@ -1,50 +1,58 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_ride")
-public class UserRide implements Serializable {
+public class UserRide {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long user_ride_id;
+	/**
+	 * 
+	 */
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	@Column(name = "user_id")
-	private long user_id;
-	@Id
-	@Column(name = "ride_id")
-	private long ride_id;
+
+	
+	@JoinColumn(foreignKey = @ForeignKey (name = "user_id"))
+	private Long user_id;
+	
+	@JoinColumn(foreignKey = @ForeignKey (name = "ride_id"))
+	private Long ride_id;
 
 	public UserRide() {
 
 	}
 
-	public UserRide(long user_id, long ride_id) {
+	public UserRide(Long user_id, Long ride_id) {
 		super();
 		this.user_id = user_id;
 		this.ride_id = ride_id;
 	}
 
-	public long getUserid() {
+	public Long getUserid() {
 		return user_id;
 	}
 
-	public void setUserid(long user_id) {
+	public void setUserid(Long user_id) {
 		this.user_id = user_id;
 	}
 
-	public long getRideid() {
+	public Long getRideid() {
 		return ride_id;
 	}
 
-	public void setRideid(long ride_id) {
+	public void setRideid(Long ride_id) {
 		this.ride_id = ride_id;
 	}
 

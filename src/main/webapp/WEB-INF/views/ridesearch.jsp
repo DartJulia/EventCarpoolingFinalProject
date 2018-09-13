@@ -27,15 +27,15 @@
 						<th>event link</th>
 						<th></th>
 					</tr>
-<c:forEach var="event" items="${titletag}">
+<c:forEach var="ride" items="${titletag}">
 
 <tr>
 			
 						<th></th>
-						<td>${event.eventid}
-						<td>${event.eventtitle}</td>
-						<td>${event.userid }</td> 
-						<td><a href="/event/${event.eventid}/${event.eventtitle}">Link</a></td>
+						<td>${ride.eventid}
+						<td>${ride.eventtitle}</td>
+						<td>${ride.userid }</td> 
+						<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">Link</a></td>
 					</tr>
 
 </c:forEach>

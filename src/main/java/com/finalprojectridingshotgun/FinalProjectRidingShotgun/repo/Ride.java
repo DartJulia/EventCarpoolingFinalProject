@@ -27,7 +27,8 @@ public class Ride {
 	@Column(name = "eventtitle")
 	private String eventtitle;
 	@Column(name = "user_id")
-	private long userid;
+	private Long userid;
+	//ownerside
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "user_ride", joinColumns = @JoinColumn(name = "ride_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users = new ArrayList<User>();
@@ -37,7 +38,7 @@ public class Ride {
 
 	}
 	
-	public Ride(String id, String eventtitle, long userid) {
+	public Ride(String id, String eventtitle, Long userid) {
 		this.eventid = id;
 		this.eventtitle = eventtitle;
 		this.userid = userid;
@@ -96,10 +97,6 @@ public class Ride {
 
 	public void setEventtitle(String eventtitle) {
 		this.eventtitle = eventtitle;
-	}
-
-	public void setUserid(long userid) {
-		this.userid = userid;
 	}
 
 	public List<User> getUsers() {
