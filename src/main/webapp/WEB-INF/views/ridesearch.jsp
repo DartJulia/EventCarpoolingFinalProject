@@ -43,5 +43,7 @@
 
 <br>
 <a href="/">Go Back</a>
+<br>
+User: ${User.first_name}
 </body>
 </html>

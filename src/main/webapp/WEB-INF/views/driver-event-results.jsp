@@ -63,6 +63,6 @@
 	</div>
 
 </div>
-
+User: ${User.first_name}
 </body>
 </html>
