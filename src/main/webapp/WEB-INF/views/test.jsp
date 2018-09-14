@@ -16,5 +16,6 @@
 
 
 ${pricePerRider}
+${map}
 </body>
 </html>

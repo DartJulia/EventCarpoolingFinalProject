@@ -15,6 +15,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Even
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.GasStations;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.StationOptions;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWrapper;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.Routes;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
@@ -43,9 +44,13 @@ public class Calculator {
 				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
 						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
 				JsonWrapper.class);
+		
+		//Added this to match the maps controller, it was missing from here.
+		ArrayList<Routes> distance = tripDistance.getRoutes();
 
-		System.out.println(tripDistance);
-		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
+		System.out.println(distance);
+		//issue is here below
+		String dist = "5"; //distance.get(0).getLegs().get(0).getDistance().getText();
 		String[] miles = dist.split(" ");
 		// System.out.println(miles[0]);
 		Double milesParse = Double.parseDouble(miles[0]);

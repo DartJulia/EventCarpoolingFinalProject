@@ -177,17 +177,18 @@ public class ShotgunController {
 	@RequestMapping("/calcrideprice")
 	public ModelAndView pricePerRider(@ModelAttribute("sessionUser") User userOrigin,
 			@ModelAttribute("echosen") Event e) {
-		System.out.println("Made it here!!!");
+		
 
 		// User userOrigin = (User) session.getAttribute("sessionUser");
 		System.out.println(userOrigin);
 		//Event e = (Event) session.getAttribute("echosen");
-		System.out.println("Made it here now!!!");
 		System.out.println(e);
 		System.out.println(e.getLatitude() + e.getLongitude());
 		System.out.println(userOrigin.getAddress());
 		Calculator calc = new Calculator();
+		
 		calc.findTripDistance(userOrigin, e);
+		System.out.println("Made it here now!!!");
 		System.out.println(calc.findTripDistance(userOrigin, e));
 		return new ModelAndView("test", "pricePerRider", calc.findTripDistance(userOrigin, e));
 	}
