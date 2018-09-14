@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
@@ -14,6 +16,8 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.GasSta
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.StationOptions;
 
 @Controller
+@Configuration
+@PropertySource("classpath:application.properties")
 @SessionAttributes({ "echosen", "sessionUser", "milesParse" })
 public class GasController {
 	

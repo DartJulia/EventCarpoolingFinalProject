@@ -12,6 +12,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -41,6 +43,9 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRideRepo
 
 
 @Controller
+@Configuration
+@PropertySource("classpath:application.properties")
+
 @SessionAttributes({"echosen", "sessionUser"})
 public class EventController {
 	
@@ -73,7 +78,7 @@ public class EventController {
 
 		ResponseEntity<Entry> response = restTemplate
 				.exchange(
-						"https://api.eventful.com/json/events/search?app_key=EnterKeyHere=" + queryloc
+						"https://api.eventful.com/json/events/search?app_key=" + eId + "&location=" + queryloc
 								+ "&q=" + queryname + "&page_size=30&image_sizes=medium",
 				HttpMethod.GET,
 				entity,
