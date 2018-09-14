@@ -39,31 +39,33 @@ public class Calculator {
 	
 	
 	public Double findTripDistance(@ModelAttribute("sessionUser") User userOrigin, @ModelAttribute("echosen") Event e) {
+		
 		RestTemplate restTemp = new RestTemplate();
 		JsonWrapper tripDistance = restTemp.getForObject(
 				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
-						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
+						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=AddKeyHere",
 				JsonWrapper.class);
+		// add map back in or not?
 		
 		//Added this to match the maps controller, it was missing from here.
 		ArrayList<Routes> distance = tripDistance.getRoutes();
 
 		System.out.println(distance);
-		//issue is here below
-		String dist = "5"; //distance.get(0).getLegs().get(0).getDistance().getText();
+		
+		String dist = distance.get(0).getLegs().get(0).getDistance().getText();
 		String[] miles = dist.split(" ");
-		// System.out.println(miles[0]);
+		
 		Double milesParse = Double.parseDouble(miles[0]);
 		return milesParse;
 	}
 	
 	
-	public Double gasPriceAtLoc(Event e, HttpSession session) {
+	public Double gasPriceAtLoc(Event e) {
 
 		RestTemplate restTemplate = new RestTemplate(); // add milesParse?
 
 		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
-				+ "/" + e.getLongitude() + "/1.0/reg/price/" + gasID + ".json", GasStations.class);
+				+ "/" + e.getLongitude() + "/1.0/reg/price/AddKeyHere.json", GasStations.class);
 		ArrayList<StationOptions> priceForCost = station.getChosenStation();
 		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
 //		Double tripCost = (((findTripDistance("sessionUser", "echosen") / 24)) * Double.parseDouble(pfc));

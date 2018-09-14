@@ -187,10 +187,12 @@ public class ShotgunController {
 		System.out.println(userOrigin.getAddress());
 		Calculator calc = new Calculator();
 		
-		calc.findTripDistance(userOrigin, e);
+		double gasPrice = calc.gasPriceAtLoc(e);
+		double tripDist = calc.findTripDistance(userOrigin, e);
 		System.out.println("Made it here now!!!");
+		Double tripCost = (((tripDist / 24)) * gasPrice);
 		System.out.println(calc.findTripDistance(userOrigin, e));
-		return new ModelAndView("test", "pricePerRider", calc.findTripDistance(userOrigin, e));
+		return new ModelAndView("test", "pricePerRider", tripCost);
 	}
 
 //	@RequestMapping("calctripcost")
