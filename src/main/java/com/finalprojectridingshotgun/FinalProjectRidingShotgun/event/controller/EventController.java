@@ -65,6 +65,13 @@ public class EventController {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
+	
+	@RequestMapping("/driversearch")
+	public ModelAndView driverSearch() {
+
+		ModelAndView mv = new ModelAndView("driversearch");
+		return mv;
+	}
 
 	@RequestMapping("/allsearch")
 	public ModelAndView searchAll(@RequestParam("queryloc") String queryloc,
@@ -91,7 +98,7 @@ public class EventController {
 		// get ArrayList<Event>
 		ArrayList<Event> result = events.getEventList();
 
-		ModelAndView av = new ModelAndView("driver-event-results");
+		ModelAndView av = new ModelAndView("driver_results");
 
 		queryloc = queryloc.toUpperCase();
 		queryname = queryname.toUpperCase();
@@ -104,10 +111,10 @@ public class EventController {
 
 		return av;
 	}
-	@RequestMapping("/ridesearch")
+	@RequestMapping("/rideresult")
 	public ModelAndView searchForRides(@RequestParam("queryloc") String location, 
 			@RequestParam("queryname") String title, @RequestParam("querydate") String start_time) {
-		ModelAndView rsv = new ModelAndView("ridesearch", "titletag", riderepo.findByEventtitleContaining(title));
+		ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findByEventtitleContaining(title));
 		rsv.addObject("ridenumber", "placeholder");
 		return rsv;
 	}

@@ -9,7 +9,7 @@
       if(this.checked){
         form.action = "/ridesearch";
       }else{
-        form.action = "/allsearch";
+        form.action = "/driversearch";
       }
       console.log(form.action);
     };
