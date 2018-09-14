@@ -36,7 +36,7 @@ public class MapsController {
 				JsonWrapper.class);
 
 		ArrayList<Routes> routes = wrapper.getRoutes();
-
+		System.out.println(routes);
 		System.out.println("Console: " + routes.get(0).getLegs().get(0).getDistance().getText());
 		// System.out.println(response.getBody());
 
