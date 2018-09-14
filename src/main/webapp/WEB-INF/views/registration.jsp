@@ -14,7 +14,7 @@
 
 <style>
 form {
-	width: 30%;
+	width: 50%;
 	margin: 0 auto;
 }
 
@@ -46,6 +46,19 @@ form {
 					name="username" placeholder="User1234"> <label>Enter
 					A Unique P@ssw0rd</label> <input type="password" class="form-control"
 					name="passcode" placeholder="Password">
+				
+				<h1>OPTIONAL CAR INFO:</h1>
+				<p>leave blank if not applicable</p>
+			<!-- 	car info	 -->
+				<label>Enter Your Car Type (SUV or sedan):</label> <input type="text"
+					class="form-control" name="car_type" placeholder="Car Type">
+				<!-- if name = POJO variable names, don't need to use RequestParam or PathVariable; pass in User object on controller side-->
+				<label>Enter your car's total number of seats:</label> <input type="number"
+					class="form-control" name="seats" placeholder="Seats">
+
+				<label>Enter Your License Plate Number</label> <input type="text"
+					class="form-control" name="plate" placeholder="Plate Number">
+						
 			</div>
 
 			<input type="submit" value="Submit">
