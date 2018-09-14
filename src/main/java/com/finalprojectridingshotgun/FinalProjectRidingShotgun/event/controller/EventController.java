@@ -21,6 +21,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -30,11 +31,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Entry;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Events;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.Ride;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRide;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRideRepository;
+
 
 @Controller
 @SessionAttributes({"echosen", "sessionUser"})
@@ -133,6 +136,14 @@ public class EventController {
 		rjv.addObject("event", event);
 		return rjv;
 		
+	}
+		@RequestMapping("/registerdriver/{id}/{title}/{user_id}")
+	public ModelAndView driveRegister(@PathVariable("id") String eventid, @PathVariable("title") String eventtitle, 
+			@PathVariable("user_id") Long user_id) {
+		// User u = (User) session.getAttribute("sessionUser");
+		Ride r = new Ride(eventid, eventtitle, user_id);
+		riderepo.save(r);
+		return new ModelAndView("redirect:/");
 	}
 	
 	// display events for rider

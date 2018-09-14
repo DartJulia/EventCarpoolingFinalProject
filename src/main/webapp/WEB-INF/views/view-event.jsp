@@ -18,8 +18,6 @@
 
 <div style="margin-left: 50px; margin-top: 50px;">
 
-<h1> Rides going to event: </h1>
-${rides}
 
 <h4>Latitude: ${latit} </h4>
 <h4>Longitude: ${longit} </h4>
@@ -29,7 +27,11 @@ ${rides}
 <iframe width="600" height="450" frameborder="0" style="border:0"
 src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI" allowfullscreen></iframe>
 
+	<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}" class="btn btn-primary">Submit</a>
+		<a href="/index" class="btn btn-link">Cancel</a>
+
 </div>
+
 User: ${sessionUser.first_name}
 </body>
 </html>
