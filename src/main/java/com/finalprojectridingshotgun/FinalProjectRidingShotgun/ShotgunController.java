@@ -6,8 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +23,6 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
 @Controller
-@Configuration
-@PropertySource("classpath:application.properties")
 @SessionAttributes({ "echosen", "sessionUser", "milesParse" })
 public class ShotgunController {
 
@@ -50,11 +46,7 @@ public class ShotgunController {
 		return new ModelAndView("registration");
 	}
 
-//	@RequestMapping("/ridesearch")
-//	public ModelAndView riderOptionPage() {
-//		return new ModelAndView("ridesearch");
-//	}
-//	
+
 	// **Adds new user into User table in database
 	// Note: Don't need to pass in variables to url (based on jsp form names
 	// matching POJO
@@ -104,104 +96,51 @@ public class ShotgunController {
 		return null;
 	}
 
-//	@RequestMapping("/pullevent")
-//	public ModelAndView pullEvent() {
-//		Event eventIdToAdd = new;
-//		eventIdToAdd.getId();
-//		Event eventTitleToAdd = new Event();
-//		eventTitleToAdd.getTitle();
-//		System.out.println(eventIdToAdd + " " + eventTitleToAdd);
-//		return new ModelAndView("redirect:/");
+
+
+//
+//	@RequestMapping("test")
+//	public String test() {
+//		return "test";
+//	}
+////
+//	@RequestMapping("finddistance")
+//	public ModelAndView findDistance(HttpSession session) {
+//		// Double milesParse = milesParsed(session);
+//		// tripCost = (milesParse/mpg) * pfc;
+////		GasController.gaspriceatloc(e, milesParse);
+//		// System.out.println(userOrigin);
+//		// return new ModelAndView ("test", "testresult",
+//		// tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
+//		User userOrigin = (User) session.getAttribute("sessionUser");
+//		Event e = (Event) session.getAttribute("echosen");
+//		Double num = findTripDistance(userOrigin, e);
+//		System.out.println(num);
+////		session.setAttribute("milesParse", milesParse);
+////		System.out.println(milesParse);
+//		return new ModelAndView("test", "tripDist", "");
 //	}
 
-//	@RequestMapping("/sendevent")
-//	public ModelAndView sendEventToDatabase(Event ) {
-//		
-//		
-//		System.out.println(eventToAdd);
-//		return new ModelAndView("redirect:/");
-//	}
 
-	@RequestMapping("test")
-	public String test() {
-		return "test";
-	}
 
-	@RequestMapping("finddistance")
-	public ModelAndView findDistance(HttpSession session) {
-		// Double milesParse = milesParsed(session);
-		// tripCost = (milesParse/mpg) * pfc;
-//		GasController.gaspriceatloc(e, milesParse);
-		// System.out.println(userOrigin);
-		// return new ModelAndView ("test", "testresult",
-		// tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText());
-		User userOrigin = (User) session.getAttribute("sessionUser");
-		Event e = (Event) session.getAttribute("echosen");
-		Double num = findTripDistance(userOrigin, e);
-		System.out.println(num);
+//	public Double milesParsed() {
+//
+//		User userOrigin = (User) session.getAttribute("sessionUser");
+//		Event e = (Event) session.getAttribute("echosen");
+//		RestTemplate restTemp = new RestTemplate();
+//		JsonWrapper tripDistance = restTemp.getForObject(
+//				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+//						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI",
+//				JsonWrapper.class);
+//
+//		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
+//		String[] miles = dist.split(" ");
+//		Double milesParse = Double.parseDouble(miles[0]);
 //		session.setAttribute("milesParse", milesParse);
 //		System.out.println(milesParse);
-		return new ModelAndView("test", "tripDist", "");
-	}
-
-	public Double findTripDistance(User userOrigin, Event e) {
-		RestTemplate restTemp = new RestTemplate();
-		JsonWrapper tripDistance = restTemp.getForObject(
-				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
-						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
-				JsonWrapper.class);
-
-		System.out.println(tripDistance);
-		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
-		String[] miles = dist.split(" ");
-		// System.out.println(miles[0]);
-		Double milesParse = Double.parseDouble(miles[0]);
-		return milesParse;
-	}
-
-	public Double milesParsed() {
-
-		User userOrigin = (User) session.getAttribute("sessionUser");
-		Event e = (Event) session.getAttribute("echosen");
-		RestTemplate restTemp = new RestTemplate();
-		JsonWrapper tripDistance = restTemp.getForObject(
-				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
-						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
-				JsonWrapper.class);
-
-		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
-		String[] miles = dist.split(" ");
-		Double milesParse = Double.parseDouble(miles[0]);
-		session.setAttribute("milesParse", milesParse);
-		System.out.println(milesParse);
-		return milesParse;
-	}
-
-	// Testing the adding of method data from maps API distance and Gas API price.
-	// @RequestMapping("/calcrideprice")
-	public double pricePerRider(@ModelAttribute("sessionUser") User userOrigin,
-			@ModelAttribute("echosen") Event e) {
-		
-
-		// User userOrigin = (User) session.getAttribute("sessionUser");
-		System.out.println(userOrigin);
-		//Event e = (Event) session.getAttribute("echosen");
-		System.out.println(e);
-		System.out.println(e.getLatitude() + e.getLongitude());
-		System.out.println(userOrigin.getAddress());
-		Calculator calc = new Calculator();
-		
-		double gasPrice = calc.gasPriceAtLoc(e);
-		double tripDist = calc.findTripDistance(userOrigin, e);
-		System.out.println("Made it here now!!!");
-		Double tripCost = (((tripDist / 24)) * gasPrice);
-		System.out.println(calc.findTripDistance(userOrigin, e));
-		return tripCost;
-	}
-
-//	@RequestMapping("calctripcost")
-//	public ModelAndView tripCostForRider(HttpSessions session) {
-//		
+//		return milesParse;
 //	}
+
+
 
 }

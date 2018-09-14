@@ -12,8 +12,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -30,7 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finalprojectridingshotgun.FinalProjectRidingShotgun.ShotgunController;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.Calculator;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Entry;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Events;
@@ -43,9 +41,6 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRideRepo
 
 
 @Controller
-@Configuration
-@PropertySource("classpath:application.properties")
-
 @SessionAttributes({"echosen", "sessionUser"})
 public class EventController {
 	
@@ -57,6 +52,9 @@ public class EventController {
 	
 	@Autowired
 	UserRepository userRepo;
+	
+	@Value("${maps.key}")
+	String map;
 
 	@Value("${events.key}")
 	String eId; // event key
@@ -125,10 +123,10 @@ public class EventController {
 		Event e = new Event(id, title, start, v, lat, lon);
 		System.out.println(e);
 		User user = (User)session.getAttribute("sessionUser");
-		ShotgunController shotGun = new ShotgunController();
-		ev.addObject("cost", numberFormat.format(shotGun.pricePerRider(user, e)));
-		ev.addObject("costfor2", numberFormat.format((shotGun.pricePerRider(user, e)) / 2));
-		ev.addObject("costfor3", numberFormat.format((shotGun.pricePerRider(user, e)) / 3));
+		Calculator calc = new Calculator();
+		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, e, map)));
+		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, e,map)) / 2));
+		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, e, map)) / 3));
 
 		session.setAttribute("echosen", e);
 //		List<Ride> rides = riderepo.findByEventid(id);
@@ -161,67 +159,8 @@ public class EventController {
 		return new ModelAndView("redirect:/");
 	}
 	
-	// display events for rider
-//	@RequestMapping("/event/{eventid}/{eventtitle}")
-//	public ModelAndView rideEvent(@PathVariable("eventid") String eventId) {
-//		RestTemplate restTemplate = eventRest();
-//		
-//		// this doesn't really work
-//		//String keyword = title.replace(" ", "+");
-////		String[] titleArr = title.split(" ");
-////		String keyword = titleArr[0] + " " + titleArr[1] + " " + titleArr[2] + " " + titleArr[3];
-////		System.out.println(keyword);
-//		// + "&q=" + keyword + "&page_size=30&image_sizes=medium"
-//		HttpEntity<String> entity = eventHeaders();
-//		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
-//				+ eId + "&q=" + eventId,
-//				HttpMethod.GET,
-//				entity,
-//				Entry.class);
-//		System.out.println(eventId);
-//		Entry entry = response.getBody();
-//		System.out.println(entry);
-//		// get Events
-//		Events events = entry.getEvents();
-//		System.out.println(events);
-//		// get ArrayList<Event>
-//		ArrayList<Event> result = events.getEventList();
-//		System.out.println(result);
-//		ModelAndView rv = new ModelAndView("driver-event-results");
-//		rv.addObject("events", result);
-//
-//		return rv;
-//	}
-	
 
-//	@RequestMapping("/event")
-//	public ModelAndView viewEvent(@RequestParam("event") Event e) {
-//		ModelAndView ev = new ModelAndView("view-event");
-//
-//
-//		System.out.println(e);
-////		
-////		System.out.println("lat: " + e.getLatitude());
-////
-////		System.out.println(e.getLongitude());
-//		ev.addObject("tag", e);
-//		return ev;
-//	}
 
-//	@RequestMapping("/event/{id}")
-//	public static float[] getLatLong(@PathVariable("id") String id) {
-//		Event e = new Event();
-//		float lat = e.getLatitude();
-//		System.out.println(lat);
-//
-//		float lon = e.getLongitude();
-//		System.out.println(lon);
-//		float[] latLong = new float[2];
-//		latLong[0] = lat;
-//		latLong[1] = lon;
-//		return latLong;
-//
-//	}
 
 	// helper method
 	public HttpEntity<String> eventHeaders() {
