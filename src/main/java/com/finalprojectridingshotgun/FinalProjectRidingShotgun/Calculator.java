@@ -44,7 +44,7 @@ public class Calculator {
 		JsonWrapper tripDistance = restTemp.getForObject(
 				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
 						+ "&destination=" + e.getLatitude() + "," + e.getLongitude()
-						+ "&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI",
+						+ "&key=EnterKeyHere",
 				JsonWrapper.class);
 		// add map back in or not?
 		
@@ -66,7 +66,7 @@ public class Calculator {
 		RestTemplate restTemplate = new RestTemplate(); // add milesParse?
 
 		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
-				+ "/" + e.getLongitude() + "/1.0/reg/price/1zu5wjxobp.json", GasStations.class);
+				+ "/" + e.getLongitude() + "/1.0/reg/price/EnterKeyHere.json", GasStations.class);
 		ArrayList<StationOptions> priceForCost = station.getChosenStation();
 		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
 //		Double tripCost = (((findTripDistance("sessionUser", "echosen") / 24)) * Double.parseDouble(pfc));

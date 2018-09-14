@@ -30,7 +30,7 @@
 <h4>${gaspricefor3}</h4>
 <%-- <h3>Price: ${price}</h3> --%>
 <iframe width="600" height="450" frameborder="0" style="border:0"
-src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI" allowfullscreen></iframe>
+src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=EnterKeyHere" allowfullscreen></iframe>
 <br>
 	<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}" class="btn btn-primary">Submit</a>
 		<a href="/" class="btn btn-link">Cancel</a>

@@ -73,7 +73,7 @@ public class EventController {
 
 		ResponseEntity<Entry> response = restTemplate
 				.exchange(
-						"https://api.eventful.com/json/events/search?app_key=pDt3rbKPf6bgTRLG&location=" + queryloc
+						"https://api.eventful.com/json/events/search?app_key=EnterKeyHere=" + queryloc
 								+ "&q=" + queryname + "&page_size=30&image_sizes=medium",
 				HttpMethod.GET,
 				entity,
