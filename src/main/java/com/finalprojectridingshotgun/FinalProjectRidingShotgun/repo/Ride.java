@@ -28,6 +28,10 @@ public class Ride {
 	private String eventtitle;
 	@Column(name = "user_id")
 	private Long userid;
+	@Column(name = "city_name")
+	private String city;
+	@Column(name = "region_name")
+	private String region;
 	//ownerside
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "user_ride", joinColumns = @JoinColumn(name = "ride_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))

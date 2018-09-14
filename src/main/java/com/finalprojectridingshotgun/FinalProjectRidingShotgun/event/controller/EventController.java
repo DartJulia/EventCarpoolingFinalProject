@@ -69,10 +69,18 @@ public class EventController {
 	@RequestMapping("/driversearch")
 	public ModelAndView driverSearch() {
 
-		ModelAndView mv = new ModelAndView("driversearch");
-		return mv;
+		ModelAndView dsv = new ModelAndView("driversearch");
+		return dsv;
 	}
-
+	
+	@RequestMapping("/ridesearch")
+	public ModelAndView rideSearch() {
+		ModelAndView rsv = new ModelAndView("ridesearch");
+		return rsv;
+	}
+	
+	
+	
 	@RequestMapping("/allsearch")
 	public ModelAndView searchAll(@RequestParam("queryloc") String queryloc,
 			@RequestParam("queryname") String queryname, @RequestParam("querydate") String querydate) {
@@ -111,13 +119,21 @@ public class EventController {
 
 		return av;
 	}
+	
+	
+	
 	@RequestMapping("/rideresult")
-	public ModelAndView searchForRides(@RequestParam("queryloc") String location, 
-			@RequestParam("queryname") String title, @RequestParam("querydate") String start_time) {
-		ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findByEventtitleContaining(title));
+	public ModelAndView searchForRides(@RequestParam("querycity") String city, 
+			@RequestParam("querystate") String state, @RequestParam("querytitle") String title) {
+		//ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findByEventtitleContaining(title));
+		ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findyByCityAndRegionAndEventtitleContaining(city, state, title));
+
 		rsv.addObject("ridenumber", "placeholder");
 		return rsv;
 	}
+	
+	
+	
 	// TODO: method to parse date and time
 
 	// TODO: pull rides from database here

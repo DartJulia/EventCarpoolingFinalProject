@@ -29,6 +29,28 @@ public class Event {
 	@JsonProperty("image")
 	private Image image;
 
+	@JsonProperty("city_name")
+	private String city;
+	
+	@JsonProperty("region_name")
+	private String region;
+	
+	public String getCity_name() {
+		return city;
+	}
+
+	public void setCity_name(String city) {
+		this.city = city;
+	}
+
+	public String getRegion_name() {
+		return region;
+	}
+
+	public void setRegion_name(String region) {
+		this.region = region;
+	}
+
 	public Event() {
 	}
 
