@@ -13,6 +13,9 @@
 </head>
 <body>
 
+<a href="/calcrideprice"><button>Get Cost</button></a>
+
+
 <div style="margin-left: 50px; margin-top: 50px;">
 
 <h1> Rides going to event: </h1>
@@ -27,6 +30,6 @@ ${rides}
 src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI" allowfullscreen></iframe>
 
 </div>
-User: ${User.first_name}
+User: ${sessionUser.first_name}
 </body>
 </html>

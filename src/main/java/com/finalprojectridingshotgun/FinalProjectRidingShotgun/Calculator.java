@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,21 +15,65 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Even
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.GasStations;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.gas.entity.StationOptions;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWrapper;
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRepository;
 
 @SessionAttributes({ "echosen", "sessionUser" })
 
 public class Calculator {
-	@Autowired
-	UserRepository userRepo;
 
 	@Value("${maps.key}")
 	String map;
-
+	
 	@Value("${gas.key}")
 	String gasID;
 
+	@Autowired
+	UserRepository userRepo;
+
+	@Autowired
+	RideRepository rideRepo;
+
+	
+	
+	public Double findTripDistance(@ModelAttribute("sessionUser") User userOrigin, @ModelAttribute("echosen") Event e) {
+		RestTemplate restTemp = new RestTemplate();
+		JsonWrapper tripDistance = restTemp.getForObject(
+				"https://maps.googleapis.com/maps/api/directions/json?origin=" + userOrigin.getAddress()
+						+ "&destination=" + e.getLatitude() + "," + e.getLongitude() + "&key=" + map,
+				JsonWrapper.class);
+
+		System.out.println(tripDistance);
+		String dist = tripDistance.getRoutes().get(0).getLegs().get(0).getDistance().getText();
+		String[] miles = dist.split(" ");
+		// System.out.println(miles[0]);
+		Double milesParse = Double.parseDouble(miles[0]);
+		return milesParse;
+	}
+	
+	
+	public Double gasPriceAtLoc(Event e, HttpSession session) {
+
+		RestTemplate restTemplate = new RestTemplate(); // add milesParse?
+
+		GasStations station = restTemplate.getForObject("http://api.mygasfeed.com/stations/radius/" + e.getLatitude()
+				+ "/" + e.getLongitude() + "/1.0/reg/price/" + gasID + ".json", GasStations.class);
+		ArrayList<StationOptions> priceForCost = station.getChosenStation();
+		String pfc = priceForCost.get(priceForCost.size() - 1).getGasPrice();
+//		Double tripCost = (((findTripDistance("sessionUser", "echosen") / 24)) * Double.parseDouble(pfc));
+		System.out.println(pfc);
+		return Double.parseDouble(pfc);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public String getDistance(HttpSession session) {
 		RestTemplate restTemp = new RestTemplate();
 		
