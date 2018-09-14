@@ -13,25 +13,30 @@
 </head>
 <body>
 
-<a href="/calcrideprice"><button>Get Cost</button></a>
-
+<!-- <a href="/calcrideprice"><button>Get Cost</button></a> -->
+<div class="jumbotron">
+<h2>${echosen.title}</h2>
+<h3>Total Price of Trip: $${cost}</h3>
+<h3>Price with 2 riders: $${costfor2}</h3>
+<h3>Price with 3 riders: $${costfor3}</h3>
 
 <div style="margin-left: 50px; margin-top: 50px;">
 
 
-<h4>Latitude: ${latit} </h4>
-<h4>Longitude: ${longit} </h4>
+<%-- <h4>Latitude: ${latit} </h4>
+<h4>Longitude: ${longit} </h4> --%>
+
 <h4>${gaspricefor2}</h4>
 <h4>${gaspricefor3}</h4>
-<h3>Price: ${price}</h3>
+<%-- <h3>Price: ${price}</h3> --%>
 <iframe width="600" height="450" frameborder="0" style="border:0"
 src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=AIzaSyAKfsn7d9hrGFAZ8li6w5Fncn-sV0xSlJI" allowfullscreen></iframe>
-
+<br>
 	<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}" class="btn btn-primary">Submit</a>
-		<a href="/index" class="btn btn-link">Cancel</a>
+		<a href="/" class="btn btn-link">Cancel</a>
 
 </div>
 
-User: ${sessionUser.first_name}
+</div>
 </body>
 </html>

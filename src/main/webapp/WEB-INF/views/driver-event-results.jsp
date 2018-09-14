@@ -63,6 +63,6 @@
 	</div>
 
 </div>
-${welcome}
+
 </body>
 </html>

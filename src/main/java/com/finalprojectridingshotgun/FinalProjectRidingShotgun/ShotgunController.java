@@ -59,7 +59,7 @@ public class ShotgunController {
 	public ModelAndView addUser(User u) {
 		System.out.println(u);
 		userRepo.save(u);
-		return new ModelAndView("index", "welcome", "Welcome " + u.getFirst_name() + "!");
+		return new ModelAndView("index", "welcome", "Welcome ");
 	}
 
 	@RequestMapping("/pullevent/{id}/{title}")
@@ -92,7 +92,7 @@ public class ShotgunController {
 			if (truePassword.equals(password)) {
 				User trueUser = user.get();
 				session.setAttribute("sessionUser", trueUser);
-				return new ModelAndView("index", "welcome", "Welcome " + trueUser.getFirst_name() + "!"); // user.get().getFirst_name()
+				return new ModelAndView("index", "welcome", "Welcome "); // user.get().getFirst_name()
 			}
 		} else {
 			return new ModelAndView("index", "welcome", "you are not a user");
@@ -174,8 +174,8 @@ public class ShotgunController {
 	}
 
 	// Testing the adding of method data from maps API distance and Gas API price.
-	@RequestMapping("/calcrideprice")
-	public ModelAndView pricePerRider(@ModelAttribute("sessionUser") User userOrigin,
+	// @RequestMapping("/calcrideprice")
+	public double pricePerRider(@ModelAttribute("sessionUser") User userOrigin,
 			@ModelAttribute("echosen") Event e) {
 		
 
@@ -192,7 +192,7 @@ public class ShotgunController {
 		System.out.println("Made it here now!!!");
 		Double tripCost = (((tripDist / 24)) * gasPrice);
 		System.out.println(calc.findTripDistance(userOrigin, e));
-		return new ModelAndView("test", "pricePerRider", tripCost);
+		return tripCost;
 	}
 
 //	@RequestMapping("calctripcost")

@@ -1,5 +1,6 @@
 package com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,13 +22,13 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.finalprojectridingshotgun.FinalProjectRidingShotgun.ShotgunController;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Entry;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Events;
@@ -70,8 +71,10 @@ public class EventController {
 
 		HttpEntity<String> entity = eventHeaders();
 
-		ResponseEntity<Entry> response = restTemplate.exchange("https://api.eventful.com/json/events/search?app_key="
-				+ eId + "&location=" + queryloc + "&q=" + queryname + "&page_size=30&image_sizes=medium",
+		ResponseEntity<Entry> response = restTemplate
+				.exchange(
+						"https://api.eventful.com/json/events/search?app_key=pDt3rbKPf6bgTRLG&location=" + queryloc
+								+ "&q=" + queryname + "&page_size=30&image_sizes=medium",
 				HttpMethod.GET,
 				entity,
 				Entry.class);
@@ -113,8 +116,15 @@ public class EventController {
 			@PathVariable("start") String start, @PathVariable("venue") String v, @PathVariable("lat") String lat,
 			@PathVariable("lon") String lon, HttpSession session) {
 		ModelAndView ev = new ModelAndView("view-event");
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		Event e = new Event(id, title, start, v, lat, lon);
 		System.out.println(e);
+		User user = (User)session.getAttribute("sessionUser");
+		ShotgunController shotGun = new ShotgunController();
+		ev.addObject("cost", numberFormat.format(shotGun.pricePerRider(user, e)));
+		ev.addObject("costfor2", numberFormat.format((shotGun.pricePerRider(user, e)) / 2));
+		ev.addObject("costfor3", numberFormat.format((shotGun.pricePerRider(user, e)) / 3));
+
 		session.setAttribute("echosen", e);
 //		List<Ride> rides = riderepo.findByEventid(id);
 //		ev.addObject("ridelist", rides);
