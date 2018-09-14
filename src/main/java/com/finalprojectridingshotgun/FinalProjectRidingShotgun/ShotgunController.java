@@ -57,9 +57,30 @@ public class ShotgunController {
 	public ModelAndView addUser(User u) {
 		System.out.println(u);
 		userRepo.save(u);
-		return new ModelAndView("redirect:/");
+		//return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/car-info");
 	}
 
+	@RequestMapping("/car-info")
+	public ModelAndView carInfo(HttpSession session) {
+		ModelAndView civ = new ModelAndView("car-info");
+//		User user = (User) session.getAttribute("sessionUser");
+//		civ.addObject("user", user.getFirst_name());
+		return civ;
+	}
+	
+	@RequestMapping("/carsave/{car_type}/{seats}/{plate}")
+	public ModelAndView addCar(@PathVariable("car_type") String carType, @PathVariable("seats") Integer seats, 
+			@PathVariable("plate") String plate, HttpSession session) {
+		User user = (User) session.getAttribute("sessionUser");
+		user.setCar_type(carType);
+		user.setSeats(seats);
+		user.setPlate(plate);
+		userRepo.save(user);
+		return new ModelAndView("redirect:/");
+//		return new ModelAndView("index", "welcome", "Welcome " + user.getFirst_name() + "!");
+	}
+	
 	@RequestMapping("/pullevent/{id}/{title}")
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title, HttpSession session) {
 		User user = (User) session.getAttribute("sessionUser");
