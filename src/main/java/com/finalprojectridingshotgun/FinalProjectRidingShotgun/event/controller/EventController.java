@@ -73,6 +73,7 @@ public class EventController {
 		return dsv;
 	}
 	
+	
 	@RequestMapping("/ridesearch")
 	public ModelAndView rideSearch() {
 		ModelAndView rsv = new ModelAndView("ridesearch");
@@ -143,14 +144,14 @@ public class EventController {
 			@PathVariable("start") String start, @PathVariable("venue") String v, @PathVariable("lat") String lat,
 			@PathVariable("lon") String lon, HttpSession session, @PathVariable("city") String city, @PathVariable("region") String state) {
 		ModelAndView ev = new ModelAndView("view-event");
-		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		// DecimalFormat numberFormat = new DecimalFormat("#.00");
 		Event e = new Event(id, title, start, v, lat, lon, city, state);
 		System.out.println(e);
-		User user = (User)session.getAttribute("sessionUser");
-		Calculator calc = new Calculator();
-		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, e, map)));
-		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, e,map)) / 2));
-		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, e, map)) / 3));
+//		User user = (User)session.getAttribute("sessionUser");
+//		Calculator calc = new Calculator();
+//		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, e, map)));
+//		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, e,map)) / 2));
+//		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, e, map)) / 3));
 
 		session.setAttribute("echosen", e);
 //		List<Ride> rides = riderepo.findByEventid(id);
@@ -161,16 +162,39 @@ public class EventController {
 		return ev;
 	}
 	
+//	@RequestMapping("/joinride/{ride_id}/{user_id}")
+//	public ModelAndView ridejoin(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId) {
+//		ModelAndView rjv = new ModelAndView("join-ride");
+//		UserRide ur = new UserRide(userId, rideId);
+//		urRepo.save(ur);
+//		User d = userRepo.getOne(riderepo.getOne(rideId).getUserid());
+//		String event = riderepo.getOne(rideId).getEventtitle();
+//		rjv.addObject("user", userRepo.getOne(userId).getFirst_name());
+//		rjv.addObject("ride", d.getFirst_name());
+//		rjv.addObject("event", event);
+//		return rjv;
+//		
+//	}
+	
 	@RequestMapping("/joinride/{ride_id}/{user_id}")
-	public ModelAndView ridejoin(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId) {
+	public ModelAndView ridejoin(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId, HttpSession session) {
 		ModelAndView rjv = new ModelAndView("join-ride");
-		UserRide ur = new UserRide(userId, rideId);
-		urRepo.save(ur);
-		User d = userRepo.getOne(riderepo.getOne(rideId).getUserid());
-		String event = riderepo.getOne(rideId).getEventtitle();
+		User user = (User)session.getAttribute("sessionUser");
+		Event e = (Event)session.getAttribute("echosen");
+		
+		Calculator calc = new Calculator();
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		rjv.addObject("user", userRepo.getOne(userId).getFirst_name());
-		rjv.addObject("ride", d.getFirst_name());
-		rjv.addObject("event", event);
+		rjv.addObject("name", user.getFirst_name());
+		System.out.println("made it here!!!");
+		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
+		System.out.println("made it here NOW!!!");
+		
+//		rjv.addObject("cost", numberFormat.format(calc.pricePerRider(user, e, map)));
+//		rjv.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, e,map)) / 2));
+//		rjv.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, e, map)) / 3));
+
+		
 		return rjv;
 		
 	}

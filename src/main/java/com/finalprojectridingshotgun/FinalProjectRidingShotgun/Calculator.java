@@ -33,18 +33,18 @@ public class Calculator {
 		
 
 		// User userOrigin = (User) session.getAttribute("sessionUser");
-		System.out.println(userOrigin);
+		//System.out.println(userOrigin);
 		//Event e = (Event) session.getAttribute("echosen");
-		System.out.println(e);
-		System.out.println(e.getLatitude() + e.getLongitude());
-		System.out.println(userOrigin.getAddress());
+		//System.out.println(e);
+	//	System.out.println(e.getLatitude() + e.getLongitude());
+	//	System.out.println(userOrigin.getAddress());
 		Calculator calc = new Calculator();
 		
 		double gasPrice = calc.gasPriceAtLoc(e);
 		double tripDist = calc.findTripDistance(userOrigin, e, map);
-		System.out.println("Made it here now!!!");
+		//System.out.println("Made it here now!!!");
 		Double tripCost = (((tripDist / 24)) * gasPrice);
-		System.out.println(calc.findTripDistance(userOrigin, e, map));
+		//System.out.println(calc.findTripDistance(userOrigin, e, map));
 		return tripCost;
 	}
 

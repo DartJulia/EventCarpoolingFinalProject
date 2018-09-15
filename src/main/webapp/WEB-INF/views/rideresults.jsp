@@ -35,6 +35,7 @@
 						<td>${ride.eventtitle}</td>
 						<td>${ride.city}</td>
 						<td>${ride.region}</td>
+						
 						<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">Link</a></td>
 					</tr>
 
