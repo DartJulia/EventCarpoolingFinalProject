@@ -121,14 +121,15 @@ public class EventController {
 	}
 	
 	
-	
-	@RequestMapping("/rideresult")
+	// display rider search results from ride database
+	@RequestMapping("/rideresults")
 	public ModelAndView searchForRides(@RequestParam("querycity") String city, 
 			@RequestParam("querystate") String state, @RequestParam("querytitle") String title) {
 		//ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findByEventtitleContaining(title));
-		ModelAndView rsv = new ModelAndView("rideresults", "titletag",
-				riderepo.findByCityAndRegionAndEventtitleContaining(city, state, title));
-		rsv.addObject("ridenumber", "placeholder");
+		ModelAndView rsv = new ModelAndView("rideresults");
+		rsv.addObject("titletag", riderepo.findByCityOrRegion(city, state));
+//		TODO: find a way to use both queries
+		//rsv.addObject("titletag", riderepo.findByEventtitleContaining(title));
 		return rsv;
 	}
 	
@@ -137,13 +138,13 @@ public class EventController {
 	// TODO: method to parse date and time
 
 	// TODO: pull rides from database here
-	@RequestMapping("/event/{id}/{title}/{start}/{venue}/{lat}/{lon}")
+	@RequestMapping("/event/{id}/{title}/{start}/{venue}/{lat}/{lon}/{city}/{region}")
 	public ModelAndView viewEvent(@PathVariable("id") String id, @PathVariable("title") String title,
 			@PathVariable("start") String start, @PathVariable("venue") String v, @PathVariable("lat") String lat,
-			@PathVariable("lon") String lon, HttpSession session) {
+			@PathVariable("lon") String lon, HttpSession session, @PathVariable("city") String city, @PathVariable("region") String state) {
 		ModelAndView ev = new ModelAndView("view-event");
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
-		Event e = new Event(id, title, start, v, lat, lon);
+		Event e = new Event(id, title, start, v, lat, lon, city, state);
 		System.out.println(e);
 		User user = (User)session.getAttribute("sessionUser");
 		Calculator calc = new Calculator();
@@ -173,11 +174,11 @@ public class EventController {
 		return rjv;
 		
 	}
-		@RequestMapping("/registerdriver/{id}/{title}/{user_id}")
+		@RequestMapping("/registerdriver/{id}/{title}/{user_id}/{city_name}/{region_name}")
 	public ModelAndView driveRegister(@PathVariable("id") String eventid, @PathVariable("title") String eventtitle, 
-			@PathVariable("user_id") Long user_id) {
+			@PathVariable("user_id") Long user_id, @PathVariable("city_name") String city, @PathVariable("region_name") String state) {
 		// User u = (User) session.getAttribute("sessionUser");
-		Ride r = new Ride(eventid, eventtitle, user_id);
+		Ride r = new Ride(eventid, eventtitle, user_id, city, state);
 		riderepo.save(r);
 		return new ModelAndView("redirect:/");
 	}

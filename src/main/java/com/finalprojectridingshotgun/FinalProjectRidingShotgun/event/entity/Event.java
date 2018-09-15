@@ -58,7 +58,7 @@ public class Event {
 		this.id = id;
 	}
 
-	public Event(String id, String title, String start_time, String venue_name, String latitude, String longitude) {
+	public Event(String id, String title, String start_time, String venue_name, String latitude, String longitude, String city, String region) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -66,6 +66,9 @@ public class Event {
 		this.venue_name = venue_name;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.city = city;
+		this.region = region;
+		
 	}
 
 

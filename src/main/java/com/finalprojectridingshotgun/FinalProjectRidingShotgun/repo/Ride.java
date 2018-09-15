@@ -22,16 +22,38 @@ public class Ride {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ride_id")
 	private Long rideid;
+	
 	@Column(name = "eventid")
 	private String eventid;
+	
 	@Column(name = "eventtitle")
 	private String eventtitle;
+	
 	@Column(name = "user_id")
 	private Long userid;
+	
 	@Column(name = "city_name")
 	private String city;
+	
 	@Column(name = "region_name")
 	private String region;
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
 	//ownerside
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "user_ride", joinColumns = @JoinColumn(name = "ride_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -48,11 +70,17 @@ public class Ride {
 		this.userid = userid;
 	}
 
-	public Ride(Long rideid, String eventid, Long userid, List<User> users) {
-		this.rideid = rideid;
+
+
+	public Ride(String eventid, String eventtitle, Long userid, String city, String region) {
+		super();
 		this.eventid = eventid;
+		this.eventtitle = eventtitle;
 		this.userid = userid;
-		this.users = users;
+		this.city = city;
+		this.region = region;
+		
+		
 	}
 
 	public Ride(String eventid, Long userid, List<User> users) {

@@ -21,9 +21,9 @@
 			<table style="border-spacing: 20px; margin: 0 auto; width: 100%">
 					<tr>
 						<th></th>
-						<th>ride id</th>
 						<th>event title</th>
-						<th>driver id</th>
+						<th>event city</th>
+						<th>State</th>
 						<th>event link</th>
 						<th></th>
 					</tr>
@@ -32,18 +32,19 @@
 <tr>
 			
 						<th></th>
-						<td>${ride.eventid}
 						<td>${ride.eventtitle}</td>
-						<td>${ride.userid }</td> 
+						<td>${ride.city}</td>
+						<td>${ride.region}</td>
 						<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">Link</a></td>
 					</tr>
 
 </c:forEach>
+</table>
 </form>
 
 <br>
 <a href="/">Go Back</a>
 <br>
-User: ${User.first_name}
+User: ${sessionUser.first_name}
 </body>
 </html>
