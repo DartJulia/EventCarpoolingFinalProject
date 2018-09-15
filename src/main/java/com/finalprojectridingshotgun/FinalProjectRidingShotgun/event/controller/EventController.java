@@ -126,8 +126,8 @@ public class EventController {
 	public ModelAndView searchForRides(@RequestParam("querycity") String city, 
 			@RequestParam("querystate") String state, @RequestParam("querytitle") String title) {
 		//ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findByEventtitleContaining(title));
-		ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findyByCityAndRegionAndEventtitleContaining(city, state, title));
-
+		ModelAndView rsv = new ModelAndView("rideresults", "titletag",
+				riderepo.findByCityAndRegionAndEventtitleContaining(city, state, title));
 		rsv.addObject("ridenumber", "placeholder");
 		return rsv;
 	}

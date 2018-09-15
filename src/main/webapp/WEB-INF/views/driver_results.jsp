@@ -51,7 +51,7 @@
 				<div class="card border-primary mb-3" >
 				<div class="card-header"><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}">${event.title }</a></div>
 				<div class="card-body">
-				   <h4 class="card-title"><img src="${event.image.medium.url}"></h4>
+				   <h4 class="card-title"><img src="${event.image.medium.url}" onerror="this.src='https://www.europapark.de/sites/default/files/styles/teaser-promo/public/field_hero_slideshow/event/live_on_stage_2018_europa-park.jpg?itok=fGLg6SJy'"></h4>
 				   <p class="card-text">${event.start_time}</p>
 				 </div>
 				 </div>

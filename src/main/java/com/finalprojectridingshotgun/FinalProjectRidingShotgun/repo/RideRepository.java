@@ -9,6 +9,8 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 	
 	List<Ride> findByEventtitleContaining(String title);
 	List<Ride> findByEventid(String id);
-	List<Ride> findyByCityAndRegionAndEventtitleContaining(String city, String state, String title);
+
+	List<Ride> findByCityAndRegionAndEventtitleContaining(String city, String
+	state, String title);
 	
 }

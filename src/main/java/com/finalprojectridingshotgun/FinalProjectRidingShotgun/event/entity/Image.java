@@ -15,14 +15,26 @@ public class Image {
 	@JsonProperty("medium")
 	private Medium medium;
 
+	@JsonProperty("url")
+	private String url;
+
 		public Image() {
 		}
 
-	public Image(Thumb thumb, Small small, Medium medium) {
+	public Image(Thumb thumb, Small small, Medium medium, String url) {
 		this.thumb = thumb;
 		this.small = small;
 		this.medium = medium;
+		this.url = url;
 		}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public Thumb getThumb() {
 		return thumb;
