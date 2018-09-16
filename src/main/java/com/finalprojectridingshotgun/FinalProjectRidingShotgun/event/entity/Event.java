@@ -35,6 +35,17 @@ public class Event {
 	@JsonProperty("region_name")
 	private String region;
 	
+	@JsonProperty("url")
+	private String url;
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public String getCity_name() {
 		return city;
 	}

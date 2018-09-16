@@ -52,6 +52,7 @@
 				<div class="card-header"><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}/${event.city_name}/${event.region_name}">${event.title}</a></div>
 				<div class="card-body">
 				   <h4 class="card-title"><img src="${event.image.medium.url}" onerror="this.src='https://www.europapark.de/sites/default/files/styles/teaser-promo/public/field_hero_slideshow/event/live_on_stage_2018_europa-park.jpg?itok=fGLg6SJy'"></h4>
+				  <a href="${event.url}" target="blank">event link</a>
 				   <p class="card-text">${event.start_time}</p>
 				 </div>
 				 </div>
