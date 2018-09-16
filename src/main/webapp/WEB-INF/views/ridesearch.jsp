@@ -9,7 +9,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
 </head>
 <body>
-
+ 
 
 <form action="/rideresults">
 		<table style="border-spacing: 20px; margin: 0 auto; width: 75%">

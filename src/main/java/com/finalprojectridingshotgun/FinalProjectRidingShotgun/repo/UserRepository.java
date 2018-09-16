@@ -10,5 +10,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Optional<User> findByUsernameAndPasscode (String user_name, String passcode);
 	
+//	String findFirst__nameByUser__id(Long userId);
 
 }

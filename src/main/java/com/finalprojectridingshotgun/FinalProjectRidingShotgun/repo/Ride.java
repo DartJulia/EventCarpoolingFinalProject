@@ -38,6 +38,28 @@ public class Ride {
 	@Column(name = "region_name")
 	private String region;
 	
+	@Column(name = "latitude")
+	private String latitude;
+
+	@Column(name = "longitude")
+	private String longitude;
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
 	public String getCity() {
 		return city;
 	}
@@ -71,16 +93,16 @@ public class Ride {
 	}
 
 
-
-	public Ride(String eventid, String eventtitle, Long userid, String city, String region) {
+	public Ride(String eventid, String eventtitle, Long userid, String city, String region,
+			String latitude, String longitude) {
 		super();
 		this.eventid = eventid;
 		this.eventtitle = eventtitle;
 		this.userid = userid;
 		this.city = city;
 		this.region = region;
-		
-		
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	public Ride(String eventid, Long userid, List<User> users) {

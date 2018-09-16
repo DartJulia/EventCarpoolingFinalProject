@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +43,7 @@ import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.UserRideRepo
 
 
 @Controller
-@SessionAttributes({"echosen", "sessionUser"})
+@SessionAttributes({ "echosen", "sessionUser", "riderevent" })
 public class EventController {
 	
 	@Autowired
@@ -144,70 +146,111 @@ public class EventController {
 			@PathVariable("start") String start, @PathVariable("venue") String v, @PathVariable("lat") String lat,
 			@PathVariable("lon") String lon, HttpSession session, @PathVariable("city") String city, @PathVariable("region") String state) {
 		ModelAndView ev = new ModelAndView("view-event");
-		// DecimalFormat numberFormat = new DecimalFormat("#.00");
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		Event e = new Event(id, title, start, v, lat, lon, city, state);
 		System.out.println(e);
-//		User user = (User)session.getAttribute("sessionUser");
-//		Calculator calc = new Calculator();
-//		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, e, map)));
-//		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, e,map)) / 2));
-//		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, e, map)) / 3));
+		User user = (User) session.getAttribute("sessionUser");
+		Calculator calc = new Calculator();
+		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, map, lat, lon)));
+		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 2));
+		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 3));
 
 		session.setAttribute("echosen", e);
 //		List<Ride> rides = riderepo.findByEventid(id);
 //		ev.addObject("ridelist", rides);
-		ev.addObject("latit", lat);
-		ev.addObject("longit", lon);
+		ev.addObject("title", e.getTitle());
+//		ev.addObject("latit", lat);
+//		ev.addObject("longit", lon);
 	
 		return ev;
 	}
 	
-//	@RequestMapping("/joinride/{ride_id}/{user_id}")
-//	public ModelAndView ridejoin(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId) {
-//		ModelAndView rjv = new ModelAndView("join-ride");
-//		UserRide ur = new UserRide(userId, rideId);
-//		urRepo.save(ur);
-//		User d = userRepo.getOne(riderepo.getOne(rideId).getUserid());
-//		String event = riderepo.getOne(rideId).getEventtitle();
-//		rjv.addObject("user", userRepo.getOne(userId).getFirst_name());
-//		rjv.addObject("ride", d.getFirst_name());
-//		rjv.addObject("event", event);
-//		return rjv;
-//		
-//	}
+
 	
+// Pulls ride details from database including price, rider name and event title - one more step to add to userride database	
 	@RequestMapping("/joinride/{ride_id}/{user_id}")
-	public ModelAndView ridejoin(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId, HttpSession session) {
+	public ModelAndView rideDetails(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId,
+			HttpSession session) {
 		ModelAndView rjv = new ModelAndView("join-ride");
 		User user = (User)session.getAttribute("sessionUser");
-		Event e = (Event)session.getAttribute("echosen");
-		
+
+		session.setAttribute("riderevent", rideId);
+
 		Calculator calc = new Calculator();
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
-		rjv.addObject("user", userRepo.getOne(userId).getFirst_name());
-		rjv.addObject("name", user.getFirst_name());
-		System.out.println("made it here!!!");
-		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
-		System.out.println("made it here NOW!!!");
-		
-//		rjv.addObject("cost", numberFormat.format(calc.pricePerRider(user, e, map)));
-//		rjv.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, e,map)) / 2));
-//		rjv.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, e, map)) / 3));
 
+		Ride driver = riderepo.getOne(rideId);
+		Long driverid = driver.getUserid();
+		Optional<User> driveruser = userRepo.findById(driverid);
+
+		rjv.addObject("drivername", driveruser.get().getFirst_name());
+		rjv.addObject("ridername", user.getFirst_name());
+		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
+
+		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
+		String latitude = rideLat.getLatitude();
+		Ride rideLong = riderepo.findLatitudeByRideid(rideId);
+		String longitude = rideLong.getLongitude();
+		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
+		double cost = Double.parseDouble(costString);
 		
+		rjv.addObject("cost", cost);
+		rjv.addObject("costfor2", cost / 2);
+		rjv.addObject("costfor3", cost / 3);
+
 		return rjv;
 		
 	}
-		@RequestMapping("/registerdriver/{id}/{title}/{user_id}/{city_name}/{region_name}")
+
+//Saves rider with driver in user_ride database	
+	@RequestMapping("/saveride/{riderevent}/{user_id}/{trip}")
+	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
+			@PathVariable("trip") boolean trip, HttpSession session) {
+		System.out.println("Made it");
+		ModelAndView rjv = new ModelAndView("summary");
+		System.out.println("Rideid:" + rideId);
+		UserRide ur = new UserRide(userId, rideId);
+		urRepo.save(ur);
+
+		User user = (User) session.getAttribute("sessionUser");
+		
+		Calculator calc = new Calculator();
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
+		String latitude = rideLat.getLatitude();
+		Ride rideLong = riderepo.findLatitudeByRideid(rideId);
+		String longitude = rideLong.getLongitude();
+		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
+		double cost = Double.parseDouble(costString);
+		// true = round trip
+		if (trip == true) {
+			rjv.addObject("cost", cost * 2);
+			rjv.addObject("costfor2", (cost * 2) / 2);
+			rjv.addObject("costfor3", (cost * 2) / 3);
+		}
+		// false = one way
+		else {
+			rjv.addObject("cost", cost);
+			rjv.addObject("costfor2", cost / 2);
+			rjv.addObject("costfor3", cost / 3);
+		}
+
+		return rjv;
+
+	}
+
+// Method adds a new ride to ride_database on the "driver side"
+	@RequestMapping("/registerdriver/{id}/{title}/{user_id}/{city_name}/{region_name}/{lat}/{lon}")
 	public ModelAndView driveRegister(@PathVariable("id") String eventid, @PathVariable("title") String eventtitle, 
-			@PathVariable("user_id") Long user_id, @PathVariable("city_name") String city, @PathVariable("region_name") String state) {
+			@PathVariable("user_id") Long user_id, @PathVariable("city_name") String city,
+			@PathVariable("region_name") String state, @PathVariable("lat") String lat,
+			@PathVariable("lon") String lon) {
 		// User u = (User) session.getAttribute("sessionUser");
-		Ride r = new Ride(eventid, eventtitle, user_id, city, state);
+
+		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon);
 		riderepo.save(r);
 		return new ModelAndView("redirect:/");
 	}
-	
-
 
 
 	// helper method

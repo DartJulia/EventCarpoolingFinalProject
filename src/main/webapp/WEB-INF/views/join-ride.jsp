@@ -10,22 +10,27 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
-	<link rel="stylesheet" href="jobotest.css" type="text/css">
+	
 </head>
 <body>
 <div class="container" style="margin: 50px">
 
-<h1> ${user} is riding with ${name} to ${title} </h1>
+<h1> ${ridername} is riding with ${drivername} to ${title} </h1>
+<br>
+${cost} <br>
+${costfor2} <br>
+${costfor3}
+<br>
+<form action="/saveride/${riderevent}/${sessionUser.user_id}/${trip}"> 
 
-${cost}${costfor2}${costfor3}
+			<input type="radio" value="true" name="trip">Round Trip
+			<input type="radio" value="false" name="trip">One Way
+<br>
+			<input type="submit" value="Join Ride">
+</form> 
 <br>
 
-			<input type="radio" value="roundtrip" name="tripoption">Round Trip
-			<input type="radio" value="roundtrip" name="tripoption">One Way
-			<!-- It hates line 26!!! -->
-			<!--  <a href="/joinride/${ride.ride_id}/${sessionUser.user_id}">Link</a> -->
-
-<a href="/"><button>search again</button></a>
+<a href="/"><button>Search again</button></a>
 </div>
 
 

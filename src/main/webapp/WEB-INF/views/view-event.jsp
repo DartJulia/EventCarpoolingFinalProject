@@ -15,7 +15,7 @@
 
 <!-- <a href="/calcrideprice"><button>Get Cost</button></a> -->
 <div class="jumbotron">
-<h2>${echosen.title}</h2>
+<h2>${title}</h2>
 <h3>Total Price of Trip: $${cost}</h3>
 <h3>Price with 2 riders: $${costfor2}</h3>
 <h3>Price with 3 riders: $${costfor3}</h3>
@@ -33,7 +33,7 @@
 <!-- <iframe width="600" height="450" frameborder="0" style="border:0"> -->
 <%-- src="https://www.google.com/maps/embed/v1/search?q=${latit},${longit}&key=${maps.key} allowfullscreen></iframe> --%>
 <br>
-	<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}/${echosen.city_name}/${echosen.region_name}">Submit</a>
+	<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}/${echosen.city_name}/${echosen.region_name}/${echosen.latitude}/${echosen.longitude}">Submit</a>
 		<a href="/">Cancel</a>
 
 </div>
