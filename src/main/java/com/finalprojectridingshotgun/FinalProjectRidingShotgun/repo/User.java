@@ -23,6 +23,8 @@ public class User {
 	private String first_name;
 	@Column(name = "last_name")
 	private String last_name;
+	@Column(name = "gender")
+	private String gender;
 	@Column(name = "username")
 	private String username;
 	@Column(name = "passcode")
@@ -45,11 +47,12 @@ public class User {
 
 	}
 
-	public User(Long user_id, String first_name, String last_name, String username, String passcode, String address,
+	public User(Long user_id, String first_name, String last_name, String gender, String username, String passcode, String address,
 			String email, String car_type, Integer seats, String plate) {
 		this.user_id = user_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
+		this.gender = gender;
 		this.username = username;
 		this.passcode = passcode;
 		this.address = address;
@@ -168,6 +171,16 @@ public class User {
 
 	public void setRide(List<Ride> ride) {
 		this.ride = ride;
+	}
+	
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	@Override

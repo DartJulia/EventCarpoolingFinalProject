@@ -36,7 +36,15 @@ form {
 				<!-- if name = POJO variable names, don't need to use RequestParam or PathVariable; pass in User object on controller side-->
 				<label>Enter Your Last Name</label> <input type="text"
 					class="form-control" name="last_name" placeholder="Last Name">
+					
+					<label>Select Gender</label> <br>
+					<label>Male</label>
+					<input type="radio" name="gender" value="Male">
+					<label>Female</label>
+					<input type="radio"  name="gender" value="Female">
+					
 
+				<br>
 				<label>Enter Your Email</label> <input type="email"
 					class="form-control" name="email" placeholder="example@email.com">
 
