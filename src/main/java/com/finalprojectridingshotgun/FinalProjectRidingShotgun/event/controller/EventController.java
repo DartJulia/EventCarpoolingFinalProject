@@ -194,9 +194,9 @@ public class EventController {
 		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
 		double cost = Double.parseDouble(costString);
 		
-		rjv.addObject("cost", cost);
-		rjv.addObject("costfor2", cost / 2);
-		rjv.addObject("costfor3", cost / 3);
+		rjv.addObject("cost", numberFormat.format(cost));
+		rjv.addObject("costfor2", numberFormat.format(cost / 2));
+		rjv.addObject("costfor3", numberFormat.format(cost / 3));
 
 		return rjv;
 		
@@ -224,15 +224,15 @@ public class EventController {
 		double cost = Double.parseDouble(costString);
 		// true = round trip
 		if (trip.equals("round")) {
-			rjv.addObject("cost", cost * 2);
-			rjv.addObject("costfor2", (cost * 2) / 2);
-			rjv.addObject("costfor3", (cost * 2) / 3);
+			rjv.addObject("cost", numberFormat.format(cost * 2));
+			rjv.addObject("costfor2", numberFormat.format((cost * 2) / 2));
+			rjv.addObject("costfor3", numberFormat.format((cost * 2) / 3));
 		}
 		// false = one way
 		else {
-			rjv.addObject("cost", cost);
-			rjv.addObject("costfor2", cost / 2);
-			rjv.addObject("costfor3", cost / 3);
+			rjv.addObject("cost", numberFormat.format(cost));
+			rjv.addObject("costfor2", numberFormat.format(cost / 2));
+			rjv.addObject("costfor3", numberFormat.format(cost / 3));
 		}
 
 		return rjv;

@@ -17,9 +17,9 @@
 
 <h1> ${ridername} is riding with ${drivername} to ${title} </h1>
 <br>
-${cost} <br>
-${costfor2} <br>
-${costfor3}
+Cost for one: $${cost} <br>
+Cost for two: $${costfor2} <br>
+Cost for three: $${costfor3}
 <br>
 <form action="/saveride/${riderevent}/${sessionUser.user_id}"> 
 
