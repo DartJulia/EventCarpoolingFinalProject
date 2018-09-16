@@ -28,14 +28,14 @@ form {
 
 	<div class="container">
 
-		<form action="/adduser">
+		<form action="/adduser"> <!-- onsubmit="alert('stop submit'); return false;" // or // onsubmit="return mySubmitFunction(event) -->
 
 			<div class="form-group">
 				<label>Enter Your First Name</label> <input type="text"
-					class="form-control" name="first_name" placeholder="First Name">
+					class="form-control" name="first_name" placeholder="First Name" required>
 				<!-- if name = POJO variable names, don't need to use RequestParam or PathVariable; pass in User object on controller side-->
 				<label>Enter Your Last Name</label> <input type="text"
-					class="form-control" name="last_name" placeholder="Last Name">
+					class="form-control" name="last_name" placeholder="Last Name" required>
 					
 					<label>Select Gender</label> <br>
 					<label>Male</label>
@@ -45,15 +45,13 @@ form {
 					
 
 				<br>
-				<label>Enter Your Email</label> <input type="email"
-					class="form-control" name="email" placeholder="example@email.com">
-
-				<label>Enter Your Home City</label> <input type="text"
-					class="form-control" name="address" placeholder="City"> <label>Enter
-					A Unique User Name</label> <input type="text" class="form-control"
-					name="username" placeholder="User1234"> <label>Enter
-					A Unique P@ssw0rd</label> <input type="password" class="form-control"
-					name="passcode" placeholder="Password">
+				<label>Enter Your Email</label> <input type="email" class="form-control" name="email" placeholder="example@email.com" required>
+				<label>Enter Your Home City</label> 
+				<input type="text" class="form-control" name="address" placeholder="City" required> 
+				<label>Enter A Unique User Name</label> 
+				<input type="text" class="form-control" name="username" placeholder="User1234" required> 
+				<label>Enter A Unique P@ssw0rd</label> 
+				<input type="password" class="form-control" name="passcode" placeholder="Password" required>
 				
 				<h1>OPTIONAL CAR INFO:</h1>
 				<p>leave blank if not applicable</p>
