@@ -21,10 +21,10 @@ ${cost} <br>
 ${costfor2} <br>
 ${costfor3}
 <br>
-<form action="/saveride/${riderevent}/${sessionUser.user_id}/${trip}"> 
+<form action="/saveride/${riderevent}/${sessionUser.user_id}"> 
 
-			<input type="radio" value="true" name="trip">Round Trip
-			<input type="radio" value="false" name="trip">One Way
+			<input type="radio" value="round" name="trip">Round Trip
+			<input type="radio" value="one" name="trip">One Way
 <br>
 			<input type="submit" value="Join Ride">
 </form> 

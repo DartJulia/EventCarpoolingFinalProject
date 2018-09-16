@@ -203,9 +203,9 @@ public class EventController {
 	}
 
 //Saves rider with driver in user_ride database	
-	@RequestMapping("/saveride/{riderevent}/{user_id}/{trip}")
+	@RequestMapping("/saveride/{riderevent}/{user_id}")
 	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
-			@PathVariable("trip") boolean trip, HttpSession session) {
+			@RequestParam("trip") String trip, HttpSession session) {
 		System.out.println("Made it");
 		ModelAndView rjv = new ModelAndView("summary");
 		System.out.println("Rideid:" + rideId);
@@ -223,7 +223,7 @@ public class EventController {
 		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
 		double cost = Double.parseDouble(costString);
 		// true = round trip
-		if (trip == true) {
+		if (trip.equals("round")) {
 			rjv.addObject("cost", cost * 2);
 			rjv.addObject("costfor2", (cost * 2) / 2);
 			rjv.addObject("costfor3", (cost * 2) / 3);
