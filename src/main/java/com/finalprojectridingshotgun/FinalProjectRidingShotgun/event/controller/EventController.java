@@ -128,19 +128,12 @@ public class EventController {
 	@RequestMapping("/rideresults")
 	public ModelAndView searchForRides(@RequestParam("querycity") String city, 
 			@RequestParam("querystate") String state, @RequestParam("querytitle") String title) {
-		//ModelAndView rsv = new ModelAndView("rideresults", "titletag", riderepo.findByEventtitleContaining(title));
 		ModelAndView rsv = new ModelAndView("rideresults");
 
-		Ride driver = riderepo.findUserIdByCityOrRegion(city, state);
-		Long driverId = driver.getUserid();
-		Optional<User> user = userRepo.findById(driverId);
-		System.out.println(driverId);
+		//		TODO: fix event search
+		
+		rsv.addObject("titletag", riderepo.findByEventtitleContaining(title));
 		rsv.addObject("titletag", riderepo.findByCityOrRegion(city, state));
-//		rsv.addObject("titletag", riderepo.findByEventtitleContainingOrCityOrRegion(title, city, state));
-		rsv.addObject("gender", user.get().getGender());
-		rsv.addObject("drivername", user.get().getFirst_name());
-//		TODO: find a way to use both queries
-		//rsv.addObject("titletag", riderepo.findByEventtitleContaining(title));
 		return rsv;
 	}
 	

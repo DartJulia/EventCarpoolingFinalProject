@@ -29,21 +29,29 @@
 						<th>Event link</th>
 						<th></th>
 					</tr>
-<c:forEach var="ride" items="${titletag}">
 
-<tr>
-			
+
+
+<c:forEach var="ride" items="${titletag}" varStatus="count">
+		<tr>	
 						<th></th>
 						<td>${ride.eventtitle}</td>
 						<td>${ride.city}</td>
 						<td>${ride.region}</td>
-						<td>${drivername}</td>
-						<td>${gender}</td>
+						
+<%-- //	<c:forEach var="driver" items="${drivers}"> --%>				
+						<td>${ride.rideUser.first_name}</td>
+						<td>${ride.rideUser.gender}</td>
 						
 						<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">View Ride</a></td>
-					</tr>
+	
+<%-- 	</c:forEach> --%>
+	
+	</c:forEach>					
 
-</c:forEach>
+	
+
+
 </table>
 </form>
 

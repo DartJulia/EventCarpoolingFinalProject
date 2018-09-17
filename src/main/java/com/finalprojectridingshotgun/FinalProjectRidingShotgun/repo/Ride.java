@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -46,6 +47,18 @@ public class Ride {
 	
 	@Column(name = "availseats")
 	private int availseats;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private User rideUser;
+
+	public User getRideUser() {
+		return rideUser;
+	}
+
+	public void setRideUser(User rideUser) {
+		this.rideUser = rideUser;
+	}
 
 	public int getAvailseats() {
 		return availseats;
