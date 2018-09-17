@@ -51,7 +51,14 @@ public class Calculator {
 		String dist = distance.get(0).getLegs().get(0).getDistance().getText();
 		System.out.println(dist);
 		String[] miles = dist.split(" ");
-		Double milesParse = Double.parseDouble(miles[0]);
+	//New code added here
+		String[] noCommaMiles = miles[0].split(",");
+		System.out.println(noCommaMiles[0] + noCommaMiles[1]);
+		String newMileFormat = noCommaMiles[0] + noCommaMiles[1];
+		System.out.println("Made it here");
+		
+	//end of new code	
+		Double milesParse = Double.parseDouble(newMileFormat);
 		return milesParse;
 	}
 
