@@ -2,15 +2,14 @@ package com.finalprojectridingshotgun.FinalProjectRidingShotgun;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,11 +48,12 @@ public class ShotgunController {
 	// Note: Don't need to pass in variables to url (based on jsp form names
 	// matching POJO
 	// variable names pass object in as parameter and save to database
-	@RequestMapping("/adduser")
+	@PostMapping("/adduser")
 	public ModelAndView addUser(User u) {
 		System.out.println(u);
 		userRepo.save(u);
-		return new ModelAndView("index", "welcome", "Welcome ");
+		return new ModelAndView("redirect:/login");
+		//return new ModelAndView("index", "welcome", "Welcome ");
 	}
 	// Where is this going?
 	@RequestMapping("/pullevent/{id}/{title}")
@@ -75,7 +75,7 @@ public class ShotgunController {
 	}
 
 	// Validating login
-	@RequestMapping("validateuser")
+	@PostMapping("validateuser")
 	public ModelAndView valUserName(@RequestParam("user_name") String username,
 			@RequestParam("password") String password, HttpSession session) {
 		// userRepo.findByUsernameAndPasscode(username, password).getUser_id();
