@@ -2,21 +2,19 @@ package com.finalprojectridingshotgun.FinalProjectRidingShotgun;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finalprojectridingshotgun.FinalProjectRidingShotgun.event.entity.Event;
-import com.finalprojectridingshotgun.FinalProjectRidingShotgun.mapentity.JsonWrapper;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.Ride;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.RideRepository;
 import com.finalprojectridingshotgun.FinalProjectRidingShotgun.repo.User;
@@ -57,15 +55,15 @@ public class ShotgunController {
 		userRepo.save(u);
 		return new ModelAndView("index", "welcome", "Welcome ");
 	}
-
+	// Where is this going?
 	@RequestMapping("/pullevent/{id}/{title}")
 	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title,
 			HttpSession session) {
 		User user = (User) session.getAttribute("sessionUser");
 		// System.out.println(user.getFirst_name());
 		Ride eventIdAndTitleToAdd = new Ride(id, title, user.getUser_id());
-		System.out.println(eventIdAndTitleToAdd.getEventid());
-		System.out.println(eventIdAndTitleToAdd.getEventtitle());
+		//System.out.println(eventIdAndTitleToAdd.getEventid());
+		//System.out.println(eventIdAndTitleToAdd.getEventtitle());
 		rideRepo.save(eventIdAndTitleToAdd);
 		return new ModelAndView("redirect:/");
 	}
