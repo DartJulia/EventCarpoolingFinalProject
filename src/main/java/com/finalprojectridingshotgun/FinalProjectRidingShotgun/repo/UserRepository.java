@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Optional<User> findByUsernameAndPasscode (String user_name, String passcode);
-	
+//	Integer findSeatsByUser__id(Long id);
 //	String findFirst__nameByUser__id(Long userId);
 
 }

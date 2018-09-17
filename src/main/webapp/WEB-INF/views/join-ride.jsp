@@ -17,6 +17,7 @@
 
 <h1> ${ridername} is riding with ${drivername} to ${title} </h1>
 <br>
+Seats available ${seats} <br>
 Cost for one: $${cost} <br>
 Cost for two: $${costfor2} <br>
 Cost for three: $${costfor3}

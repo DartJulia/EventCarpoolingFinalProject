@@ -134,8 +134,9 @@ public class EventController {
 		Ride driver = riderepo.findUserIdByCityOrRegion(city, state);
 		Long driverId = driver.getUserid();
 		Optional<User> user = userRepo.findById(driverId);
-
+		System.out.println(driverId);
 		rsv.addObject("titletag", riderepo.findByCityOrRegion(city, state));
+//		rsv.addObject("titletag", riderepo.findByEventtitleContainingOrCityOrRegion(title, city, state));
 		rsv.addObject("gender", user.get().getGender());
 		rsv.addObject("drivername", user.get().getFirst_name());
 //		TODO: find a way to use both queries
@@ -180,7 +181,7 @@ public class EventController {
 			HttpSession session) {
 		ModelAndView rjv = new ModelAndView("join-ride");
 		User user = (User)session.getAttribute("sessionUser");
-
+		
 		session.setAttribute("riderevent", rideId);
 
 		Calculator calc = new Calculator();
@@ -189,7 +190,9 @@ public class EventController {
 		Ride driver = riderepo.getOne(rideId);
 		Long driverid = driver.getUserid();
 		Optional<User> driveruser = userRepo.findById(driverid);
-
+		int maxSeats = driveruser.get().getSeats();
+		rjv.addObject("seats", maxSeats);
+		
 		rjv.addObject("drivername", driveruser.get().getFirst_name());
 		rjv.addObject("ridername", user.getFirst_name());
 		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
@@ -252,9 +255,10 @@ public class EventController {
 			@PathVariable("user_id") Long user_id, @PathVariable("city_name") String city,
 			@PathVariable("region_name") String state, @PathVariable("lat") String lat,
 			@PathVariable("lon") String lon) {
-		// User u = (User) session.getAttribute("sessionUser");
-
-		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon);
+//		 User u = (User) session.getAttribute("sessionUser");
+		Optional<User> user = userRepo.findById(user_id);
+		Integer seats = user.get().getSeats();
+		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon, seats);
 		riderepo.save(r);
 		return new ModelAndView("redirect:/");
 	}

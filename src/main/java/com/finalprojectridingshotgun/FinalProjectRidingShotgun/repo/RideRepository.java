@@ -13,6 +13,9 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 	List<Ride> findByCityOrRegion(String city, String region);
 
 	List<Ride> findByEventtitleContaining(String eventtitle);
+	
+	// should work, maybe try an @Query
+	List<Ride> findByEventtitleContainingOrCityOrRegion(String eventtitle, String city, String region);
 
 	Ride findEventtitleByRideid(Long rideId);
 

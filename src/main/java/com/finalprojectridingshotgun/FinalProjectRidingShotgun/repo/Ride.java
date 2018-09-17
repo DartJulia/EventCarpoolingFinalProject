@@ -43,6 +43,17 @@ public class Ride {
 
 	@Column(name = "longitude")
 	private String longitude;
+	
+	@Column(name = "availseats")
+	private int availseats;
+
+	public int getAvailseats() {
+		return availseats;
+	}
+
+	public void setAvailseats(int availseats) {
+		this.availseats = availseats;
+	}
 
 	public String getLatitude() {
 		return latitude;
@@ -94,7 +105,7 @@ public class Ride {
 
 
 	public Ride(String eventid, String eventtitle, Long userid, String city, String region,
-			String latitude, String longitude) {
+			String latitude, String longitude, int availseats) {
 		super();
 		this.eventid = eventid;
 		this.eventtitle = eventtitle;
@@ -103,6 +114,7 @@ public class Ride {
 		this.region = region;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.availseats = availseats;
 	}
 
 	public Ride(String eventid, Long userid, List<User> users) {
