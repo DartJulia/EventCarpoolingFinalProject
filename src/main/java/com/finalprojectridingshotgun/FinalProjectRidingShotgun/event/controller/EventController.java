@@ -190,8 +190,14 @@ public class EventController {
 		Ride driver = riderepo.getOne(rideId);
 		Long driverid = driver.getUserid();
 		Optional<User> driveruser = userRepo.findById(driverid);
-		int maxSeats = driveruser.get().getSeats();
-		rjv.addObject("seats", maxSeats);
+//		int maxSeats = driveruser.get().getSeats();
+//		driver.setAvailseats(maxSeats);
+		int seats = driver.getAvailseats();
+		rjv.addObject("seats", seats);
+		
+		if (driver.getAvailseats() < 1) {
+			return new ModelAndView("/ridefull");
+		}
 		
 		rjv.addObject("drivername", driveruser.get().getFirst_name());
 		rjv.addObject("ridername", user.getFirst_name());
@@ -219,8 +225,17 @@ public class EventController {
 		System.out.println("Made it");
 		ModelAndView rjv = new ModelAndView("summary");
 		System.out.println("Rideid:" + rideId);
+		Ride ride = riderepo.getOne(rideId);
+		
+		
+		
+		ride.setAvailseats(ride.getAvailseats()-1);
+		
+		riderepo.save(ride);
+		
 		UserRide ur = new UserRide(userId, rideId);
 		urRepo.save(ur);
+		
 
 		User user = (User) session.getAttribute("sessionUser");
 		
@@ -251,18 +266,24 @@ public class EventController {
 
 // Method adds a new ride to ride_database on the "driver side"
 	@RequestMapping("/registerdriver/{id}/{title}/{user_id}/{city_name}/{region_name}/{lat}/{lon}")
-	public ModelAndView driveRegister(@PathVariable("id") String eventid, @PathVariable("title") String eventtitle, 
+	public ModelAndView rideRegister(@PathVariable("id") String eventid, @PathVariable("title") String eventtitle, 
 			@PathVariable("user_id") Long user_id, @PathVariable("city_name") String city,
 			@PathVariable("region_name") String state, @PathVariable("lat") String lat,
 			@PathVariable("lon") String lon) {
 //		 User u = (User) session.getAttribute("sessionUser");
 		Optional<User> user = userRepo.findById(user_id);
 		Integer seats = user.get().getSeats();
+		System.out.println("Seats: " + seats);
 		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon, seats);
 		riderepo.save(r);
 		return new ModelAndView("redirect:/");
 	}
 
+	
+	@RequestMapping("/ridefull")
+	public ModelAndView fullride() {
+		return new ModelAndView("ridefull");
+	}
 
 	// helper method
 	public HttpEntity<String> eventHeaders() {
