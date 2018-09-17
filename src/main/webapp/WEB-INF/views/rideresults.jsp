@@ -21,10 +21,12 @@
 			<table style="border-spacing: 20px; margin: 0 auto; width: 100%">
 					<tr>
 						<th></th>
-						<th>event title</th>
-						<th>event city</th>
+						<th>Event title</th>
+						<th>Event city</th>
 						<th>State</th>
-						<th>event link</th>
+						<th>Driver Name</th>
+						<th>Gender</th>
+						<th>Event link</th>
 						<th></th>
 					</tr>
 <c:forEach var="ride" items="${titletag}">
@@ -35,8 +37,10 @@
 						<td>${ride.eventtitle}</td>
 						<td>${ride.city}</td>
 						<td>${ride.region}</td>
+						<td>${drivername}</td>
+						<td>${gender}</td>
 						
-						<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">Link</a></td>
+						<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">View Ride</a></td>
 					</tr>
 
 </c:forEach>
