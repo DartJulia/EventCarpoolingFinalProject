@@ -28,7 +28,7 @@ form {
 
 	<div class="container">
 
-		<form action="/adduser" onsubmit="validate()"> 
+		<form action="/adduser" onsubmit="validate()" method= "post"> 
 
 			<div class="form-group">
 				<label>Enter Your First Name</label> <input type="text"
