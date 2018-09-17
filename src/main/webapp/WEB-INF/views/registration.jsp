@@ -28,7 +28,7 @@ form {
 
 	<div class="container">
 
-		<form action="/adduser"> <!-- onsubmit="alert('stop submit'); return false;" // or // onsubmit="return mySubmitFunction(event) -->
+		<form action="/adduser" onsubmit="validate()"> 
 
 			<div class="form-group">
 				<label>Enter Your First Name</label> <input type="text"
@@ -46,8 +46,8 @@ form {
 
 				<br>
 				<label>Enter Your Email</label> <input type="email" class="form-control" name="email" placeholder="example@email.com" required>
-				<label>Enter Your Home City</label> 
-				<input type="text" class="form-control" name="address" placeholder="City" required> 
+				<label>Enter Your Zip Code</label> 
+				<input type="text" class="form-control" name="address" placeholder="Zip" required> 
 				<label>Enter A Unique User Name</label> 
 				<input type="text" class="form-control" name="username" placeholder="User1234" required> 
 				<label>Enter A Unique P@ssw0rd</label> 
