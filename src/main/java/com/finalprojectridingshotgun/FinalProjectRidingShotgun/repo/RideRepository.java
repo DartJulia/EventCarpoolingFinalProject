@@ -20,4 +20,6 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
 
 	Ride findLongitudeByRideid(Long rideId);
 
+	Ride findUserIdByCityOrRegion(String city, String region);
+
 }
