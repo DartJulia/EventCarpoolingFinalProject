@@ -26,7 +26,7 @@ function validate() {
 			alert("please enter a valid email address!");
 			document.getElementById("em").focus();
 			return false;
-		} else if (!zip.length < 5) {
+		} else if (zip.length < 5) {
 			alert("please enter a valid zip code!");
 			document.getElementById("address").focus();
 			return false;	
