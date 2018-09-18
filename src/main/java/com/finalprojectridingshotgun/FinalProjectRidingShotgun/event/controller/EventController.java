@@ -126,17 +126,15 @@ public class EventController {
 	
 	// display rider search results from ride database
 	@RequestMapping("/rideresults")
-	public ModelAndView searchForRides(@RequestParam("querycity") String city, 
-			@RequestParam("querystate") String state, @RequestParam("querytitle") String title) {
+	public ModelAndView searchForRides(@RequestParam("query") String query) {
 		ModelAndView rsv = new ModelAndView("rideresults");
 
 		//		TODO: fix event search
-		
-		rsv.addObject("titletag", riderepo.findByEventtitleContaining(title));
-		rsv.addObject("titletag", riderepo.findByCityOrRegion(city, state));
+
+		rsv.addObject("titletag", riderepo.findByCityContaining(query));
+
 		return rsv;
 	}
-	
 	
 	
 	// TODO: method to parse date and time
@@ -173,8 +171,8 @@ public class EventController {
 	public ModelAndView rideDetails(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId,
 			HttpSession session) {
 		ModelAndView rjv = new ModelAndView("join-ride");
-		User user = (User)session.getAttribute("sessionUser");
-		
+		User user = (User) session.getAttribute("sessionUser");
+
 		session.setAttribute("riderevent", rideId);
 
 		Calculator calc = new Calculator();
@@ -187,11 +185,11 @@ public class EventController {
 //		driver.setAvailseats(maxSeats);
 		int seats = driver.getAvailseats();
 		rjv.addObject("seats", seats);
-		
+
 		if (driver.getAvailseats() < 1) {
 			return new ModelAndView("/ridefull");
 		}
-		
+
 		rjv.addObject("drivername", driveruser.get().getFirst_name());
 		rjv.addObject("ridername", user.getFirst_name());
 		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
@@ -202,13 +200,13 @@ public class EventController {
 		String longitude = rideLong.getLongitude();
 		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
 		double cost = Double.parseDouble(costString);
-		
+
 		rjv.addObject("cost", numberFormat.format(cost));
 		rjv.addObject("costfor2", numberFormat.format(cost / 2));
 		rjv.addObject("costfor3", numberFormat.format(cost / 3));
 
 		return rjv;
-		
+
 	}
 
 //Saves rider with driver in user_ride database	
@@ -219,19 +217,16 @@ public class EventController {
 		ModelAndView rjv = new ModelAndView("summary");
 		System.out.println("Rideid:" + rideId);
 		Ride ride = riderepo.getOne(rideId);
-		
-		
-		
-		ride.setAvailseats(ride.getAvailseats()-1);
-		
+
+		ride.setAvailseats(ride.getAvailseats() - 1);
+
 		riderepo.save(ride);
-		
+
 		UserRide ur = new UserRide(userId, rideId);
 		urRepo.save(ur);
-		
 
 		User user = (User) session.getAttribute("sessionUser");
-		
+
 		Calculator calc = new Calculator();
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
