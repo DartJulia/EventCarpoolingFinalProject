@@ -45,9 +45,13 @@ public class ShotgunController {
 
 
 	// **Adds new user into User table in database
+	//Takes information from registration.jsp and send it to the login page
+	
 	// Note: Don't need to pass in variables to url (based on jsp form names
 	// matching POJO
 	// variable names pass object in as parameter and save to database
+	
+	// Getting information from the registration and saving to DB. sending the user to the login
 	@PostMapping("/adduser")
 	public ModelAndView addUser(User u) {
 		System.out.println(u);
@@ -55,18 +59,7 @@ public class ShotgunController {
 		return new ModelAndView("redirect:/login");
 		//return new ModelAndView("index", "welcome", "Welcome ");
 	}
-	// Where is this going?
-	@RequestMapping("/pullevent/{id}/{title}")
-	public ModelAndView pullEvent(@PathVariable("id") String id, @PathVariable("title") String title,
-			HttpSession session) {
-		User user = (User) session.getAttribute("sessionUser");
-		// System.out.println(user.getFirst_name());
-		Ride eventIdAndTitleToAdd = new Ride(id, title, user.getUser_id());
-		//System.out.println(eventIdAndTitleToAdd.getEventid());
-		//System.out.println(eventIdAndTitleToAdd.getEventtitle());
-		rideRepo.save(eventIdAndTitleToAdd);
-		return new ModelAndView("redirect:/");
-	}
+
 
 	// Displays login page
 	@RequestMapping("/login")
@@ -75,6 +68,7 @@ public class ShotgunController {
 	}
 
 	// Validating login
+	// taking information from login.jsp and validating it
 	@PostMapping("validateuser")
 	public ModelAndView valUserName(@RequestParam("user_name") String username,
 			@RequestParam("password") String password, HttpSession session) {
