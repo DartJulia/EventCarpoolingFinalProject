@@ -29,28 +29,32 @@ form {
 
 </head>
 <body>
+<div class="top-nav-bar" style="font-size:1.5em">
 
-	<div class="top-nav-bar" style="font-size:1.5em">
+		<a href="/" style="padding: 10px">Home</a> 
+			
+</div>
+<div style="margin-left: 50px; margin-right: 50px; text-align: center">
 
-	<a href="/" style="padding: 30px">Home</a>
-
+	<div style="margin-top: 100px">
+		<h1 style="text-align: center">Login Page</h1>
 	</div>
-
-	<h1 align="center">RIDING SHOTGUN LOGIN</h1>
-
-	<div class="container">
+<br>
+<br>
 
 		<form action="validateuser" method= "post">
 
 			<div class="form-group">
-				<label>USER NAME</label> <input type="text"
+				<label>USER NAME</label> 
+				<input type="text"
 					class="form-control" name="user_name" placeholder="UserName">
 				<!-- if name = POJO variable names, don't need to use RequestParam or PathVariable; pass in User object on controller side-->
+				<br>
 				<label>PASSWORD</label> <input type="password"
 					class="form-control" name="password" placeholder="P@$$W0rd">
 			</div>
 
-			<input type="submit" value="Submit">
+			<button class="btn-primary">Login</button>
 		</form>
 
 
