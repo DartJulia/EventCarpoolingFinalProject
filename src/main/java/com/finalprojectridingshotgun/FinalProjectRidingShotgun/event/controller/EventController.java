@@ -186,6 +186,51 @@ public class EventController {
 
 	// TODO: pull rides from database here
 	
+	// Getting information from join_ride and sending it to summary
+//Saves rider with driver in user_ride database	
+	@RequestMapping("/saveride/{riderevent}/{user_id}")
+	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
+			@RequestParam("trip") String trip, HttpSession session) {
+		System.out.println("Made it");
+		ModelAndView rjv = new ModelAndView("summary");
+		System.out.println("Rideid:" + rideId);
+		Ride ride = riderepo.getOne(rideId);
+		
+		ride.setAvailseats(ride.getAvailseats() - 1);
+		
+		riderepo.save(ride);
+		
+		UserRide ur = new UserRide(userId, rideId);
+		urRepo.save(ur);
+		
+		User user = (User) session.getAttribute("sessionUser");
+		
+		Calculator calc = new Calculator();
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
+		String latitude = rideLat.getLatitude();
+		Ride rideLong = riderepo.findLatitudeByRideid(rideId);
+		String longitude = rideLong.getLongitude();
+		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
+		double cost = Double.parseDouble(costString);
+		// true = round trip
+		if (trip.equals("round")) {
+			rjv.addObject("cost", numberFormat.format(cost * 2));
+			rjv.addObject("costfor2", numberFormat.format((cost * 2) / 2));
+			rjv.addObject("costfor3", numberFormat.format((cost * 2) / 3));
+		}
+		// false = one way
+		else {
+			rjv.addObject("cost", numberFormat.format(cost));
+			rjv.addObject("costfor2", numberFormat.format(cost / 2));
+			rjv.addObject("costfor3", numberFormat.format(cost / 3));
+		}
+		
+		return rjv;
+		
+	}
+	
+	
 	// Getting information from driver_results and sending it to view_event
 	@RequestMapping("/event/{id}/{title}/{start}/{venue}/{lat}/{lon}/{city}/{region}")
 	public ModelAndView viewEvent(@PathVariable("id") String id, @PathVariable("title") String title,
@@ -212,49 +257,6 @@ public class EventController {
 	}
 	
 
-	// Getting information from join_ride and sending it to summary
-//Saves rider with driver in user_ride database	
-	@RequestMapping("/saveride/{riderevent}/{user_id}")
-	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
-			@RequestParam("trip") String trip, HttpSession session) {
-		System.out.println("Made it");
-		ModelAndView rjv = new ModelAndView("summary");
-		System.out.println("Rideid:" + rideId);
-		Ride ride = riderepo.getOne(rideId);
-
-		ride.setAvailseats(ride.getAvailseats() - 1);
-
-		riderepo.save(ride);
-
-		UserRide ur = new UserRide(userId, rideId);
-		urRepo.save(ur);
-
-		User user = (User) session.getAttribute("sessionUser");
-
-		Calculator calc = new Calculator();
-		DecimalFormat numberFormat = new DecimalFormat("#.00");
-		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
-		String latitude = rideLat.getLatitude();
-		Ride rideLong = riderepo.findLatitudeByRideid(rideId);
-		String longitude = rideLong.getLongitude();
-		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
-		double cost = Double.parseDouble(costString);
-		// true = round trip
-		if (trip.equals("round")) {
-			rjv.addObject("cost", numberFormat.format(cost * 2));
-			rjv.addObject("costfor2", numberFormat.format((cost * 2) / 2));
-			rjv.addObject("costfor3", numberFormat.format((cost * 2) / 3));
-		}
-		// false = one way
-		else {
-			rjv.addObject("cost", numberFormat.format(cost));
-			rjv.addObject("costfor2", numberFormat.format(cost / 2));
-			rjv.addObject("costfor3", numberFormat.format(cost / 3));
-		}
-
-		return rjv;
-
-	}
 
 	// Getting information from view_event and sends it to DB and back to index
 // Method adds a new ride to ride_database on the "driver side"
