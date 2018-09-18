@@ -188,6 +188,7 @@ public class EventController {
 	
 	// Getting information from join_ride and sending it to summary
 //Saves rider with driver in user_ride database	
+	// If statement for if it is a round trip or one way to calculate gas
 	@RequestMapping("/saveride/{riderevent}/{user_id}")
 	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
 			@RequestParam("trip") String trip, HttpSession session) {
@@ -196,6 +197,7 @@ public class EventController {
 		System.out.println("Rideid:" + rideId);
 		Ride ride = riderepo.getOne(rideId);
 		
+		// Subtracts a seat when somebody signs up to update available seats
 		ride.setAvailseats(ride.getAvailseats() - 1);
 		
 		riderepo.save(ride);
@@ -274,12 +276,12 @@ public class EventController {
 		return new ModelAndView("redirect:/");
 	}
 
-	
+	// if seats are full it sends to this page
 	@RequestMapping("/ridefull")
 	public ModelAndView fullride() {
 		return new ModelAndView("ridefull");
 	}
-
+	
 	// helper method
 	public HttpEntity<String> eventHeaders() {
 		HttpHeaders headers = new HttpHeaders();
@@ -299,6 +301,7 @@ public class EventController {
 
 		RestTemplate restTemplate = new RestTemplate(requestFactory);
 
+		// converting javascript text to JSON so your restTemplate knows what to do with it
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
 		List<MediaType> mediaTypes = new ArrayList<MediaType>();
 		mediaTypes.add(MediaType.ALL);
