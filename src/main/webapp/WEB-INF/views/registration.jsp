@@ -3,15 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/yeti/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="test2.css">
-	<script src="jquery-3.3.1.min.js"></script>
-<script src="registration.js"></script>
-
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images/favicon.png">
+        <title>I Call Shotgun</title>
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/responsive.css" rel="stylesheet">
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/custom.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="jobotest.css" type="text/css"> 
+    </head>
 <style>
 form {
 	width: 50%;
@@ -24,6 +30,11 @@ form {
 </head>
 <body>
 
+<div class="top-nav-bar" style="font-size:1.5em">
+
+<a href="/" style="padding: 30px">Home</a>
+
+</div>
 	<h1 align="center">RIDING SHOTGUN REGISTRATION FORM</h1>
 
 	<div class="container">
