@@ -27,9 +27,9 @@
 <body>
 
 <div class="top-nav-bar" style="font-size:1.5em">
-
-		${sessionUser.first_name }
-			<a href="/logout" style="padding: 20px">logout</a>
+${sessionUser.first_name }
+		<a href="/" style="padding: 10px">Home</a> 
+			<a href="/logout" style="padding: 20px">Logout</a>
 </div>
 <div style="margin-left: 50px; margin-right: 50px; text-align: center">
 
