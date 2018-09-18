@@ -83,7 +83,7 @@ public class EventController {
 	}
 	
 	
-	
+	// Getting information from the API and sending it to driver_results
 	@RequestMapping("/allsearch")
 	public ModelAndView searchAll(@RequestParam("queryloc") String queryloc,
 			@RequestParam("queryname") String queryname, @RequestParam("querydate") String querydate) {
@@ -123,6 +123,7 @@ public class EventController {
 		return av;
 	}
 	
+	// Getting information from ridesearch and sending it to rideresults
 	
 	// display rider search results from ride database
 	@RequestMapping("/rideresults")
@@ -137,9 +138,55 @@ public class EventController {
 	}
 	
 	
+	// Getting information from rideresults and sending it to join_ride
+// Pulls ride details from database including price, rider name and event title - one more step to add to userride database	
+	@RequestMapping("/joinride/{ride_id}/{user_id}")
+	public ModelAndView rideDetails(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId,
+			HttpSession session) {
+		ModelAndView rjv = new ModelAndView("join-ride");
+		User user = (User) session.getAttribute("sessionUser");
+		
+		session.setAttribute("riderevent", rideId);
+		
+		Calculator calc = new Calculator();
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		
+		Ride driver = riderepo.getOne(rideId);
+		Long driverid = driver.getUserid();
+		Optional<User> driveruser = userRepo.findById(driverid);
+//		int maxSeats = driveruser.get().getSeats();
+//		driver.setAvailseats(maxSeats);
+		int seats = driver.getAvailseats();
+		rjv.addObject("seats", seats);
+		
+		if (driver.getAvailseats() < 1) {
+			return new ModelAndView("/ridefull");
+		}
+		
+		rjv.addObject("drivername", driveruser.get().getFirst_name());
+		rjv.addObject("ridername", user.getFirst_name());
+		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
+		
+		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
+		String latitude = rideLat.getLatitude();
+		Ride rideLong = riderepo.findLatitudeByRideid(rideId);
+		String longitude = rideLong.getLongitude();
+		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
+		double cost = Double.parseDouble(costString);
+		
+		rjv.addObject("cost", numberFormat.format(cost));
+		rjv.addObject("costfor2", numberFormat.format(cost / 2));
+		rjv.addObject("costfor3", numberFormat.format(cost / 3));
+		
+		return rjv;
+		
+	}
+	
 	// TODO: method to parse date and time
 
 	// TODO: pull rides from database here
+	
+	// Getting information from driver_results and sending it to view_event
 	@RequestMapping("/event/{id}/{title}/{start}/{venue}/{lat}/{lon}/{city}/{region}")
 	public ModelAndView viewEvent(@PathVariable("id") String id, @PathVariable("title") String title,
 			@PathVariable("start") String start, @PathVariable("venue") String v, @PathVariable("lat") String lat,
@@ -165,50 +212,7 @@ public class EventController {
 	}
 	
 
-	
-// Pulls ride details from database including price, rider name and event title - one more step to add to userride database	
-	@RequestMapping("/joinride/{ride_id}/{user_id}")
-	public ModelAndView rideDetails(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId,
-			HttpSession session) {
-		ModelAndView rjv = new ModelAndView("join-ride");
-		User user = (User) session.getAttribute("sessionUser");
-
-		session.setAttribute("riderevent", rideId);
-
-		Calculator calc = new Calculator();
-		DecimalFormat numberFormat = new DecimalFormat("#.00");
-
-		Ride driver = riderepo.getOne(rideId);
-		Long driverid = driver.getUserid();
-		Optional<User> driveruser = userRepo.findById(driverid);
-//		int maxSeats = driveruser.get().getSeats();
-//		driver.setAvailseats(maxSeats);
-		int seats = driver.getAvailseats();
-		rjv.addObject("seats", seats);
-
-		if (driver.getAvailseats() < 1) {
-			return new ModelAndView("/ridefull");
-		}
-
-		rjv.addObject("drivername", driveruser.get().getFirst_name());
-		rjv.addObject("ridername", user.getFirst_name());
-		rjv.addObject("title", riderepo.findEventtitleByRideid(rideId).getEventtitle());
-
-		Ride rideLat = riderepo.findLatitudeByRideid(rideId);
-		String latitude = rideLat.getLatitude();
-		Ride rideLong = riderepo.findLatitudeByRideid(rideId);
-		String longitude = rideLong.getLongitude();
-		String costString = numberFormat.format(calc.pricePerRider(user, map, latitude, longitude));
-		double cost = Double.parseDouble(costString);
-
-		rjv.addObject("cost", numberFormat.format(cost));
-		rjv.addObject("costfor2", numberFormat.format(cost / 2));
-		rjv.addObject("costfor3", numberFormat.format(cost / 3));
-
-		return rjv;
-
-	}
-
+	// Getting information from join_ride and sending it to summary
 //Saves rider with driver in user_ride database	
 	@RequestMapping("/saveride/{riderevent}/{user_id}")
 	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
@@ -252,6 +256,7 @@ public class EventController {
 
 	}
 
+	// Getting information from view_event and sends it to DB and back to index
 // Method adds a new ride to ride_database on the "driver side"
 	@RequestMapping("/registerdriver/{id}/{title}/{user_id}/{city_name}/{region_name}/{lat}/{lon}")
 	public ModelAndView rideRegister(@PathVariable("id") String eventid, @PathVariable("title") String eventtitle, 

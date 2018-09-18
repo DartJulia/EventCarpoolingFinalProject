@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
- <link rel="stylesheet"
-	href="https://bootswatch.com/4/lux/bootstrap.min.css" /> 
+ 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="images/favicon.png">
@@ -20,44 +19,43 @@
         <script src="js/custom.js" type="text/javascript"></script>
 
 </head>
-<body>
-<br>
-<br>
+<body style="background-color:">
+
 <div class="top-nav-bar" style="font-size:1.5em">
-	
-			<a href="/" style="padding: 10px">Home</a> 
-			<a href="/logout" style="padding: 10px">Logout</a>
-			</div>
 
-			
-<h1>Search for Events to Drive To</h1>
+		${sessionUser.first_name }
+		<a href="/" style="padding: 10px">Home</a> 
+			<a href="/logout" style="padding: 20px">Logout</a>
+</div>
+<div style="margin-left: 50px; margin-right: 50px; text-align: center">
 
+	<div style="margin-top: 160px">
+		<h1 style="text-align: center">SEARCH EVENTS TO DRIVE TO</h1>
+	</div>
 <br>
-<br>
-<br>
+
+
+
 <br>
 <br>
 
 	<form action="/allsearch">
-		<table style="border-spacing: 20px; margin: 0 auto; width: 75%">
-					<tr>
-						<td>search by location</td>
-						<td><input type="text" style="font-size: 150%; width: 350px"
-							name="queryloc" placeholder="where would you like to go?"></td>
-					</tr>
-					<tr>
-						<td>search by keyword</td>
-						<td><input type="text" style="font-size: 150%; width: 350px"
-							name="queryname" placeholder="what is your event keyword?"></td>
-					</tr>
-					<tr>
-						<td>search by date</td>
-						<td><input type="text" style="font-size: 150%; width: 350px"
-							name="querydate" placeholder="when is your event?"></td>
-					</tr>
-				</table>
+		
+						<label style="font-size:130%; padding:30px">Search by location</label>
+						<input type="text" style="font-size: 150%; width: 350px; height:40px; border-radius:6px"
+							name="queryloc" placeholder="Where would you like to go?">
+							<br>
+					<label style="font-size:130%; padding:30px">Search by keyword</label>
+						<input type="text" style="font-size: 150%; width: 350px; height:40px; border-radius:6px"
+							name="queryname" placeholder="What is your event keyword?">
+							<br>
+					<label style="font-size:130%; padding:30px">Search by date</label>
+						<input type="text" style="font-size: 150%; width: 350px; height:40px; border-radius:6px"
+							name="querydate" placeholder="When is your event?">
+					<br>
 				<br>
-				<input type="submit" value="Find an Event">
+				<button class="btn-primary">Find an Event</button>
+			
 	</form>
 
 
