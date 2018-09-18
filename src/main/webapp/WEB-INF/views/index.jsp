@@ -20,6 +20,12 @@
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/custom.js" type="text/javascript"></script>
         <link rel="stylesheet" href="jobotest.css" type="text/css"> 
+        
+         <style>
+        a { color: #000000; }
+		a:hover { color: #00FF00; } /* CSS link hover (green) */
+        </style>
+        
     </head>
 <!-- <head>
 <meta charset="ISO-8859-1">
