@@ -49,12 +49,12 @@
 
 		<div align="center">
 		
-<img src="https://lh6.googleusercontent.com/Etx4xd5YeJkUjQ22TKccmIIhr1ZfvpZwXDRBVjfOgiCDs5VrAic1vJV2mleZD3jFFo3H8_41kzuWdueRpovP=w1440-h742-rw" style="height:50%; width:50%">
+<img src="images/logo.webp" style="height:50%; width:50%">
 			<!-- <h1 style="text-align: center; font-size: 100px">RIDING SHOTGUN!</h1> -->
 			
           
-			<br>
-			<br>
+			    		<br>
+						<br>
 						<br>
 						<br>
 						<br>
