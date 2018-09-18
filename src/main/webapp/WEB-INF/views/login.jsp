@@ -28,7 +28,7 @@ form {
 
 
 </head>
-<body>
+<body style="background-color:	#D3D3D3">
 <div class="top-nav-bar" style="font-size:1.5em">
 
 		<a href="/" style="padding: 10px">Home</a> 

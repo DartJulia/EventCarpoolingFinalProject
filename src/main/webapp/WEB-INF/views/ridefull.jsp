@@ -20,7 +20,7 @@
         <script src="js/custom.js" type="text/javascript"></script>
 
 </head>
-<body>
+<body style="background-color:	#D3D3D3">
 
 <div class="top-nav-bar" style="font-size:1.5em">
 	

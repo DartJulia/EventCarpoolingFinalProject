@@ -12,7 +12,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
 	
 </head>
-<body>
+<body style="background-color:	#D3D3D3">
 <div class="container" style="margin: 50px">
 
 <h1> ${ridername} is riding with ${drivername} to ${title} </h1>

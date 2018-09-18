@@ -40,7 +40,7 @@
 	
 	</style> -->
 </head>
-<body style="margin:10px;text-align:center">
+<body style="margin:10px;text-align:center; background-color:#D3D3D3">
 
 <div class="top-nav-bar" style="font-size:1.5em">
 	

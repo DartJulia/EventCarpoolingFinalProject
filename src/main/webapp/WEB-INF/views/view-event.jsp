@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
 </head>
-<body>
+<body style="background-color:	#D3D3D3">
 
 <!-- <a href="/calcrideprice"><button>Get Cost</button></a> -->
 <div class="jumbotron">

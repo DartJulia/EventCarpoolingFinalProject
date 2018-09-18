@@ -18,7 +18,7 @@
         <script src="js/custom.js" type="text/javascript"></script>
         <link rel="stylesheet" href="jobotest.css" type="text/css"> 
     </head>
-<body>
+<body style="background-color:	#D3D3D3">
 
 
 <div class="top-nav-bar" style="text-align: right">
