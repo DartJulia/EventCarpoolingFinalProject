@@ -31,10 +31,10 @@
 <body>
 
 <div class="top-nav-bar" style="font-size:1.5em">
-
-		${sessionUser.first_name }
-			<a href="/logout" style="padding: 20px">logout</a>
-		</div>
+${sessionUser.first_name }
+		<a href="/" style="padding: 10px">Home</a> 
+			<a href="/logout" style="padding: 20px">Logout</a>
+</div>
 <br>
 <br>
 <br>
@@ -89,13 +89,6 @@
 	</table>
 	</form>
 	
-	<br>
-	<br>
-	<br>
-	<br>
-	
-	<button class="btn-primary"><a href="/">Go Back</a></button>
-	<br>
 </div>	
 </body>
 </html>
