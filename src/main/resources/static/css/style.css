@@ -142,7 +142,7 @@ h1,h2,h3,h4,h5,h6,p{
 }
 
 .btn-primary {
-    background: #ff5200 none repeat scroll 0 0;
+    background: #227cc6 none repeat scroll 0 0;
     border: medium none;
     border-radius: 8px;
     font-size: 15px;
@@ -178,10 +178,11 @@ h1,h2,h3,h4,h5,h6,p{
 
 /*toggle menu*/
 .top-nav-bar {
-    left: 70px;
+    right: 60px;
     position: absolute;
     top: 60px;
     z-index: 99999;
+
 }
 #toggle {
     cursor: pointer;
@@ -219,16 +220,17 @@ h1,h2,h3,h4,h5,h6,p{
     display: inline-block;
     padding-top: 25px;
     padding-bottom: 25px;
-}
+} 
 
-
+/* https://wallpapersfx.files.wordpress.com/2015/08/open-road-1920x1200-wallpaperz-co.jpg */
 
 /*banner*/
 .banner-full-image {
-    background: rgba(0, 0, 0, 0) url("../images/banner.png") no-repeat scroll center top / cover ;
-    background-attachment: fixed;
-    height: 480px;
+    background: rgba(0, 0, 0, 0) url("http://qtcgq.inkworldwide.com/wp-content/uploads/2017/07/39620960-road-wallpapers.jpg") no-repeat scroll center center / cover ;
+    background-attachment: fixed; 
+    height: 550px;
     position: relative;
+/*     background-size: cover; */
 }
 .banner-full-image::after {
     background-color: rgba(0, 0, 0, 0.2);
