@@ -22,7 +22,7 @@ public class MapsController {
 	@Value("${maps.key}")
 	String map;
 
-
+	// gets the map from the google maps API
 	@RequestMapping("/search")
 	public ModelAndView searchTitle(HttpSession session) {
 		Event e = (Event) session.getAttribute("echosen");
