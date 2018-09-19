@@ -50,25 +50,29 @@ ${sessionUser.first_name }
 	
 	<br>
 	<br>
+	<br>
+	<br>
 	
 	<form> <!--  CAN BE A REQUESTPARAM -->
-				<table style="border-spacing: 20px; margin: 0 auto; width: 100%; text-align: left">
-						<tr>
-							<th></th>
+	<font size="4em">
+				<table style="border-spacing: 20px; margin: 0 auto; width: 80%; text-align: left">
+						<tr style="color:#227cc6">
+							<!-- <th></th> -->
 							<th>Event title</th>
 							<th>Event city</th>
 							<th>State</th>
 							<th>Driver Name</th>
 							<th>Gender</th>
-							<th>Event link</th>
 							<th></th>
+							<!-- <th></th> -->
 						</tr>
 	
 	
+	</font>
 	
 	<c:forEach var="ride" items="${titletag}" varStatus="count">
 			<tr>	
-							<th></th>
+							<!-- <th></th> -->
 							<td>${ride.eventtitle}</td>
 							<td>${ride.city}</td>
 							<td>${ride.region}</td>
@@ -84,7 +88,6 @@ ${sessionUser.first_name }
 		</c:forEach>					
 	
 		
-	
 	
 	</table>
 	</form>
