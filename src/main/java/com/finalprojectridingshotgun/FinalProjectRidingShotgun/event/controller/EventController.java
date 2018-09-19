@@ -252,9 +252,9 @@ public class EventController {
 		System.out.println(e);
 		User user = (User) session.getAttribute("sessionUser");
 		Calculator calc = new Calculator();
-		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, map, lat, lon)));
-		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 2));
-		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 3));
+		ev.addObject("cost", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 2));
+		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 3));
+		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 4));
 
 		session.setAttribute("echosen", e);
 //		List<Ride> rides = riderepo.findByEventid(id);
