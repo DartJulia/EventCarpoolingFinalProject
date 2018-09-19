@@ -143,8 +143,13 @@ public class EventController {
 	@RequestMapping("/joinride/{ride_id}/{user_id}")
 	public ModelAndView rideDetails(@PathVariable("ride_id") Long rideId, @PathVariable("user_id") Long userId,
 			HttpSession session) {
+		
 		ModelAndView rjv = new ModelAndView("join-ride");
 		User user = (User) session.getAttribute("sessionUser");
+		
+		if (user == null) {
+			return new ModelAndView("/adduser");
+		}
 		
 		session.setAttribute("riderevent", rideId);
 		
@@ -192,6 +197,9 @@ public class EventController {
 	@RequestMapping("/saveride/{riderevent}/{user_id}")
 	public ModelAndView ridejoin(@ModelAttribute("riderevent") Long rideId, @PathVariable("user_id") Long userId,
 			@RequestParam("trip") String trip, HttpSession session) {
+		if (userId == null) {
+			return new ModelAndView("/adduser");
+		}
 		System.out.println("Made it");
 		ModelAndView rjv = new ModelAndView("summary");
 		System.out.println("Rideid:" + rideId);
