@@ -50,7 +50,7 @@
 			<a href="/login" style="padding: 20px">login</a>
 			<a href="/logout" style="padding: 20px">logout</a>
 			<br>
-	<p style="text-align: center">${welcome} ${sessionUser.first_name}!</p>
+	<p style="text-align: center">${welcome} ${sessionUser.first_name}</p>
 </div>
 
 	
