@@ -127,9 +127,14 @@ public class EventController {
 	
 	// display rider search results from ride database
 	@RequestMapping("/rideresults")
-	public ModelAndView searchForRides(@RequestParam("query") String query) {
+	public ModelAndView searchForRides(@RequestParam("query") String query, HttpSession session) {
 		ModelAndView rsv = new ModelAndView("rideresults");
-
+		
+		User user = (User) session.getAttribute("sessionUser");
+		
+		if (user == null) {
+			return new ModelAndView("redirect:/registerpage");
+		}
 		//		TODO: fix event search
 
 		rsv.addObject("titletag", riderepo.findByCityContaining(query));
@@ -147,9 +152,6 @@ public class EventController {
 		ModelAndView rjv = new ModelAndView("join-ride");
 		User user = (User) session.getAttribute("sessionUser");
 		
-		if (user == null) {
-			return new ModelAndView("/adduser");
-		}
 		
 		session.setAttribute("riderevent", rideId);
 		
@@ -251,6 +253,11 @@ public class EventController {
 		Event e = new Event(id, title, start, v, lat, lon, city, state);
 		System.out.println(e);
 		User user = (User) session.getAttribute("sessionUser");
+		
+		if (user == null) {
+			return new ModelAndView("redirect:/registerpage");
+		}
+		
 		Calculator calc = new Calculator();
 		ev.addObject("cost", numberFormat.format(calc.pricePerRider(user, map, lat, lon)));
 		ev.addObject("costfor2", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 2));
