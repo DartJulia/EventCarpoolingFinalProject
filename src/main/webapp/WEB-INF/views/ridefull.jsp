@@ -33,7 +33,7 @@
 
 <h1>Sorry, this ride is full :(</h1>
 
-<a href="/">search again</a>
+<a href="/ridesearch">search again</a>
 
 </div>
 

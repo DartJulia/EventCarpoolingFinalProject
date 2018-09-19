@@ -53,7 +53,7 @@
 <div style="margin: 20px">
 
 	
-		<h1 style="text-align:center; font-size:50px; color:#227cc6">YOU SEARCHED IN ${queryloc} FOR ${queryname} ${querydate}</h1>
+		<h1 style="text-align:center; font-size:50px; color:#227cc6">YOU SEARCHED FOR ${queryloc} ${queryname} ${querydate}</h1>
 		<br>
 		<br>
 		<br>

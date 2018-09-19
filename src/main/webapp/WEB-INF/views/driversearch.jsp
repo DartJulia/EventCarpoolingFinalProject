@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+
  
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +43,7 @@
 		
 						<label style="font-size:130%; padding:30px">Search by location</label>
 						<input type="text" style="font-size: 150%; width: 350px; height:40px; border-radius:6px"
-							name="queryloc" placeholder="Where would you like to go?">
+							name="queryloc" placeholder="Where would you like to go?" required>
 							<br>
 					<label style="font-size:130%; padding:30px">Search by keyword</label>
 						<input type="text" style="font-size: 150%; width: 350px; height:40px; border-radius:6px"

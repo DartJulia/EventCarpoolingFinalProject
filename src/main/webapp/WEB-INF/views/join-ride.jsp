@@ -6,32 +6,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css" />
-	
+	href="https://bootswatch.com/4/lux/bootstrap.min.css" /> 
+<link href="css/style.css" rel="stylesheet">
+
+<style>
+
+.top-nav-bar {
+    right: 60px;
+    position: absolute;
+    top: 45px;
+    z-index: 99999;
+
+}
+</style>
+
 </head>
 <body style="background-color:	#D3D3D3">
-<div class="container" style="margin: 50px">
 
-<h1> ${ridername} is riding with ${drivername} to ${title} </h1>
+<div class="top-nav-bar" style="font-size:1.5em">
+
+		${sessionUser.first_name }
+		<a href="/" style="padding: 10px">Home</a> 
+			<a href="/logout" style="padding: 20px">Logout</a>
+</div>
+
+<div style="margin-left: 50px; margin-right: 50px; text-align: center; margin-top: 100px;">
+
+<h1> join ride with ${drivername} to ${title}? </h1>
 <br>
-Seats available ${seats} <br>
-Cost for one: $${cost} <br>
-Cost for two: $${costfor2} <br>
-Cost for three: $${costfor3}
+<h2> Seats available: ${seats} </h2><br>
+<h2>Cost for one: $${cost} </h2><br>
+<h2>Cost for two: $${costfor2} </h2><br>
+<h2>Cost for three: $${costfor3}</h2>
+<br>
+<br>
 <br>
 <form action="/saveride/${riderevent}/${sessionUser.user_id}"> 
 
-			<input type="radio" value="round" name="trip">Round Trip
-			<input type="radio" value="one" name="trip">One Way
+			<h3><input type="radio" value="round" name="trip"> Round Trip
+			<input type="radio" value="one" name="trip"> One Way</h3>
 <br>
-			<input type="submit" value="Join Ride">
+<br>
+
+			<button style="border-radius: 6px" class="btn btn-info">Join Ride</button>
 </form> 
 <br>
 
-<a href="/"><button>Search again</button></a>
+<a href="/"><button style="border-radius: 6px" class="btn btn-info">No Thanks</button></a>
 </div>
 
 

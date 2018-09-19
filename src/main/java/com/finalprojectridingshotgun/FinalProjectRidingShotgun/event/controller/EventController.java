@@ -138,7 +138,8 @@ public class EventController {
 		//		TODO: fix event search
 
 		rsv.addObject("titletag", riderepo.findByCityContaining(query));
-
+		rsv.addObject("mapkey", map);
+		
 		return rsv;
 	}
 	
@@ -264,11 +265,10 @@ public class EventController {
 		ev.addObject("costfor3", numberFormat.format((calc.pricePerRider(user, map, lat, lon)) / 4));
 
 		session.setAttribute("echosen", e);
-//		List<Ride> rides = riderepo.findByEventid(id);
-//		ev.addObject("ridelist", rides);
 		ev.addObject("title", e.getTitle());
-//		ev.addObject("latit", lat);
-//		ev.addObject("longit", lon);
+		ev.addObject("mapkey", map);
+		ev.addObject("latit", lat);
+		ev.addObject("longit", lon);
 	
 		return ev;
 	}
