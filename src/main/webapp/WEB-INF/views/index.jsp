@@ -44,13 +44,16 @@
 
 <div class="top-nav-bar" style="font-size:1.5em">
 
-		${welcome}
-		${sessionUser.first_name }
+		
+	
 			<a href="/registerpage" style="padding: 20px">sign up</a> 
 			<a href="/login" style="padding: 20px">login</a>
 			<a href="/logout" style="padding: 20px">logout</a>
-		</div>
+			<br>
+	<p style="text-align: center">${welcome} ${sessionUser.first_name}!</p>
+</div>
 
+	
 	<div class="banner-full-image">
 
 		<div align="center">
