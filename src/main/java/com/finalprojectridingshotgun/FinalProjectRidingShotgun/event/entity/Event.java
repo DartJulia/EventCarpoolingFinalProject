@@ -83,7 +83,6 @@ public class Event {
 	}
 
 
-
 	public Event(String id, String title) {
 		this.id = id;
 		this.title = title;

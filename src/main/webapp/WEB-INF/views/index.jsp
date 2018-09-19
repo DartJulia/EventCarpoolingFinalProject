@@ -59,9 +59,8 @@
 		<div align="center">
 		
 <img src="images/logo.png" style="height:50%; width:50%">
-			<!-- <h1 style="text-align: center; font-size: 100px">RIDING SHOTGUN!</h1> -->
-			
-          
+		
+		  
 			    		<br>
 						<br>
 						<br>

@@ -24,7 +24,7 @@
 
 <div style="margin-left: 50px; margin-top: 50px;">
 
-<h4><a href="${event.url}" target="blank">Click for Event Details</a></h4>
+<%-- <h4><a href="${echosen.url}" target="blank">Click for Event Details</a></h4> --%>
 
 <br>
 <br>

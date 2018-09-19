@@ -38,6 +38,7 @@
 <br>
 
 	<form action="/allsearch">
+		<p style="font-size:15px; color:red">${noevent}<p><br>
 		
 						<label style="font-size:130%; padding:30px">Search by location</label>
 						<input type="text" style="font-size: 150%; width: 350px; height:40px; border-radius:6px"

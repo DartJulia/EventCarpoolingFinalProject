@@ -57,7 +57,7 @@
 		<br>
 		<br>
 		<br>
-		
+	
 		
 		<form style="margin-left:70px"> <!--  CAN BE A REQUESTPARAM -->
 			<!-- <table style="border-spacing: 20px; margin: 0 auto; width: 100%"> -->
@@ -75,7 +75,7 @@
 				<div class="card-header"><a href="/event/${event.id}/${event.title}/${event.start_time}/${event.venue_name}/${event.latitude}/${event.longitude}/${event.city_name}/${event.region_name}">${event.title}</a></div>
 				<div class="card-body">
 				   <h3 class="card-title"><img src="${event.image.medium.url}" onerror="this.src='https://www.europapark.de/sites/default/files/styles/teaser-promo/public/field_hero_slideshow/event/live_on_stage_2018_europa-park.jpg?itok=fGLg6SJy'"  style="width:180px;height:180px"></h3>
-				  <a href="${event.url}" target="blank">event link</a>
+				  <a href="${event.url}" target="blank">Event Details</a>
 				   <p class="card-text">${event.start_time}</p>
 				 </div>
 				 </div>

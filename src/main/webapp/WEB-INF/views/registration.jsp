@@ -57,7 +57,7 @@ form {
 					
 					<label style="font-size:15px">Select Gender</label> <br>
 					<label style="padding:5px">Male</label>
-					<input type="radio" name="gender" value="Male">
+					<input type="radio" name="gender" value="Male" required>
 					<label>Female</label>
 					<input type="radio"  name="gender" value="Female"><br>
 					

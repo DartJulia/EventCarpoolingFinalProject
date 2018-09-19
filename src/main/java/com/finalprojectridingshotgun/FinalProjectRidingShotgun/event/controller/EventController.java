@@ -81,8 +81,7 @@ public class EventController {
 		ModelAndView rsv = new ModelAndView("ridesearch");
 		return rsv;
 	}
-	
-	
+
 	// Getting information from the API and sending it to driver_results
 	@RequestMapping("/allsearch")
 	public ModelAndView searchAll(@RequestParam("queryloc") String queryloc,
@@ -105,9 +104,13 @@ public class EventController {
 
 		// get Events
 		Events events = entry.getEvents();
-
+		// if an event search has no results i.e. Toledo
+		if (events == null) {
+			return new ModelAndView("driversearch", "noevent", "Sorry, there were no events in that area.");
+		}
 		// get ArrayList<Event>
 		ArrayList<Event> result = events.getEventList();
+
 
 		ModelAndView av = new ModelAndView("driver_results");
 
@@ -248,10 +251,12 @@ public class EventController {
 	@RequestMapping("/event/{id}/{title}/{start}/{venue}/{lat}/{lon}/{city}/{region}")
 	public ModelAndView viewEvent(@PathVariable("id") String id, @PathVariable("title") String title,
 			@PathVariable("start") String start, @PathVariable("venue") String v, @PathVariable("lat") String lat,
-			@PathVariable("lon") String lon, HttpSession session, @PathVariable("city") String city, @PathVariable("region") String state) {
+			@PathVariable("lon") String lon, HttpSession session, @PathVariable("city") String city,
+			@PathVariable("region") String state) {
 		ModelAndView ev = new ModelAndView("view-event");
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		Event e = new Event(id, title, start, v, lat, lon, city, state);
+
 		System.out.println(e);
 		User user = (User) session.getAttribute("sessionUser");
 		
@@ -269,7 +274,7 @@ public class EventController {
 		ev.addObject("mapkey", map);
 		ev.addObject("latit", lat);
 		ev.addObject("longit", lon);
-	
+
 		return ev;
 	}
 	
@@ -286,6 +291,9 @@ public class EventController {
 		Optional<User> user = userRepo.findById(user_id);
 		Integer seats = user.get().getSeats();
 		System.out.println("Seats: " + seats);
+		if(seats==null) {
+			return new ModelAndView("ridesearch", "noseats", "No registered vehicle found. Please search for rides.");
+		}
 		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon, seats);
 		riderepo.save(r);
 		return new ModelAndView("redirect:/");
