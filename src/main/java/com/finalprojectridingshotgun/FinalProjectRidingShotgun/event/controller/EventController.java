@@ -296,7 +296,7 @@ public class EventController {
 		}
 		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon, seats);
 		riderepo.save(r);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/summary");
 	}
 
 	// if seats are full it sends to this page
