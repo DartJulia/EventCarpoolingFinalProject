@@ -53,15 +53,13 @@ ${sessionUser.first_name }
 	
 	<p style="color:red; font-size:15px">${noseats}</p>
 	<form style="align: center" action="/rideresults"> 
-	<div style="margin-top: 120px">
+	<div style="margin-top: 100px">
 		<input type="text" style="font-size: 150%; border-radius:10px;width: 350px; padding: 10px"
 									name="query"  placeholder="What city are you searching in?">
 	</div>
 
-
-	<!-- <input type="submit" value="Find an Event"> -->
-	<div style="margin-top: 100px">
-		<button class="btn-primary">Find Rides</button>
+	<div style="margin-top: 40px">
+		<button class="btn-primary" style="border-radius:10px; font-size:16px; padding:8px">Find Rides</button>
 	</div>
 	</form>
 	

@@ -46,16 +46,17 @@ ${sessionUser.first_name }
 <div style="margin-left: 50px; margin-right: 50px; text-align: center">
 
 	<br>
-	<h2>Rides matching your search:</h2>
-	
+	<h1>Rides matching your search:</h1>
+	<br>
+	<h3>Click to view the ride you want to join!</h3>
 	<br>
 	<br>
 	<br>
 	<br>
 	
 	<form> <!--  CAN BE A REQUESTPARAM -->
-	<font size="4em">
-				<table style="border-spacing: 20px; margin: 0 auto; width: 80%; text-align: left">
+	<font size="5em">
+				<table style="border-spacing: 20px; margin: 0 auto; width: 90%; text-align: left; line-height:200%">
 						<tr style="color:#227cc6">
 							<!-- <th></th> -->
 							<th>Event title</th>
@@ -81,7 +82,7 @@ ${sessionUser.first_name }
 							<td>${ride.rideUser.first_name}</td>
 							<td>${ride.rideUser.gender}</td>
 							
-							<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}">View Ride</a></td>
+							<td><a href="/joinride/${ride.rideid}/${sessionUser.user_id}"><u>View Ride</u></a></td>
 		
 	<%-- 	</c:forEach> --%>
 		

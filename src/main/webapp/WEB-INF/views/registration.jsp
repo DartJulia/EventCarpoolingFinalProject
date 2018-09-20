@@ -33,7 +33,7 @@ form {
 <div class="top-nav-bar" style="font-size:1.5em">
 
 		<a href="/" style="padding: 10px">Home</a> 
-		<a href="/login" style="padding: 20px">login</a>
+		<a href="/login" style="padding: 20px">Login</a>
 			
 </div>
 <div style="margin-left: 50px; margin-right: 50px; text-align: center">

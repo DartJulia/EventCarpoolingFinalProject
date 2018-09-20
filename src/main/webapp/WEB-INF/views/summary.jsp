@@ -23,18 +23,21 @@
 	<a href="/logout" style="padding: 20px">logout</a>
 
 </div>
-
+<br>
+<br>
 <div style="text-align: center">
 	
 	<h1>You are Confirmed!</h1>
-	Gas Donation Options: <br><br>
-	Cost for one rider: $${cost} <br>
-	Cost for two riders: $${costfor2} <br>
-	Cost for three riders: $${costfor3}
+<br>
+<br>
 
 	<h3>Enjoy your ride!</h3>
+	<br>
+	<h4>Your confirmation information will be emailed to you.</h4>
+
 
 </div>
+
 
 </body>
 </html>
