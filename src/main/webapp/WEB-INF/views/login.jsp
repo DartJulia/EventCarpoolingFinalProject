@@ -36,15 +36,17 @@ form {
 </div>
 <div style="margin-left: 50px; margin-right: 50px; text-align: center">
 
-	<div style="margin-top: 100px">
-		<h1 style="text-align: center">Login Page</h1>
+	<div style="margin-top: 100px" >
+		<img src="images/logo.png" style="height:40%; width:40%">
 	</div>
-<br>
-<br>
+
+
 
 		<form action="validateuser" method= "post">
 
 			<div class="form-group">
+		<h1 style="text-align: center">Login</h1>
+		<br>
 				<label>USER NAME</label> 
 				<input type="text"
 					class="form-control" name="user_name" placeholder="UserName">
