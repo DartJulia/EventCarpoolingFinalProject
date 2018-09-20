@@ -12,23 +12,30 @@
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/lux/bootstrap.min.css" />
 </head>
 <body style="background-color:	#D3D3D3">
+<div class="top-nav-bar" style="text-align: right">
 
-<!-- <a href="/calcrideprice"><button>Get Cost</button></a> -->
+	${sessionUser.first_name}
+	<a href="/" style="padding: 20px">Home</a>
+	<a href="/logout" style="padding: 20px">logout</a>
+
+</div>
+
 <div style="margin-top: 50px; text-align: center">
-<h2 style="color:#227cc6">${title}</h2>
+<h2 style="color:#227cc6">Your Event: ${title}</h2>
 <br>
 <h3>Suggested Gas Share:</h3>
-<h3>Price with 1 rider: $${cost}</h3>
-<h3>Price with 2 riders: $${costfor2}</h3>
-<h3>Price with 3 riders: $${costfor3}</h3>
+<h4>Potential gas savings with 1 rider: $${cost}</h4>
+<h4>Potential gas savings with 2 riders: $${costfor2}</h4>
+<h4>Potential gas savings with 3 riders: $${costfor3}</h4>
 
 <div style="margin-left: 50px; margin-top: 50px;">
 
 <%-- <h4><a href="${echosen.url}" target="blank">Click for Event Details</a></h4> --%>
 
 <br>
+<h4>Drive to this event?</h4>
 <br>
-<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}/${echosen.city_name}/${echosen.region_name}/${echosen.latitude}/${echosen.longitude}"><button style="border-radius: 6px" class="btn btn-info">Submit</button></a>
+<a href="/registerdriver/${echosen.id}/${echosen.title}/${sessionUser.user_id}/${echosen.city_name}/${echosen.region_name}/${echosen.latitude}/${echosen.longitude}"><button style="border-radius: 6px" class="btn btn-info">Yes!</button></a>
 <a href="/"><button style="border-radius: 6px"class="btn btn-info">Cancel</button></a>
 
 <br>

@@ -94,7 +94,7 @@ public class EventController {
 		ResponseEntity<Entry> response = restTemplate
 				.exchange(
 						"https://api.eventful.com/json/events/search?app_key=" + eId + "&location=" + queryloc
-								+ "&q=" + queryname + "&page_size=30&image_sizes=medium",
+								+ "&q=" + queryname + "&page_size=50&image_sizes=medium",
 				HttpMethod.GET,
 				entity,
 				Entry.class);
@@ -296,7 +296,7 @@ public class EventController {
 		}
 		Ride r = new Ride(eventid, eventtitle, user_id, city, state, lat, lon, seats);
 		riderepo.save(r);
-		return new ModelAndView("redirect:/summary");
+		return new ModelAndView("summary");
 	}
 
 	// if seats are full it sends to this page
