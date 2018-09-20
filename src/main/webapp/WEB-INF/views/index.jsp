@@ -46,11 +46,11 @@
 
 		
 	
-			<a href="/registerpage" style="padding: 20px">sign up</a> 
-			<a href="/login" style="padding: 20px">login</a>
-			<a href="/logout" style="padding: 20px">logout</a>
-			<br>
-	<p style="text-align: center">${welcome} ${sessionUser.first_name}</p>
+			<a href="/registerpage" style="padding: 20px">Sign up</a> 
+			<a href="/login" style="padding: 20px">Login</a>
+			<a href="/logout" style="padding: 20px">Logout</a>
+			<br><br>
+	<p style="text-align:center">${welcome} ${sessionUser.first_name}</p>
 </div>
 
 	
@@ -70,11 +70,13 @@
 			<p style="text-align: center; font-size: 250%; color:white">Find rides to
 				events nationwide</p>
 			
-
+<br>
 			<br>
-
+	<p style="text-align: center; font-size: 150%; color:white">Select if you would like to drive or hitch a ride to an event</p>
+	
 		</div>
 </div>
+	<br>
 <br>
 <br>
 
